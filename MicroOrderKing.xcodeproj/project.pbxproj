@@ -1,0 +1,1458 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		062EB0E61F35563F00945BE9 /* MKAddreChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 062EB0E51F35563F00945BE9 /* MKAddreChoiceView.m */; };
+		063CE53B1F2C36D500A5A9F9 /* MKGoodsInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE53A1F2C36D500A5A9F9 /* MKGoodsInfoTable.m */; };
+		063CE53E1F2C4CC200A5A9F9 /* MKOrderOtherView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE53D1F2C4CC200A5A9F9 /* MKOrderOtherView.m */; };
+		063CE5411F2C556800A5A9F9 /* MKAddAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5401F2C556800A5A9F9 /* MKAddAccountController.m */; };
+		063CE5441F2C566400A5A9F9 /* MKTittleTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5431F2C566400A5A9F9 /* MKTittleTextView.m */; };
+		063CE5471F2CBAB700A5A9F9 /* MKOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5461F2CBAB700A5A9F9 /* MKOrderDetailController.m */; };
+		063CE54C1F2CBBCC00A5A9F9 /* MKTradesDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE54B1F2CBBCC00A5A9F9 /* MKTradesDetailController.m */; };
+		063CE5521F2CBD4200A5A9F9 /* MKTradesHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5511F2CBD4200A5A9F9 /* MKTradesHeaderView.m */; };
+		063CE5551F2DF58300A5A9F9 /* MKMemberDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5541F2DF58300A5A9F9 /* MKMemberDetailController.m */; };
+		063CE55A1F2DF61400A5A9F9 /* MKMemberInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5591F2DF61400A5A9F9 /* MKMemberInfoView.m */; };
+		063CE5611F2E101B00A5A9F9 /* MKMemTradesInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5601F2E101B00A5A9F9 /* MKMemTradesInfoView.m */; };
+		063CE5641F2E1C7E00A5A9F9 /* MKMemberManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5631F2E1C7E00A5A9F9 /* MKMemberManageController.m */; };
+		063CE5681F2E2E6200A5A9F9 /* MKMemManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5671F2E2E6200A5A9F9 /* MKMemManageCell.m */; };
+		063CE56B1F2E303400A5A9F9 /* MKMemManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE56A1F2E303400A5A9F9 /* MKMemManageTable.m */; };
+		063CE56E1F2E3D4500A5A9F9 /* MKPerformanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE56D1F2E3D4500A5A9F9 /* MKPerformanceController.m */; };
+		063CE5711F2E3DD000A5A9F9 /* MKMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5701F2E3DD000A5A9F9 /* MKMemberCell.m */; };
+		063CE5741F2E472F00A5A9F9 /* MKGoodsManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5731F2E472F00A5A9F9 /* MKGoodsManageCell.m */; };
+		063CE5771F2EC63B00A5A9F9 /* MKGoodsManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 063CE5761F2EC63B00A5A9F9 /* MKGoodsManageController.m */; };
+		064DB2431F35B59100087865 /* MKAddMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2421F35B59100087865 /* MKAddMemberController.m */; };
+		064DB2461F35F68700087865 /* MKEditAddreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2451F35F68700087865 /* MKEditAddreController.m */; };
+		064DB2491F35FC2100087865 /* MKAddreManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2481F35FC2100087865 /* MKAddreManageController.m */; };
+		064DB24C1F35FCA000087865 /* MKAddreMangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */; };
+		06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */; };
+		06A0D6B21F304CB800B7CE09 /* MKPersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B11F304CB800B7CE09 /* MKPersonInfoView.m */; };
+		06A0D6B61F305B1700B7CE09 /* MKPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B51F305B1700B7CE09 /* MKPersonModel.m */; };
+		06A0D6B91F306B2500B7CE09 /* MKChangePasdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B81F306B2500B7CE09 /* MKChangePasdController.m */; };
+		06A0D6BC1F306FA800B7CE09 /* MKContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6BB1F306FA800B7CE09 /* MKContactController.m */; };
+		06A0D6BF1F306FDC00B7CE09 /* MKContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6BE1F306FDC00B7CE09 /* MKContactView.m */; };
+		06A0D6C21F30769A00B7CE09 /* MKContactModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6C11F30769A00B7CE09 /* MKContactModel.m */; };
+		06A0D6C51F317F8300B7CE09 /* MKLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6C41F317F8300B7CE09 /* MKLoginModel.m */; };
+		06A0D6CA1F31817B00B7CE09 /* MKHttpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6C91F31817B00B7CE09 /* MKHttpModel.m */; };
+		06A0D7B01F32CF5600B7CE09 /* MKHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7AF1F32CF5600B7CE09 /* MKHomeModel.m */; };
+		06A0D7B71F3311B700B7CE09 /* MKSignOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7B61F3311B700B7CE09 /* MKSignOutView.m */; };
+		06A0D7BA1F33532600B7CE09 /* MKConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7B91F33532600B7CE09 /* MKConfirmView.m */; };
+		06A0D7BD1F3465B100B7CE09 /* MKMemberBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */; };
+		06C82A931F2EDCA7004E2F25 /* MKOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */; };
+		06C82A961F2EFF82004E2F25 /* MKOrderGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A951F2EFF82004E2F25 /* MKOrderGoodsView.m */; };
+		06C82AA01F2F1ECD004E2F25 /* MKNewGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */; };
+		06C82AA31F2F20BA004E2F25 /* MKNewGoodsInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82AA21F2F20BA004E2F25 /* MKNewGoodsInfoView.m */; };
+		06C82AA61F2F5303004E2F25 /* MKSearchGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82AA51F2F5303004E2F25 /* MKSearchGoodsController.m */; };
+		06C82AA91F2F5348004E2F25 /* MKSearchTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82AA81F2F5348004E2F25 /* MKSearchTable.m */; };
+		06CCAFD71F275A79003091C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCAFD61F275A79003091C0 /* main.m */; };
+		06CCAFDA1F275A79003091C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCAFD91F275A79003091C0 /* AppDelegate.m */; };
+		06CCAFE21F275A79003091C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06CCAFE11F275A79003091C0 /* Assets.xcassets */; };
+		06CCAFE51F275A79003091C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06CCAFE31F275A79003091C0 /* LaunchScreen.storyboard */; };
+		06CCAFF01F275A79003091C0 /* MicroOrderKingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCAFEF1F275A79003091C0 /* MicroOrderKingTests.m */; };
+		06CCAFFB1F275A79003091C0 /* MicroOrderKingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCAFFA1F275A79003091C0 /* MicroOrderKingUITests.m */; };
+		06CCB0481F276867003091C0 /* AFNetWorkingUsing.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB00A1F276867003091C0 /* AFNetWorkingUsing.m */; };
+		06CCB0491F276867003091C0 /* NSDate+ZYFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB00D1F276867003091C0 /* NSDate+ZYFCategory.m */; };
+		06CCB04A1F276867003091C0 /* NSString+ZYFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB00F1F276867003091C0 /* NSString+ZYFCategory.m */; };
+		06CCB04B1F276867003091C0 /* UIColor+ZYFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0111F276867003091C0 /* UIColor+ZYFCategory.m */; };
+		06CCB04C1F276867003091C0 /* UIImage+ZYFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0131F276867003091C0 /* UIImage+ZYFCategory.m */; };
+		06CCB04D1F276867003091C0 /* UIImageView+ZYFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0151F276867003091C0 /* UIImageView+ZYFCategory.m */; };
+		06CCB04E1F276867003091C0 /* UIView+ZYFUIViewCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0171F276867003091C0 /* UIView+ZYFUIViewCategory.m */; };
+		06CCB04F1F276867003091C0 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB01A1F276867003091C0 /* BaseNavigationController.m */; };
+		06CCB0501F276867003091C0 /* BaseScrollTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB01C1F276867003091C0 /* BaseScrollTableViewController.m */; };
+		06CCB0511F276867003091C0 /* BaseScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB01E1F276867003091C0 /* BaseScrollViewController.m */; };
+		06CCB0521F276867003091C0 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0201F276867003091C0 /* BaseTabBarController.m */; };
+		06CCB0531F276867003091C0 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0221F276867003091C0 /* BaseViewController.m */; };
+		06CCB0541F276867003091C0 /* BaseTabButtonScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0251F276867003091C0 /* BaseTabButtonScrollView.m */; };
+		06CCB0551F276867003091C0 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0271F276867003091C0 /* BaseTableViewCell.m */; };
+		06CCB0561F276867003091C0 /* BaseTipHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0291F276867003091C0 /* BaseTipHud.m */; };
+		06CCB0571F276867003091C0 /* BaseTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB02B1F276867003091C0 /* BaseTopView.m */; };
+		06CCB0581F276867003091C0 /* BaseUITableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB02D1F276867003091C0 /* BaseUITableView.m */; };
+		06CCB0591F276867003091C0 /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB02F1F276867003091C0 /* BaseView.m */; };
+		06CCB05A1F276867003091C0 /* Container.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0311F276867003091C0 /* Container.m */; };
+		06CCB05B1F276867003091C0 /* NSLog+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0341F276867003091C0 /* NSLog+Extension.m */; };
+		06CCB05C1F276867003091C0 /* AFNetworkingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0371F276867003091C0 /* AFNetworkingHelper.m */; };
+		06CCB05D1F276867003091C0 /* IQKeyboardManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0391F276867003091C0 /* IQKeyboardManagerHelper.m */; };
+		06CCB05E1F276867003091C0 /* NSErrorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB03B1F276867003091C0 /* NSErrorHelper.m */; };
+		06CCB05F1F276867003091C0 /* ZYFDeviceHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB03D1F276867003091C0 /* ZYFDeviceHelper.m */; };
+		06CCB0601F276867003091C0 /* ZYFUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB03F1F276867003091C0 /* ZYFUserDefaults.m */; };
+		06CCB06D1F27716C003091C0 /* MKLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB06C1F27716C003091C0 /* MKLoginViewController.m */; };
+		06CCB0711F286F31003091C0 /* MKSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0701F286F31003091C0 /* MKSignUpViewController.m */; };
+		06CCB0751F287E1F003091C0 /* MKHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0741F287E1F003091C0 /* MKHomePageViewController.m */; };
+		06CCB0781F288373003091C0 /* MKTradesInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0771F288373003091C0 /* MKTradesInfoView.m */; };
+		06CCB0821F29761B003091C0 /* MKSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0811F29761B003091C0 /* MKSectionView.m */; };
+		06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0851F2983FC003091C0 /* MKOrderManageController.m */; };
+		06CCB08A1F29A809003091C0 /* MKOrderManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0891F29A809003091C0 /* MKOrderManageCell.m */; };
+		06CCB08D1F29A846003091C0 /* MKGoodsInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB08C1F29A846003091C0 /* MKGoodsInfoView.m */; };
+		06CCB0901F29D25D003091C0 /* MKOrderCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB08F1F29D25D003091C0 /* MKOrderCellModel.m */; };
+		06CCB0971F29DDC2003091C0 /* MKOrderManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0961F29DDC2003091C0 /* MKOrderManageTable.m */; };
+		06CCB0A31F2AC870003091C0 /* MKAccountManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0A21F2AC870003091C0 /* MKAccountManageController.m */; };
+		06CCB0A61F2AC9AD003091C0 /* MKAccountManageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0A51F2AC9AD003091C0 /* MKAccountManageCell.m */; };
+		06CCB0A91F2ACEC4003091C0 /* MKAccountBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0A81F2ACEC4003091C0 /* MKAccountBaseModel.m */; };
+		06CCB0AE1F2AD0AC003091C0 /* MKAccountManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0AD1F2AD0AC003091C0 /* MKAccountManageTable.m */; };
+		06CCB0B11F2AE688003091C0 /* MKAccountInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0B01F2AE688003091C0 /* MKAccountInfoController.m */; };
+		06CCB0B41F2AEE26003091C0 /* MKAccountInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0B31F2AEE26003091C0 /* MKAccountInfoView.m */; };
+		06CCB0B71F2B11C3003091C0 /* MKAddGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0B61F2B11C3003091C0 /* MKAddGoodsController.m */; };
+		06CCB0BC1F2B12FA003091C0 /* MKAddGoodsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0BB1F2B12FA003091C0 /* MKAddGoodsCell.m */; };
+		06CCB0BF1F2B3164003091C0 /* MKGoodsBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0BE1F2B3164003091C0 /* MKGoodsBottomView.m */; };
+		06CCB0C21F2B40C4003091C0 /* MKOrderWritingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0C11F2B40C4003091C0 /* MKOrderWritingController.m */; };
+		06CCB0C61F2B483E003091C0 /* MKCopyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0C51F2B483E003091C0 /* MKCopyBoard.m */; };
+		06CCB0C91F2B5A4C003091C0 /* MKReceiverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0C81F2B5A4C003091C0 /* MKReceiverInfoView.m */; };
+		06CCB0CC1F2B6CA2003091C0 /* MKGoodsInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0CB1F2B6CA2003091C0 /* MKGoodsInfoCell.m */; };
+		06ECE3101F36A30B001DDFF3 /* MKAddreManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE30F1F36A30B001DDFF3 /* MKAddreManageModel.m */; };
+		06ECE3161F36A9DF001DDFF3 /* MKAddreManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3151F36A9DF001DDFF3 /* MKAddreManageTable.m */; };
+		06ECE3191F36AB1E001DDFF3 /* MKEditMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */; };
+		06ECE31C1F378FF9001DDFF3 /* MKAddreMatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE31B1F378FF9001DDFF3 /* MKAddreMatchModel.m */; };
+		AFAEA7F24E0972E457594BA6 /* Pods_MicroOrderKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		06CCAFEC1F275A79003091C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06CCAFCA1F275A79003091C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06CCAFD11F275A79003091C0;
+			remoteInfo = MicroOrderKing;
+		};
+		06CCAFF71F275A79003091C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 06CCAFCA1F275A79003091C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 06CCAFD11F275A79003091C0;
+			remoteInfo = MicroOrderKing;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		062EB0E41F35563F00945BE9 /* MKAddreChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreChoiceView.h; path = order/View/MKAddreChoiceView.h; sourceTree = "<group>"; };
+		062EB0E51F35563F00945BE9 /* MKAddreChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreChoiceView.m; path = order/View/MKAddreChoiceView.m; sourceTree = "<group>"; };
+		063CE5391F2C36D500A5A9F9 /* MKGoodsInfoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsInfoTable.h; path = order/View/MKGoodsInfoTable.h; sourceTree = "<group>"; };
+		063CE53A1F2C36D500A5A9F9 /* MKGoodsInfoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsInfoTable.m; path = order/View/MKGoodsInfoTable.m; sourceTree = "<group>"; };
+		063CE53C1F2C4CC200A5A9F9 /* MKOrderOtherView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderOtherView.h; path = order/View/MKOrderOtherView.h; sourceTree = "<group>"; };
+		063CE53D1F2C4CC200A5A9F9 /* MKOrderOtherView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderOtherView.m; path = order/View/MKOrderOtherView.m; sourceTree = "<group>"; };
+		063CE53F1F2C556800A5A9F9 /* MKAddAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddAccountController.h; path = subAccount/Controller/MKAddAccountController.h; sourceTree = "<group>"; };
+		063CE5401F2C556800A5A9F9 /* MKAddAccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddAccountController.m; path = subAccount/Controller/MKAddAccountController.m; sourceTree = "<group>"; };
+		063CE5421F2C566400A5A9F9 /* MKTittleTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKTittleTextView.h; path = subAccount/View/MKTittleTextView.h; sourceTree = "<group>"; };
+		063CE5431F2C566400A5A9F9 /* MKTittleTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTittleTextView.m; path = subAccount/View/MKTittleTextView.m; sourceTree = "<group>"; };
+		063CE5451F2CBAB700A5A9F9 /* MKOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderDetailController.h; path = order/Controller/MKOrderDetailController.h; sourceTree = "<group>"; };
+		063CE5461F2CBAB700A5A9F9 /* MKOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderDetailController.m; path = order/Controller/MKOrderDetailController.m; sourceTree = "<group>"; };
+		063CE54A1F2CBBCC00A5A9F9 /* MKTradesDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKTradesDetailController.h; path = member/Controller/MKTradesDetailController.h; sourceTree = "<group>"; };
+		063CE54B1F2CBBCC00A5A9F9 /* MKTradesDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTradesDetailController.m; path = member/Controller/MKTradesDetailController.m; sourceTree = "<group>"; };
+		063CE5501F2CBD4200A5A9F9 /* MKTradesHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKTradesHeaderView.h; path = member/View/MKTradesHeaderView.h; sourceTree = "<group>"; };
+		063CE5511F2CBD4200A5A9F9 /* MKTradesHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTradesHeaderView.m; path = member/View/MKTradesHeaderView.m; sourceTree = "<group>"; };
+		063CE5531F2DF58300A5A9F9 /* MKMemberDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberDetailController.h; path = member/Controller/MKMemberDetailController.h; sourceTree = "<group>"; };
+		063CE5541F2DF58300A5A9F9 /* MKMemberDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberDetailController.m; path = member/Controller/MKMemberDetailController.m; sourceTree = "<group>"; };
+		063CE5581F2DF61400A5A9F9 /* MKMemberInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberInfoView.h; path = member/View/MKMemberInfoView.h; sourceTree = "<group>"; };
+		063CE5591F2DF61400A5A9F9 /* MKMemberInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberInfoView.m; path = member/View/MKMemberInfoView.m; sourceTree = "<group>"; };
+		063CE55F1F2E101B00A5A9F9 /* MKMemTradesInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemTradesInfoView.h; path = member/View/MKMemTradesInfoView.h; sourceTree = "<group>"; };
+		063CE5601F2E101B00A5A9F9 /* MKMemTradesInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemTradesInfoView.m; path = member/View/MKMemTradesInfoView.m; sourceTree = "<group>"; };
+		063CE5621F2E1C7E00A5A9F9 /* MKMemberManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberManageController.h; path = member/Controller/MKMemberManageController.h; sourceTree = "<group>"; };
+		063CE5631F2E1C7E00A5A9F9 /* MKMemberManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberManageController.m; path = member/Controller/MKMemberManageController.m; sourceTree = "<group>"; };
+		063CE5661F2E2E6200A5A9F9 /* MKMemManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemManageCell.h; path = member/View/MKMemManageCell.h; sourceTree = "<group>"; };
+		063CE5671F2E2E6200A5A9F9 /* MKMemManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemManageCell.m; path = member/View/MKMemManageCell.m; sourceTree = "<group>"; };
+		063CE5691F2E303400A5A9F9 /* MKMemManageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMemManageTable.h; sourceTree = "<group>"; };
+		063CE56A1F2E303400A5A9F9 /* MKMemManageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMemManageTable.m; sourceTree = "<group>"; };
+		063CE56C1F2E3D4500A5A9F9 /* MKPerformanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPerformanceController.h; path = subAccount/Controller/MKPerformanceController.h; sourceTree = "<group>"; };
+		063CE56D1F2E3D4500A5A9F9 /* MKPerformanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPerformanceController.m; path = subAccount/Controller/MKPerformanceController.m; sourceTree = "<group>"; };
+		063CE56F1F2E3DD000A5A9F9 /* MKMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberCell.h; path = subAccount/View/MKMemberCell.h; sourceTree = "<group>"; };
+		063CE5701F2E3DD000A5A9F9 /* MKMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberCell.m; path = subAccount/View/MKMemberCell.m; sourceTree = "<group>"; };
+		063CE5721F2E472F00A5A9F9 /* MKGoodsManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsManageCell.h; path = order/View/MKGoodsManageCell.h; sourceTree = "<group>"; };
+		063CE5731F2E472F00A5A9F9 /* MKGoodsManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsManageCell.m; path = order/View/MKGoodsManageCell.m; sourceTree = "<group>"; };
+		063CE5751F2EC63B00A5A9F9 /* MKGoodsManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsManageController.h; path = order/Controller/MKGoodsManageController.h; sourceTree = "<group>"; };
+		063CE5761F2EC63B00A5A9F9 /* MKGoodsManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsManageController.m; path = order/Controller/MKGoodsManageController.m; sourceTree = "<group>"; };
+		064DB2411F35B59100087865 /* MKAddMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddMemberController.h; path = member/Controller/MKAddMemberController.h; sourceTree = "<group>"; };
+		064DB2421F35B59100087865 /* MKAddMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddMemberController.m; path = member/Controller/MKAddMemberController.m; sourceTree = "<group>"; };
+		064DB2441F35F68700087865 /* MKEditAddreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKEditAddreController.h; path = member/Controller/MKEditAddreController.h; sourceTree = "<group>"; };
+		064DB2451F35F68700087865 /* MKEditAddreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKEditAddreController.m; path = member/Controller/MKEditAddreController.m; sourceTree = "<group>"; };
+		064DB2471F35FC2100087865 /* MKAddreManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreManageController.h; path = member/Controller/MKAddreManageController.h; sourceTree = "<group>"; };
+		064DB2481F35FC2100087865 /* MKAddreManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageController.m; path = member/Controller/MKAddreManageController.m; sourceTree = "<group>"; };
+		064DB24A1F35FCA000087865 /* MKAddreMangeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreMangeCell.h; path = member/View/MKAddreMangeCell.h; sourceTree = "<group>"; };
+		064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreMangeCell.m; path = member/View/MKAddreMangeCell.m; sourceTree = "<group>"; };
+		06A0D6AD1F304C2300B7CE09 /* MKPersonCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonCenterController.h; path = homeage/Controller/MKPersonCenterController.h; sourceTree = "<group>"; };
+		06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPersonCenterController.m; path = homeage/Controller/MKPersonCenterController.m; sourceTree = "<group>"; };
+		06A0D6B01F304CB800B7CE09 /* MKPersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonInfoView.h; path = homeage/View/MKPersonInfoView.h; sourceTree = "<group>"; };
+		06A0D6B11F304CB800B7CE09 /* MKPersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPersonInfoView.m; path = homeage/View/MKPersonInfoView.m; sourceTree = "<group>"; };
+		06A0D6B41F305B1700B7CE09 /* MKPersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonModel.h; path = homeage/Model/MKPersonModel.h; sourceTree = "<group>"; };
+		06A0D6B51F305B1700B7CE09 /* MKPersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPersonModel.m; path = homeage/Model/MKPersonModel.m; sourceTree = "<group>"; };
+		06A0D6B71F306B2500B7CE09 /* MKChangePasdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKChangePasdController.h; path = loginPart/Controller/MKChangePasdController.h; sourceTree = "<group>"; };
+		06A0D6B81F306B2500B7CE09 /* MKChangePasdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKChangePasdController.m; path = loginPart/Controller/MKChangePasdController.m; sourceTree = "<group>"; };
+		06A0D6BA1F306FA800B7CE09 /* MKContactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKContactController.h; path = homeage/Controller/MKContactController.h; sourceTree = "<group>"; };
+		06A0D6BB1F306FA800B7CE09 /* MKContactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKContactController.m; path = homeage/Controller/MKContactController.m; sourceTree = "<group>"; };
+		06A0D6BD1F306FDC00B7CE09 /* MKContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKContactView.h; path = homeage/View/MKContactView.h; sourceTree = "<group>"; };
+		06A0D6BE1F306FDC00B7CE09 /* MKContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKContactView.m; path = homeage/View/MKContactView.m; sourceTree = "<group>"; };
+		06A0D6C01F30769A00B7CE09 /* MKContactModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKContactModel.h; path = homeage/Model/MKContactModel.h; sourceTree = "<group>"; };
+		06A0D6C11F30769A00B7CE09 /* MKContactModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKContactModel.m; path = homeage/Model/MKContactModel.m; sourceTree = "<group>"; };
+		06A0D6C31F317F8300B7CE09 /* MKLoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKLoginModel.h; path = loginPart/Model/MKLoginModel.h; sourceTree = "<group>"; };
+		06A0D6C41F317F8300B7CE09 /* MKLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKLoginModel.m; path = loginPart/Model/MKLoginModel.m; sourceTree = "<group>"; };
+		06A0D6C81F31817B00B7CE09 /* MKHttpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKHttpModel.h; sourceTree = "<group>"; };
+		06A0D6C91F31817B00B7CE09 /* MKHttpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKHttpModel.m; sourceTree = "<group>"; };
+		06A0D7AE1F32CF5600B7CE09 /* MKHomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHomeModel.h; path = homeage/Model/MKHomeModel.h; sourceTree = "<group>"; };
+		06A0D7AF1F32CF5600B7CE09 /* MKHomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHomeModel.m; path = homeage/Model/MKHomeModel.m; sourceTree = "<group>"; };
+		06A0D7B51F3311B700B7CE09 /* MKSignOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSignOutView.h; path = homeage/View/MKSignOutView.h; sourceTree = "<group>"; };
+		06A0D7B61F3311B700B7CE09 /* MKSignOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSignOutView.m; path = homeage/View/MKSignOutView.m; sourceTree = "<group>"; };
+		06A0D7B81F33532600B7CE09 /* MKConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKConfirmView.h; path = order/View/MKConfirmView.h; sourceTree = "<group>"; };
+		06A0D7B91F33532600B7CE09 /* MKConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKConfirmView.m; path = order/View/MKConfirmView.m; sourceTree = "<group>"; };
+		06A0D7BB1F3465B100B7CE09 /* MKMemberBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberBaseModel.h; path = member/Model/MKMemberBaseModel.h; sourceTree = "<group>"; };
+		06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberBaseModel.m; path = member/Model/MKMemberBaseModel.m; sourceTree = "<group>"; };
+		06C82A911F2EDCA7004E2F25 /* MKOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderDetailView.h; path = order/View/MKOrderDetailView.h; sourceTree = "<group>"; };
+		06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderDetailView.m; path = order/View/MKOrderDetailView.m; sourceTree = "<group>"; };
+		06C82A941F2EFF82004E2F25 /* MKOrderGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderGoodsView.h; path = order/View/MKOrderGoodsView.h; sourceTree = "<group>"; };
+		06C82A951F2EFF82004E2F25 /* MKOrderGoodsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderGoodsView.m; path = order/View/MKOrderGoodsView.m; sourceTree = "<group>"; };
+		06C82A9E1F2F1ECD004E2F25 /* MKNewGoodsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKNewGoodsController.h; path = order/Controller/MKNewGoodsController.h; sourceTree = "<group>"; };
+		06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKNewGoodsController.m; path = order/Controller/MKNewGoodsController.m; sourceTree = "<group>"; };
+		06C82AA11F2F20BA004E2F25 /* MKNewGoodsInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKNewGoodsInfoView.h; path = order/View/MKNewGoodsInfoView.h; sourceTree = "<group>"; };
+		06C82AA21F2F20BA004E2F25 /* MKNewGoodsInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKNewGoodsInfoView.m; path = order/View/MKNewGoodsInfoView.m; sourceTree = "<group>"; };
+		06C82AA41F2F5303004E2F25 /* MKSearchGoodsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSearchGoodsController.h; path = order/Controller/MKSearchGoodsController.h; sourceTree = "<group>"; };
+		06C82AA51F2F5303004E2F25 /* MKSearchGoodsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSearchGoodsController.m; path = order/Controller/MKSearchGoodsController.m; sourceTree = "<group>"; };
+		06C82AA71F2F5348004E2F25 /* MKSearchTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSearchTable.h; path = order/View/MKSearchTable.h; sourceTree = "<group>"; };
+		06C82AA81F2F5348004E2F25 /* MKSearchTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSearchTable.m; path = order/View/MKSearchTable.m; sourceTree = "<group>"; };
+		06CCAFD21F275A79003091C0 /* MicroOrderKing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MicroOrderKing.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		06CCAFD61F275A79003091C0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		06CCAFD81F275A79003091C0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		06CCAFD91F275A79003091C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		06CCAFE11F275A79003091C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		06CCAFE41F275A79003091C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		06CCAFE61F275A79003091C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06CCAFEB1F275A79003091C0 /* MicroOrderKingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MicroOrderKingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06CCAFEF1F275A79003091C0 /* MicroOrderKingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicroOrderKingTests.m; sourceTree = "<group>"; };
+		06CCAFF11F275A79003091C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06CCAFF61F275A79003091C0 /* MicroOrderKingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MicroOrderKingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		06CCAFFA1F275A79003091C0 /* MicroOrderKingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicroOrderKingUITests.m; sourceTree = "<group>"; };
+		06CCAFFC1F275A79003091C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06CCB0091F276867003091C0 /* AFNetWorkingUsing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetWorkingUsing.h; sourceTree = "<group>"; };
+		06CCB00A1F276867003091C0 /* AFNetWorkingUsing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetWorkingUsing.m; sourceTree = "<group>"; };
+		06CCB00C1F276867003091C0 /* NSDate+ZYFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ZYFCategory.h"; sourceTree = "<group>"; };
+		06CCB00D1F276867003091C0 /* NSDate+ZYFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZYFCategory.m"; sourceTree = "<group>"; };
+		06CCB00E1F276867003091C0 /* NSString+ZYFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZYFCategory.h"; sourceTree = "<group>"; };
+		06CCB00F1F276867003091C0 /* NSString+ZYFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZYFCategory.m"; sourceTree = "<group>"; };
+		06CCB0101F276867003091C0 /* UIColor+ZYFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ZYFCategory.h"; sourceTree = "<group>"; };
+		06CCB0111F276867003091C0 /* UIColor+ZYFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ZYFCategory.m"; sourceTree = "<group>"; };
+		06CCB0121F276867003091C0 /* UIImage+ZYFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ZYFCategory.h"; sourceTree = "<group>"; };
+		06CCB0131F276867003091C0 /* UIImage+ZYFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ZYFCategory.m"; sourceTree = "<group>"; };
+		06CCB0141F276867003091C0 /* UIImageView+ZYFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ZYFCategory.h"; sourceTree = "<group>"; };
+		06CCB0151F276867003091C0 /* UIImageView+ZYFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ZYFCategory.m"; sourceTree = "<group>"; };
+		06CCB0161F276867003091C0 /* UIView+ZYFUIViewCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ZYFUIViewCategory.h"; sourceTree = "<group>"; };
+		06CCB0171F276867003091C0 /* UIView+ZYFUIViewCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ZYFUIViewCategory.m"; sourceTree = "<group>"; };
+		06CCB0191F276867003091C0 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		06CCB01A1F276867003091C0 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		06CCB01B1F276867003091C0 /* BaseScrollTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScrollTableViewController.h; sourceTree = "<group>"; };
+		06CCB01C1F276867003091C0 /* BaseScrollTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScrollTableViewController.m; sourceTree = "<group>"; };
+		06CCB01D1F276867003091C0 /* BaseScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseScrollViewController.h; sourceTree = "<group>"; };
+		06CCB01E1F276867003091C0 /* BaseScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseScrollViewController.m; sourceTree = "<group>"; };
+		06CCB01F1F276867003091C0 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
+		06CCB0201F276867003091C0 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
+		06CCB0211F276867003091C0 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		06CCB0221F276867003091C0 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		06CCB0241F276867003091C0 /* BaseTabButtonScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabButtonScrollView.h; sourceTree = "<group>"; };
+		06CCB0251F276867003091C0 /* BaseTabButtonScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabButtonScrollView.m; sourceTree = "<group>"; };
+		06CCB0261F276867003091C0 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
+		06CCB0271F276867003091C0 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		06CCB0281F276867003091C0 /* BaseTipHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTipHud.h; sourceTree = "<group>"; };
+		06CCB0291F276867003091C0 /* BaseTipHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTipHud.m; sourceTree = "<group>"; };
+		06CCB02A1F276867003091C0 /* BaseTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTopView.h; sourceTree = "<group>"; };
+		06CCB02B1F276867003091C0 /* BaseTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTopView.m; sourceTree = "<group>"; };
+		06CCB02C1F276867003091C0 /* BaseUITableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseUITableView.h; sourceTree = "<group>"; };
+		06CCB02D1F276867003091C0 /* BaseUITableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseUITableView.m; sourceTree = "<group>"; };
+		06CCB02E1F276867003091C0 /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
+		06CCB02F1F276867003091C0 /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
+		06CCB0301F276867003091C0 /* Container.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Container.h; sourceTree = "<group>"; };
+		06CCB0311F276867003091C0 /* Container.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Container.m; sourceTree = "<group>"; };
+		06CCB0331F276867003091C0 /* NSLog+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLog+Extension.h"; sourceTree = "<group>"; };
+		06CCB0341F276867003091C0 /* NSLog+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLog+Extension.m"; sourceTree = "<group>"; };
+		06CCB0361F276867003091C0 /* AFNetworkingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkingHelper.h; sourceTree = "<group>"; };
+		06CCB0371F276867003091C0 /* AFNetworkingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkingHelper.m; sourceTree = "<group>"; };
+		06CCB0381F276867003091C0 /* IQKeyboardManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQKeyboardManagerHelper.h; sourceTree = "<group>"; };
+		06CCB0391F276867003091C0 /* IQKeyboardManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardManagerHelper.m; sourceTree = "<group>"; };
+		06CCB03A1F276867003091C0 /* NSErrorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSErrorHelper.h; sourceTree = "<group>"; };
+		06CCB03B1F276867003091C0 /* NSErrorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSErrorHelper.m; sourceTree = "<group>"; };
+		06CCB03C1F276867003091C0 /* ZYFDeviceHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFDeviceHelper.h; sourceTree = "<group>"; };
+		06CCB03D1F276867003091C0 /* ZYFDeviceHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFDeviceHelper.m; sourceTree = "<group>"; };
+		06CCB03E1F276867003091C0 /* ZYFUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFUserDefaults.h; sourceTree = "<group>"; };
+		06CCB03F1F276867003091C0 /* ZYFUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYFUserDefaults.m; sourceTree = "<group>"; };
+		06CCB0461F276867003091C0 /* ZYFUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFUtility.h; sourceTree = "<group>"; };
+		06CCB0471F276867003091C0 /* ZYFUtilityPch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYFUtilityPch.h; sourceTree = "<group>"; };
+		06CCB0631F276A92003091C0 /* MicroOrderKing.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicroOrderKing.pch; sourceTree = "<group>"; };
+		06CCB06B1F27716C003091C0 /* MKLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKLoginViewController.h; path = loginPart/Controller/MKLoginViewController.h; sourceTree = "<group>"; };
+		06CCB06C1F27716C003091C0 /* MKLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKLoginViewController.m; path = loginPart/Controller/MKLoginViewController.m; sourceTree = "<group>"; };
+		06CCB06F1F286F31003091C0 /* MKSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSignUpViewController.h; path = loginPart/Controller/MKSignUpViewController.h; sourceTree = "<group>"; };
+		06CCB0701F286F31003091C0 /* MKSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSignUpViewController.m; path = loginPart/Controller/MKSignUpViewController.m; sourceTree = "<group>"; };
+		06CCB0731F287E1F003091C0 /* MKHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKHomePageViewController.h; path = homeage/Controller/MKHomePageViewController.h; sourceTree = "<group>"; };
+		06CCB0741F287E1F003091C0 /* MKHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKHomePageViewController.m; path = homeage/Controller/MKHomePageViewController.m; sourceTree = "<group>"; };
+		06CCB0761F288373003091C0 /* MKTradesInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKTradesInfoView.h; path = homeage/View/MKTradesInfoView.h; sourceTree = "<group>"; };
+		06CCB0771F288373003091C0 /* MKTradesInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTradesInfoView.m; path = homeage/View/MKTradesInfoView.m; sourceTree = "<group>"; };
+		06CCB0801F29761B003091C0 /* MKSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSectionView.h; path = homeage/View/MKSectionView.h; sourceTree = "<group>"; };
+		06CCB0811F29761B003091C0 /* MKSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSectionView.m; path = homeage/View/MKSectionView.m; sourceTree = "<group>"; };
+		06CCB0841F2983FC003091C0 /* MKOrderManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderManageController.h; path = order/Controller/MKOrderManageController.h; sourceTree = "<group>"; };
+		06CCB0851F2983FC003091C0 /* MKOrderManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderManageController.m; path = order/Controller/MKOrderManageController.m; sourceTree = "<group>"; };
+		06CCB0881F29A809003091C0 /* MKOrderManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderManageCell.h; path = order/View/MKOrderManageCell.h; sourceTree = "<group>"; };
+		06CCB0891F29A809003091C0 /* MKOrderManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderManageCell.m; path = order/View/MKOrderManageCell.m; sourceTree = "<group>"; };
+		06CCB08B1F29A846003091C0 /* MKGoodsInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsInfoView.h; path = order/View/MKGoodsInfoView.h; sourceTree = "<group>"; };
+		06CCB08C1F29A846003091C0 /* MKGoodsInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsInfoView.m; path = order/View/MKGoodsInfoView.m; sourceTree = "<group>"; };
+		06CCB08E1F29D25D003091C0 /* MKOrderCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderCellModel.h; path = order/Model/MKOrderCellModel.h; sourceTree = "<group>"; };
+		06CCB08F1F29D25D003091C0 /* MKOrderCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderCellModel.m; path = order/Model/MKOrderCellModel.m; sourceTree = "<group>"; };
+		06CCB0951F29DDC2003091C0 /* MKOrderManageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderManageTable.h; path = order/View/MKOrderManageTable.h; sourceTree = "<group>"; };
+		06CCB0961F29DDC2003091C0 /* MKOrderManageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderManageTable.m; path = order/View/MKOrderManageTable.m; sourceTree = "<group>"; };
+		06CCB0A11F2AC870003091C0 /* MKAccountManageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountManageController.h; path = subAccount/Controller/MKAccountManageController.h; sourceTree = "<group>"; };
+		06CCB0A21F2AC870003091C0 /* MKAccountManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountManageController.m; path = subAccount/Controller/MKAccountManageController.m; sourceTree = "<group>"; };
+		06CCB0A41F2AC9AD003091C0 /* MKAccountManageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountManageCell.h; path = subAccount/View/MKAccountManageCell.h; sourceTree = "<group>"; };
+		06CCB0A51F2AC9AD003091C0 /* MKAccountManageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountManageCell.m; path = subAccount/View/MKAccountManageCell.m; sourceTree = "<group>"; };
+		06CCB0A71F2ACEC4003091C0 /* MKAccountBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountBaseModel.h; path = subAccount/Model/MKAccountBaseModel.h; sourceTree = "<group>"; };
+		06CCB0A81F2ACEC4003091C0 /* MKAccountBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountBaseModel.m; path = subAccount/Model/MKAccountBaseModel.m; sourceTree = "<group>"; };
+		06CCB0AC1F2AD0AC003091C0 /* MKAccountManageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountManageTable.h; path = subAccount/View/MKAccountManageTable.h; sourceTree = "<group>"; };
+		06CCB0AD1F2AD0AC003091C0 /* MKAccountManageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountManageTable.m; path = subAccount/View/MKAccountManageTable.m; sourceTree = "<group>"; };
+		06CCB0AF1F2AE688003091C0 /* MKAccountInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountInfoController.h; path = subAccount/Controller/MKAccountInfoController.h; sourceTree = "<group>"; };
+		06CCB0B01F2AE688003091C0 /* MKAccountInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountInfoController.m; path = subAccount/Controller/MKAccountInfoController.m; sourceTree = "<group>"; };
+		06CCB0B21F2AEE26003091C0 /* MKAccountInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAccountInfoView.h; path = subAccount/View/MKAccountInfoView.h; sourceTree = "<group>"; };
+		06CCB0B31F2AEE26003091C0 /* MKAccountInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAccountInfoView.m; path = subAccount/View/MKAccountInfoView.m; sourceTree = "<group>"; };
+		06CCB0B51F2B11C3003091C0 /* MKAddGoodsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddGoodsController.h; path = order/Controller/MKAddGoodsController.h; sourceTree = "<group>"; };
+		06CCB0B61F2B11C3003091C0 /* MKAddGoodsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddGoodsController.m; path = order/Controller/MKAddGoodsController.m; sourceTree = "<group>"; };
+		06CCB0BA1F2B12FA003091C0 /* MKAddGoodsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddGoodsCell.h; path = order/View/MKAddGoodsCell.h; sourceTree = "<group>"; };
+		06CCB0BB1F2B12FA003091C0 /* MKAddGoodsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddGoodsCell.m; path = order/View/MKAddGoodsCell.m; sourceTree = "<group>"; };
+		06CCB0BD1F2B3164003091C0 /* MKGoodsBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsBottomView.h; path = order/View/MKGoodsBottomView.h; sourceTree = "<group>"; };
+		06CCB0BE1F2B3164003091C0 /* MKGoodsBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsBottomView.m; path = order/View/MKGoodsBottomView.m; sourceTree = "<group>"; };
+		06CCB0C01F2B40C4003091C0 /* MKOrderWritingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderWritingController.h; path = order/Controller/MKOrderWritingController.h; sourceTree = "<group>"; };
+		06CCB0C11F2B40C4003091C0 /* MKOrderWritingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderWritingController.m; path = order/Controller/MKOrderWritingController.m; sourceTree = "<group>"; };
+		06CCB0C41F2B483E003091C0 /* MKCopyBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKCopyBoard.h; path = order/View/MKCopyBoard.h; sourceTree = "<group>"; };
+		06CCB0C51F2B483E003091C0 /* MKCopyBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKCopyBoard.m; path = order/View/MKCopyBoard.m; sourceTree = "<group>"; };
+		06CCB0C71F2B5A4C003091C0 /* MKReceiverInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKReceiverInfoView.h; path = order/View/MKReceiverInfoView.h; sourceTree = "<group>"; };
+		06CCB0C81F2B5A4C003091C0 /* MKReceiverInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKReceiverInfoView.m; path = order/View/MKReceiverInfoView.m; sourceTree = "<group>"; };
+		06CCB0CA1F2B6CA2003091C0 /* MKGoodsInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsInfoCell.h; path = order/View/MKGoodsInfoCell.h; sourceTree = "<group>"; };
+		06CCB0CB1F2B6CA2003091C0 /* MKGoodsInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsInfoCell.m; path = order/View/MKGoodsInfoCell.m; sourceTree = "<group>"; };
+		06ECE30E1F36A30B001DDFF3 /* MKAddreManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreManageModel.h; path = member/Model/MKAddreManageModel.h; sourceTree = "<group>"; };
+		06ECE30F1F36A30B001DDFF3 /* MKAddreManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageModel.m; path = member/Model/MKAddreManageModel.m; sourceTree = "<group>"; };
+		06ECE3141F36A9DF001DDFF3 /* MKAddreManageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreManageTable.h; path = member/View/MKAddreManageTable.h; sourceTree = "<group>"; };
+		06ECE3151F36A9DF001DDFF3 /* MKAddreManageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageTable.m; path = member/View/MKAddreManageTable.m; sourceTree = "<group>"; };
+		06ECE3171F36AB1E001DDFF3 /* MKEditMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKEditMemberController.h; path = member/Controller/MKEditMemberController.h; sourceTree = "<group>"; };
+		06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKEditMemberController.m; path = member/Controller/MKEditMemberController.m; sourceTree = "<group>"; };
+		06ECE31A1F378FF9001DDFF3 /* MKAddreMatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreMatchModel.h; path = order/Model/MKAddreMatchModel.h; sourceTree = "<group>"; };
+		06ECE31B1F378FF9001DDFF3 /* MKAddreMatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreMatchModel.m; path = order/Model/MKAddreMatchModel.m; sourceTree = "<group>"; };
+		27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MicroOrderKing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BECADD553E1FAA9E2BD614F5 /* Pods-MicroOrderKing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MicroOrderKing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing.debug.xcconfig"; sourceTree = "<group>"; };
+		F76AD51BEE9725B54AEF006E /* Pods-MicroOrderKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MicroOrderKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06CCAFCF1F275A79003091C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFAEA7F24E0972E457594BA6 /* Pods_MicroOrderKing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFE81F275A79003091C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFF31F275A79003091C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		063CE5481F2CBB7900A5A9F9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				063CE54A1F2CBBCC00A5A9F9 /* MKTradesDetailController.h */,
+				063CE54B1F2CBBCC00A5A9F9 /* MKTradesDetailController.m */,
+				063CE5531F2DF58300A5A9F9 /* MKMemberDetailController.h */,
+				063CE5541F2DF58300A5A9F9 /* MKMemberDetailController.m */,
+				063CE5621F2E1C7E00A5A9F9 /* MKMemberManageController.h */,
+				063CE5631F2E1C7E00A5A9F9 /* MKMemberManageController.m */,
+				064DB2411F35B59100087865 /* MKAddMemberController.h */,
+				064DB2421F35B59100087865 /* MKAddMemberController.m */,
+				06ECE3171F36AB1E001DDFF3 /* MKEditMemberController.h */,
+				06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */,
+				064DB2471F35FC2100087865 /* MKAddreManageController.h */,
+				064DB2481F35FC2100087865 /* MKAddreManageController.m */,
+				064DB2441F35F68700087865 /* MKEditAddreController.h */,
+				064DB2451F35F68700087865 /* MKEditAddreController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		063CE5491F2CBB8400A5A9F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				063CE5651F2E2E1500A5A9F9 /* 会员管理 */,
+				063CE5571F2DF5EE00A5A9F9 /* 会员详情 */,
+				063CE5561F2DF5B200A5A9F9 /* 查看详情 */,
+				064DB24A1F35FCA000087865 /* MKAddreMangeCell.h */,
+				064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */,
+				06ECE3141F36A9DF001DDFF3 /* MKAddreManageTable.h */,
+				06ECE3151F36A9DF001DDFF3 /* MKAddreManageTable.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		063CE5561F2DF5B200A5A9F9 /* 查看详情 */ = {
+			isa = PBXGroup;
+			children = (
+				063CE5501F2CBD4200A5A9F9 /* MKTradesHeaderView.h */,
+				063CE5511F2CBD4200A5A9F9 /* MKTradesHeaderView.m */,
+			);
+			name = "查看详情";
+			sourceTree = "<group>";
+		};
+		063CE5571F2DF5EE00A5A9F9 /* 会员详情 */ = {
+			isa = PBXGroup;
+			children = (
+				063CE5581F2DF61400A5A9F9 /* MKMemberInfoView.h */,
+				063CE5591F2DF61400A5A9F9 /* MKMemberInfoView.m */,
+				063CE55F1F2E101B00A5A9F9 /* MKMemTradesInfoView.h */,
+				063CE5601F2E101B00A5A9F9 /* MKMemTradesInfoView.m */,
+			);
+			name = "会员详情";
+			sourceTree = "<group>";
+		};
+		063CE55B1F2E090C00A5A9F9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D7BB1F3465B100B7CE09 /* MKMemberBaseModel.h */,
+				06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */,
+				06ECE30E1F36A30B001DDFF3 /* MKAddreManageModel.h */,
+				06ECE30F1F36A30B001DDFF3 /* MKAddreManageModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		063CE5651F2E2E1500A5A9F9 /* 会员管理 */ = {
+			isa = PBXGroup;
+			children = (
+				063CE5661F2E2E6200A5A9F9 /* MKMemManageCell.h */,
+				063CE5671F2E2E6200A5A9F9 /* MKMemManageCell.m */,
+				063CE5691F2E303400A5A9F9 /* MKMemManageTable.h */,
+				063CE56A1F2E303400A5A9F9 /* MKMemManageTable.m */,
+			);
+			name = "会员管理";
+			sourceTree = "<group>";
+		};
+		06A0D6B31F305AE700B7CE09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6B41F305B1700B7CE09 /* MKPersonModel.h */,
+				06A0D6B51F305B1700B7CE09 /* MKPersonModel.m */,
+				06A0D6C01F30769A00B7CE09 /* MKContactModel.h */,
+				06A0D6C11F30769A00B7CE09 /* MKContactModel.m */,
+				06A0D7AE1F32CF5600B7CE09 /* MKHomeModel.h */,
+				06A0D7AF1F32CF5600B7CE09 /* MKHomeModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06A0D6C61F317F8800B7CE09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6C31F317F8300B7CE09 /* MKLoginModel.h */,
+				06A0D6C41F317F8300B7CE09 /* MKLoginModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06A0D6C71F31816000B7CE09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6C81F31817B00B7CE09 /* MKHttpModel.h */,
+				06A0D6C91F31817B00B7CE09 /* MKHttpModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06C82A901F2EDC64004E2F25 /* 订单详情 */ = {
+			isa = PBXGroup;
+			children = (
+				06C82A911F2EDCA7004E2F25 /* MKOrderDetailView.h */,
+				06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */,
+				06C82A941F2EFF82004E2F25 /* MKOrderGoodsView.h */,
+				06C82A951F2EFF82004E2F25 /* MKOrderGoodsView.m */,
+			);
+			name = "订单详情";
+			sourceTree = "<group>";
+		};
+		06C82A9A1F2F0A22004E2F25 /* 其他 */ = {
+			isa = PBXGroup;
+			children = (
+				06C82AA11F2F20BA004E2F25 /* MKNewGoodsInfoView.h */,
+				06C82AA21F2F20BA004E2F25 /* MKNewGoodsInfoView.m */,
+				06CCB08B1F29A846003091C0 /* MKGoodsInfoView.h */,
+				06CCB08C1F29A846003091C0 /* MKGoodsInfoView.m */,
+				063CE5721F2E472F00A5A9F9 /* MKGoodsManageCell.h */,
+				063CE5731F2E472F00A5A9F9 /* MKGoodsManageCell.m */,
+				06C82AA71F2F5348004E2F25 /* MKSearchTable.h */,
+				06C82AA81F2F5348004E2F25 /* MKSearchTable.m */,
+			);
+			name = "其他";
+			sourceTree = "<group>";
+		};
+		06CCAFC91F275A79003091C0 = {
+			isa = PBXGroup;
+			children = (
+				06CCAFD41F275A79003091C0 /* MicroOrderKing */,
+				06CCAFEE1F275A79003091C0 /* MicroOrderKingTests */,
+				06CCAFF91F275A79003091C0 /* MicroOrderKingUITests */,
+				06CCAFD31F275A79003091C0 /* Products */,
+				0A419410DD84DA0F008BFE2C /* Pods */,
+				0C66F285EAFB8E1A80771F0D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		06CCAFD31F275A79003091C0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06CCAFD21F275A79003091C0 /* MicroOrderKing.app */,
+				06CCAFEB1F275A79003091C0 /* MicroOrderKingTests.xctest */,
+				06CCAFF61F275A79003091C0 /* MicroOrderKingUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06CCAFD41F275A79003091C0 /* MicroOrderKing */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6C71F31816000B7CE09 /* Model */,
+				06CCB0681F277040003091C0 /* SubAccount(子账户) */,
+				06CCB0671F276F67003091C0 /* MemberPart(会员管理) */,
+				06CCB0661F276F4C003091C0 /* OrderPart(订单商品) */,
+				06CCB0651F276F2A003091C0 /* HomePage(首页) */,
+				06CCB0641F276F19003091C0 /* Login(登录注册) */,
+				06CCB0081F276867003091C0 /* Utility(工具) */,
+				06CCB0691F2770CB003091C0 /* AppDelegate */,
+				06CCB06E1F27792B003091C0 /* PCH */,
+				06CCAFD51F275A79003091C0 /* Supporting Files */,
+			);
+			path = MicroOrderKing;
+			sourceTree = "<group>";
+		};
+		06CCAFD51F275A79003091C0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				06CCAFE11F275A79003091C0 /* Assets.xcassets */,
+				06CCAFE61F275A79003091C0 /* Info.plist */,
+				06CCAFE31F275A79003091C0 /* LaunchScreen.storyboard */,
+				06CCAFD61F275A79003091C0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06CCAFEE1F275A79003091C0 /* MicroOrderKingTests */ = {
+			isa = PBXGroup;
+			children = (
+				06CCAFEF1F275A79003091C0 /* MicroOrderKingTests.m */,
+				06CCAFF11F275A79003091C0 /* Info.plist */,
+			);
+			path = MicroOrderKingTests;
+			sourceTree = "<group>";
+		};
+		06CCAFF91F275A79003091C0 /* MicroOrderKingUITests */ = {
+			isa = PBXGroup;
+			children = (
+				06CCAFFA1F275A79003091C0 /* MicroOrderKingUITests.m */,
+				06CCAFFC1F275A79003091C0 /* Info.plist */,
+			);
+			path = MicroOrderKingUITests;
+			sourceTree = "<group>";
+		};
+		06CCB0081F276867003091C0 /* Utility(工具) */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0091F276867003091C0 /* AFNetWorkingUsing.h */,
+				06CCB00A1F276867003091C0 /* AFNetWorkingUsing.m */,
+				06CCB00B1F276867003091C0 /* Category */,
+				06CCB0181F276867003091C0 /* Controller */,
+				06CCB0231F276867003091C0 /* CustomerView */,
+				06CCB0321F276867003091C0 /* Extension */,
+				06CCB0351F276867003091C0 /* Helper */,
+				06CCB0461F276867003091C0 /* ZYFUtility.h */,
+				06CCB0471F276867003091C0 /* ZYFUtilityPch.h */,
+			);
+			name = "Utility(工具)";
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		06CCB00B1F276867003091C0 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB00C1F276867003091C0 /* NSDate+ZYFCategory.h */,
+				06CCB00D1F276867003091C0 /* NSDate+ZYFCategory.m */,
+				06CCB00E1F276867003091C0 /* NSString+ZYFCategory.h */,
+				06CCB00F1F276867003091C0 /* NSString+ZYFCategory.m */,
+				06CCB0101F276867003091C0 /* UIColor+ZYFCategory.h */,
+				06CCB0111F276867003091C0 /* UIColor+ZYFCategory.m */,
+				06CCB0121F276867003091C0 /* UIImage+ZYFCategory.h */,
+				06CCB0131F276867003091C0 /* UIImage+ZYFCategory.m */,
+				06CCB0141F276867003091C0 /* UIImageView+ZYFCategory.h */,
+				06CCB0151F276867003091C0 /* UIImageView+ZYFCategory.m */,
+				06CCB0161F276867003091C0 /* UIView+ZYFUIViewCategory.h */,
+				06CCB0171F276867003091C0 /* UIView+ZYFUIViewCategory.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		06CCB0181F276867003091C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0191F276867003091C0 /* BaseNavigationController.h */,
+				06CCB01A1F276867003091C0 /* BaseNavigationController.m */,
+				06CCB01B1F276867003091C0 /* BaseScrollTableViewController.h */,
+				06CCB01C1F276867003091C0 /* BaseScrollTableViewController.m */,
+				06CCB01D1F276867003091C0 /* BaseScrollViewController.h */,
+				06CCB01E1F276867003091C0 /* BaseScrollViewController.m */,
+				06CCB01F1F276867003091C0 /* BaseTabBarController.h */,
+				06CCB0201F276867003091C0 /* BaseTabBarController.m */,
+				06CCB0211F276867003091C0 /* BaseViewController.h */,
+				06CCB0221F276867003091C0 /* BaseViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		06CCB0231F276867003091C0 /* CustomerView */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0241F276867003091C0 /* BaseTabButtonScrollView.h */,
+				06CCB0251F276867003091C0 /* BaseTabButtonScrollView.m */,
+				06CCB0261F276867003091C0 /* BaseTableViewCell.h */,
+				06CCB0271F276867003091C0 /* BaseTableViewCell.m */,
+				06CCB0281F276867003091C0 /* BaseTipHud.h */,
+				06CCB0291F276867003091C0 /* BaseTipHud.m */,
+				06CCB02A1F276867003091C0 /* BaseTopView.h */,
+				06CCB02B1F276867003091C0 /* BaseTopView.m */,
+				06CCB02C1F276867003091C0 /* BaseUITableView.h */,
+				06CCB02D1F276867003091C0 /* BaseUITableView.m */,
+				06CCB02E1F276867003091C0 /* BaseView.h */,
+				06CCB02F1F276867003091C0 /* BaseView.m */,
+				06CCB0301F276867003091C0 /* Container.h */,
+				06CCB0311F276867003091C0 /* Container.m */,
+			);
+			path = CustomerView;
+			sourceTree = "<group>";
+		};
+		06CCB0321F276867003091C0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0331F276867003091C0 /* NSLog+Extension.h */,
+				06CCB0341F276867003091C0 /* NSLog+Extension.m */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		06CCB0351F276867003091C0 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0361F276867003091C0 /* AFNetworkingHelper.h */,
+				06CCB0371F276867003091C0 /* AFNetworkingHelper.m */,
+				06CCB0381F276867003091C0 /* IQKeyboardManagerHelper.h */,
+				06CCB0391F276867003091C0 /* IQKeyboardManagerHelper.m */,
+				06CCB03A1F276867003091C0 /* NSErrorHelper.h */,
+				06CCB03B1F276867003091C0 /* NSErrorHelper.m */,
+				06CCB03C1F276867003091C0 /* ZYFDeviceHelper.h */,
+				06CCB03D1F276867003091C0 /* ZYFDeviceHelper.m */,
+				06CCB03E1F276867003091C0 /* ZYFUserDefaults.h */,
+				06CCB03F1F276867003091C0 /* ZYFUserDefaults.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		06CCB0641F276F19003091C0 /* Login(登录注册) */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6C61F317F8800B7CE09 /* Model */,
+				06CCB06A1F27710A003091C0 /* Controller */,
+			);
+			name = "Login(登录注册)";
+			sourceTree = "<group>";
+		};
+		06CCB0651F276F2A003091C0 /* HomePage(首页) */ = {
+			isa = PBXGroup;
+			children = (
+				06A0D6B31F305AE700B7CE09 /* Model */,
+				06CCB0791F288378003091C0 /* View */,
+				06CCB0721F287DF6003091C0 /* Controller */,
+			);
+			name = "HomePage(首页)";
+			sourceTree = "<group>";
+		};
+		06CCB0661F276F4C003091C0 /* OrderPart(订单商品) */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0911F29D263003091C0 /* Model */,
+				06CCB0871F29916D003091C0 /* View */,
+				06CCB0831F2983B8003091C0 /* Controller */,
+			);
+			name = "OrderPart(订单商品)";
+			sourceTree = "<group>";
+		};
+		06CCB0671F276F67003091C0 /* MemberPart(会员管理) */ = {
+			isa = PBXGroup;
+			children = (
+				063CE55B1F2E090C00A5A9F9 /* Model */,
+				063CE5491F2CBB8400A5A9F9 /* View */,
+				063CE5481F2CBB7900A5A9F9 /* Controller */,
+			);
+			name = "MemberPart(会员管理)";
+			sourceTree = "<group>";
+		};
+		06CCB0681F277040003091C0 /* SubAccount(子账户) */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0A01F2AC826003091C0 /* Model */,
+				06CCB09F1F2AC81F003091C0 /* View */,
+				06CCB09E1F2AC816003091C0 /* Controller */,
+			);
+			name = "SubAccount(子账户)";
+			sourceTree = "<group>";
+		};
+		06CCB0691F2770CB003091C0 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				06CCAFD81F275A79003091C0 /* AppDelegate.h */,
+				06CCAFD91F275A79003091C0 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		06CCB06A1F27710A003091C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB06B1F27716C003091C0 /* MKLoginViewController.h */,
+				06CCB06C1F27716C003091C0 /* MKLoginViewController.m */,
+				06CCB06F1F286F31003091C0 /* MKSignUpViewController.h */,
+				06CCB0701F286F31003091C0 /* MKSignUpViewController.m */,
+				06A0D6B71F306B2500B7CE09 /* MKChangePasdController.h */,
+				06A0D6B81F306B2500B7CE09 /* MKChangePasdController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		06CCB06E1F27792B003091C0 /* PCH */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0631F276A92003091C0 /* MicroOrderKing.pch */,
+			);
+			name = PCH;
+			sourceTree = "<group>";
+		};
+		06CCB0721F287DF6003091C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0731F287E1F003091C0 /* MKHomePageViewController.h */,
+				06CCB0741F287E1F003091C0 /* MKHomePageViewController.m */,
+				06A0D6AD1F304C2300B7CE09 /* MKPersonCenterController.h */,
+				06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */,
+				06A0D6BA1F306FA800B7CE09 /* MKContactController.h */,
+				06A0D6BB1F306FA800B7CE09 /* MKContactController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		06CCB0791F288378003091C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0761F288373003091C0 /* MKTradesInfoView.h */,
+				06CCB0771F288373003091C0 /* MKTradesInfoView.m */,
+				06CCB0801F29761B003091C0 /* MKSectionView.h */,
+				06CCB0811F29761B003091C0 /* MKSectionView.m */,
+				06A0D6B01F304CB800B7CE09 /* MKPersonInfoView.h */,
+				06A0D6B11F304CB800B7CE09 /* MKPersonInfoView.m */,
+				06A0D6BD1F306FDC00B7CE09 /* MKContactView.h */,
+				06A0D6BE1F306FDC00B7CE09 /* MKContactView.m */,
+				06A0D7B51F3311B700B7CE09 /* MKSignOutView.h */,
+				06A0D7B61F3311B700B7CE09 /* MKSignOutView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		06CCB0831F2983B8003091C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06C82AA41F2F5303004E2F25 /* MKSearchGoodsController.h */,
+				06C82AA51F2F5303004E2F25 /* MKSearchGoodsController.m */,
+				06CCB0841F2983FC003091C0 /* MKOrderManageController.h */,
+				06CCB0851F2983FC003091C0 /* MKOrderManageController.m */,
+				06CCB0B51F2B11C3003091C0 /* MKAddGoodsController.h */,
+				06CCB0B61F2B11C3003091C0 /* MKAddGoodsController.m */,
+				06CCB0C01F2B40C4003091C0 /* MKOrderWritingController.h */,
+				06CCB0C11F2B40C4003091C0 /* MKOrderWritingController.m */,
+				063CE5451F2CBAB700A5A9F9 /* MKOrderDetailController.h */,
+				063CE5461F2CBAB700A5A9F9 /* MKOrderDetailController.m */,
+				063CE5751F2EC63B00A5A9F9 /* MKGoodsManageController.h */,
+				063CE5761F2EC63B00A5A9F9 /* MKGoodsManageController.m */,
+				06C82A9E1F2F1ECD004E2F25 /* MKNewGoodsController.h */,
+				06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		06CCB0871F29916D003091C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06C82A9A1F2F0A22004E2F25 /* 其他 */,
+				06C82A901F2EDC64004E2F25 /* 订单详情 */,
+				06CCB0C31F2B47D8003091C0 /* 录入订单 */,
+				06CCB0B91F2B12A6003091C0 /* 添加商品 */,
+				06CCB0B81F2B1243003091C0 /* 订单管理 */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		06CCB0911F29D263003091C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB08E1F29D25D003091C0 /* MKOrderCellModel.h */,
+				06CCB08F1F29D25D003091C0 /* MKOrderCellModel.m */,
+				06ECE31A1F378FF9001DDFF3 /* MKAddreMatchModel.h */,
+				06ECE31B1F378FF9001DDFF3 /* MKAddreMatchModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06CCB09E1F2AC816003091C0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0A11F2AC870003091C0 /* MKAccountManageController.h */,
+				06CCB0A21F2AC870003091C0 /* MKAccountManageController.m */,
+				06CCB0AF1F2AE688003091C0 /* MKAccountInfoController.h */,
+				06CCB0B01F2AE688003091C0 /* MKAccountInfoController.m */,
+				063CE53F1F2C556800A5A9F9 /* MKAddAccountController.h */,
+				063CE5401F2C556800A5A9F9 /* MKAddAccountController.m */,
+				063CE56C1F2E3D4500A5A9F9 /* MKPerformanceController.h */,
+				063CE56D1F2E3D4500A5A9F9 /* MKPerformanceController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		06CCB09F1F2AC81F003091C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0A41F2AC9AD003091C0 /* MKAccountManageCell.h */,
+				06CCB0A51F2AC9AD003091C0 /* MKAccountManageCell.m */,
+				06CCB0AC1F2AD0AC003091C0 /* MKAccountManageTable.h */,
+				06CCB0AD1F2AD0AC003091C0 /* MKAccountManageTable.m */,
+				06CCB0B21F2AEE26003091C0 /* MKAccountInfoView.h */,
+				06CCB0B31F2AEE26003091C0 /* MKAccountInfoView.m */,
+				063CE5421F2C566400A5A9F9 /* MKTittleTextView.h */,
+				063CE5431F2C566400A5A9F9 /* MKTittleTextView.m */,
+				063CE56F1F2E3DD000A5A9F9 /* MKMemberCell.h */,
+				063CE5701F2E3DD000A5A9F9 /* MKMemberCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		06CCB0A01F2AC826003091C0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0A71F2ACEC4003091C0 /* MKAccountBaseModel.h */,
+				06CCB0A81F2ACEC4003091C0 /* MKAccountBaseModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06CCB0B81F2B1243003091C0 /* 订单管理 */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0881F29A809003091C0 /* MKOrderManageCell.h */,
+				06CCB0891F29A809003091C0 /* MKOrderManageCell.m */,
+				06CCB0951F29DDC2003091C0 /* MKOrderManageTable.h */,
+				06CCB0961F29DDC2003091C0 /* MKOrderManageTable.m */,
+				06A0D7B81F33532600B7CE09 /* MKConfirmView.h */,
+				06A0D7B91F33532600B7CE09 /* MKConfirmView.m */,
+			);
+			name = "订单管理";
+			sourceTree = "<group>";
+		};
+		06CCB0B91F2B12A6003091C0 /* 添加商品 */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0BA1F2B12FA003091C0 /* MKAddGoodsCell.h */,
+				06CCB0BB1F2B12FA003091C0 /* MKAddGoodsCell.m */,
+				06CCB0BD1F2B3164003091C0 /* MKGoodsBottomView.h */,
+				06CCB0BE1F2B3164003091C0 /* MKGoodsBottomView.m */,
+			);
+			name = "添加商品";
+			sourceTree = "<group>";
+		};
+		06CCB0C31F2B47D8003091C0 /* 录入订单 */ = {
+			isa = PBXGroup;
+			children = (
+				06CCB0C41F2B483E003091C0 /* MKCopyBoard.h */,
+				06CCB0C51F2B483E003091C0 /* MKCopyBoard.m */,
+				06CCB0C71F2B5A4C003091C0 /* MKReceiverInfoView.h */,
+				06CCB0C81F2B5A4C003091C0 /* MKReceiverInfoView.m */,
+				06CCB0CA1F2B6CA2003091C0 /* MKGoodsInfoCell.h */,
+				06CCB0CB1F2B6CA2003091C0 /* MKGoodsInfoCell.m */,
+				063CE5391F2C36D500A5A9F9 /* MKGoodsInfoTable.h */,
+				063CE53A1F2C36D500A5A9F9 /* MKGoodsInfoTable.m */,
+				063CE53C1F2C4CC200A5A9F9 /* MKOrderOtherView.h */,
+				063CE53D1F2C4CC200A5A9F9 /* MKOrderOtherView.m */,
+				062EB0E41F35563F00945BE9 /* MKAddreChoiceView.h */,
+				062EB0E51F35563F00945BE9 /* MKAddreChoiceView.m */,
+			);
+			name = "录入订单";
+			sourceTree = "<group>";
+		};
+		0A419410DD84DA0F008BFE2C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BECADD553E1FAA9E2BD614F5 /* Pods-MicroOrderKing.debug.xcconfig */,
+				F76AD51BEE9725B54AEF006E /* Pods-MicroOrderKing.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		0C66F285EAFB8E1A80771F0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06CCAFD11F275A79003091C0 /* MicroOrderKing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06CCAFFF1F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKing" */;
+			buildPhases = (
+				59A9B5CC82E0640A1E88DF64 /* [CP] Check Pods Manifest.lock */,
+				06CCAFCE1F275A79003091C0 /* Sources */,
+				06CCAFCF1F275A79003091C0 /* Frameworks */,
+				06CCAFD01F275A79003091C0 /* Resources */,
+				2869D2E9A011D895C7CCFE44 /* [CP] Embed Pods Frameworks */,
+				627316328B07085E1021F42B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MicroOrderKing;
+			productName = MicroOrderKing;
+			productReference = 06CCAFD21F275A79003091C0 /* MicroOrderKing.app */;
+			productType = "com.apple.product-type.application";
+		};
+		06CCAFEA1F275A79003091C0 /* MicroOrderKingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06CCB0021F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKingTests" */;
+			buildPhases = (
+				06CCAFE71F275A79003091C0 /* Sources */,
+				06CCAFE81F275A79003091C0 /* Frameworks */,
+				06CCAFE91F275A79003091C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06CCAFED1F275A79003091C0 /* PBXTargetDependency */,
+			);
+			name = MicroOrderKingTests;
+			productName = MicroOrderKingTests;
+			productReference = 06CCAFEB1F275A79003091C0 /* MicroOrderKingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		06CCAFF51F275A79003091C0 /* MicroOrderKingUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06CCB0051F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKingUITests" */;
+			buildPhases = (
+				06CCAFF21F275A79003091C0 /* Sources */,
+				06CCAFF31F275A79003091C0 /* Frameworks */,
+				06CCAFF41F275A79003091C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				06CCAFF81F275A79003091C0 /* PBXTargetDependency */,
+			);
+			name = MicroOrderKingUITests;
+			productName = MicroOrderKingUITests;
+			productReference = 06CCAFF61F275A79003091C0 /* MicroOrderKingUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06CCAFCA1F275A79003091C0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "陈徳柱";
+				TargetAttributes = {
+					06CCAFD11F275A79003091C0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8EA9WX9959;
+						ProvisioningStyle = Automatic;
+					};
+					06CCAFEA1F275A79003091C0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8EA9WX9959;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 06CCAFD11F275A79003091C0;
+					};
+					06CCAFF51F275A79003091C0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 8EA9WX9959;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 06CCAFD11F275A79003091C0;
+					};
+				};
+			};
+			buildConfigurationList = 06CCAFCD1F275A79003091C0 /* Build configuration list for PBXProject "MicroOrderKing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 06CCAFC91F275A79003091C0;
+			productRefGroup = 06CCAFD31F275A79003091C0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06CCAFD11F275A79003091C0 /* MicroOrderKing */,
+				06CCAFEA1F275A79003091C0 /* MicroOrderKingTests */,
+				06CCAFF51F275A79003091C0 /* MicroOrderKingUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06CCAFD01F275A79003091C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06CCAFE51F275A79003091C0 /* LaunchScreen.storyboard in Resources */,
+				06CCAFE21F275A79003091C0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFE91F275A79003091C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFF41F275A79003091C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2869D2E9A011D895C7CCFE44 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		59A9B5CC82E0640A1E88DF64 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		627316328B07085E1021F42B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06CCAFCE1F275A79003091C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06CCB0531F276867003091C0 /* BaseViewController.m in Sources */,
+				06A0D6C51F317F8300B7CE09 /* MKLoginModel.m in Sources */,
+				06CCB0C21F2B40C4003091C0 /* MKOrderWritingController.m in Sources */,
+				06CCB0591F276867003091C0 /* BaseView.m in Sources */,
+				06CCB05A1F276867003091C0 /* Container.m in Sources */,
+				06C82AA91F2F5348004E2F25 /* MKSearchTable.m in Sources */,
+				06A0D7B71F3311B700B7CE09 /* MKSignOutView.m in Sources */,
+				062EB0E61F35563F00945BE9 /* MKAddreChoiceView.m in Sources */,
+				06CCB0BC1F2B12FA003091C0 /* MKAddGoodsCell.m in Sources */,
+				064DB2491F35FC2100087865 /* MKAddreManageController.m in Sources */,
+				06C82AA61F2F5303004E2F25 /* MKSearchGoodsController.m in Sources */,
+				06CCB04F1F276867003091C0 /* BaseNavigationController.m in Sources */,
+				06CCB08D1F29A846003091C0 /* MKGoodsInfoView.m in Sources */,
+				063CE53E1F2C4CC200A5A9F9 /* MKOrderOtherView.m in Sources */,
+				06CCB04B1F276867003091C0 /* UIColor+ZYFCategory.m in Sources */,
+				06A0D6B61F305B1700B7CE09 /* MKPersonModel.m in Sources */,
+				064DB2431F35B59100087865 /* MKAddMemberController.m in Sources */,
+				06CCB05C1F276867003091C0 /* AFNetworkingHelper.m in Sources */,
+				06C82AA01F2F1ECD004E2F25 /* MKNewGoodsController.m in Sources */,
+				063CE5551F2DF58300A5A9F9 /* MKMemberDetailController.m in Sources */,
+				06CCB0B11F2AE688003091C0 /* MKAccountInfoController.m in Sources */,
+				06CCB0751F287E1F003091C0 /* MKHomePageViewController.m in Sources */,
+				06C82AA31F2F20BA004E2F25 /* MKNewGoodsInfoView.m in Sources */,
+				06CCB06D1F27716C003091C0 /* MKLoginViewController.m in Sources */,
+				063CE53B1F2C36D500A5A9F9 /* MKGoodsInfoTable.m in Sources */,
+				06CCB0B71F2B11C3003091C0 /* MKAddGoodsController.m in Sources */,
+				06A0D6C21F30769A00B7CE09 /* MKContactModel.m in Sources */,
+				063CE5611F2E101B00A5A9F9 /* MKMemTradesInfoView.m in Sources */,
+				06CCB0551F276867003091C0 /* BaseTableViewCell.m in Sources */,
+				06A0D6BC1F306FA800B7CE09 /* MKContactController.m in Sources */,
+				06CCB0AE1F2AD0AC003091C0 /* MKAccountManageTable.m in Sources */,
+				06ECE3191F36AB1E001DDFF3 /* MKEditMemberController.m in Sources */,
+				06CCB0601F276867003091C0 /* ZYFUserDefaults.m in Sources */,
+				06A0D7BA1F33532600B7CE09 /* MKConfirmView.m in Sources */,
+				06ECE3101F36A30B001DDFF3 /* MKAddreManageModel.m in Sources */,
+				06CCB0511F276867003091C0 /* BaseScrollViewController.m in Sources */,
+				06C82A961F2EFF82004E2F25 /* MKOrderGoodsView.m in Sources */,
+				06CCB0971F29DDC2003091C0 /* MKOrderManageTable.m in Sources */,
+				06CCB0A61F2AC9AD003091C0 /* MKAccountManageCell.m in Sources */,
+				06CCB0711F286F31003091C0 /* MKSignUpViewController.m in Sources */,
+				063CE5471F2CBAB700A5A9F9 /* MKOrderDetailController.m in Sources */,
+				06CCB0BF1F2B3164003091C0 /* MKGoodsBottomView.m in Sources */,
+				063CE5441F2C566400A5A9F9 /* MKTittleTextView.m in Sources */,
+				063CE54C1F2CBBCC00A5A9F9 /* MKTradesDetailController.m in Sources */,
+				06CCB05E1F276867003091C0 /* NSErrorHelper.m in Sources */,
+				06A0D6B21F304CB800B7CE09 /* MKPersonInfoView.m in Sources */,
+				064DB24C1F35FCA000087865 /* MKAddreMangeCell.m in Sources */,
+				06ECE3161F36A9DF001DDFF3 /* MKAddreManageTable.m in Sources */,
+				06CCAFDA1F275A79003091C0 /* AppDelegate.m in Sources */,
+				06CCB04E1F276867003091C0 /* UIView+ZYFUIViewCategory.m in Sources */,
+				06ECE31C1F378FF9001DDFF3 /* MKAddreMatchModel.m in Sources */,
+				064DB2461F35F68700087865 /* MKEditAddreController.m in Sources */,
+				06A0D6B91F306B2500B7CE09 /* MKChangePasdController.m in Sources */,
+				06CCB0A31F2AC870003091C0 /* MKAccountManageController.m in Sources */,
+				06CCB0C61F2B483E003091C0 /* MKCopyBoard.m in Sources */,
+				06A0D7B01F32CF5600B7CE09 /* MKHomeModel.m in Sources */,
+				06CCB0581F276867003091C0 /* BaseUITableView.m in Sources */,
+				06CCB05F1F276867003091C0 /* ZYFDeviceHelper.m in Sources */,
+				06CCB0821F29761B003091C0 /* MKSectionView.m in Sources */,
+				06CCB0CC1F2B6CA2003091C0 /* MKGoodsInfoCell.m in Sources */,
+				06CCB04C1F276867003091C0 /* UIImage+ZYFCategory.m in Sources */,
+				06CCB0C91F2B5A4C003091C0 /* MKReceiverInfoView.m in Sources */,
+				06CCB08A1F29A809003091C0 /* MKOrderManageCell.m in Sources */,
+				06CCB04D1F276867003091C0 /* UIImageView+ZYFCategory.m in Sources */,
+				063CE5411F2C556800A5A9F9 /* MKAddAccountController.m in Sources */,
+				063CE5641F2E1C7E00A5A9F9 /* MKMemberManageController.m in Sources */,
+				063CE5681F2E2E6200A5A9F9 /* MKMemManageCell.m in Sources */,
+				06CCB0561F276867003091C0 /* BaseTipHud.m in Sources */,
+				06A0D7BD1F3465B100B7CE09 /* MKMemberBaseModel.m in Sources */,
+				06CCB0521F276867003091C0 /* BaseTabBarController.m in Sources */,
+				063CE55A1F2DF61400A5A9F9 /* MKMemberInfoView.m in Sources */,
+				06CCB0B41F2AEE26003091C0 /* MKAccountInfoView.m in Sources */,
+				06A0D6CA1F31817B00B7CE09 /* MKHttpModel.m in Sources */,
+				063CE56B1F2E303400A5A9F9 /* MKMemManageTable.m in Sources */,
+				063CE5741F2E472F00A5A9F9 /* MKGoodsManageCell.m in Sources */,
+				06CCB0781F288373003091C0 /* MKTradesInfoView.m in Sources */,
+				06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */,
+				06CCB0901F29D25D003091C0 /* MKOrderCellModel.m in Sources */,
+				06CCB0571F276867003091C0 /* BaseTopView.m in Sources */,
+				06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */,
+				06CCAFD71F275A79003091C0 /* main.m in Sources */,
+				06CCB04A1F276867003091C0 /* NSString+ZYFCategory.m in Sources */,
+				06A0D6BF1F306FDC00B7CE09 /* MKContactView.m in Sources */,
+				06CCB0541F276867003091C0 /* BaseTabButtonScrollView.m in Sources */,
+				063CE5771F2EC63B00A5A9F9 /* MKGoodsManageController.m in Sources */,
+				06CCB0481F276867003091C0 /* AFNetWorkingUsing.m in Sources */,
+				06CCB0491F276867003091C0 /* NSDate+ZYFCategory.m in Sources */,
+				06C82A931F2EDCA7004E2F25 /* MKOrderDetailView.m in Sources */,
+				06CCB0501F276867003091C0 /* BaseScrollTableViewController.m in Sources */,
+				06CCB05B1F276867003091C0 /* NSLog+Extension.m in Sources */,
+				063CE5711F2E3DD000A5A9F9 /* MKMemberCell.m in Sources */,
+				06CCB0A91F2ACEC4003091C0 /* MKAccountBaseModel.m in Sources */,
+				063CE56E1F2E3D4500A5A9F9 /* MKPerformanceController.m in Sources */,
+				063CE5521F2CBD4200A5A9F9 /* MKTradesHeaderView.m in Sources */,
+				06CCB05D1F276867003091C0 /* IQKeyboardManagerHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFE71F275A79003091C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06CCAFF01F275A79003091C0 /* MicroOrderKingTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		06CCAFF21F275A79003091C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06CCAFFB1F275A79003091C0 /* MicroOrderKingUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		06CCAFED1F275A79003091C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06CCAFD11F275A79003091C0 /* MicroOrderKing */;
+			targetProxy = 06CCAFEC1F275A79003091C0 /* PBXContainerItemProxy */;
+		};
+		06CCAFF81F275A79003091C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 06CCAFD11F275A79003091C0 /* MicroOrderKing */;
+			targetProxy = 06CCAFF71F275A79003091C0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		06CCAFE31F275A79003091C0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06CCAFE41F275A79003091C0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		06CCAFFD1F275A79003091C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		06CCAFFE1F275A79003091C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		06CCB0001F275A79003091C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BECADD553E1FAA9E2BD614F5 /* Pods-MicroOrderKing.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
+				INFOPLIST_FILE = MicroOrderKing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		06CCB0011F275A79003091C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F76AD51BEE9725B54AEF006E /* Pods-MicroOrderKing.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
+				INFOPLIST_FILE = MicroOrderKing/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		06CCB0031F275A79003091C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				INFOPLIST_FILE = MicroOrderKingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MicroOrderKing.app/MicroOrderKing";
+			};
+			name = Debug;
+		};
+		06CCB0041F275A79003091C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				INFOPLIST_FILE = MicroOrderKingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKingTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MicroOrderKing.app/MicroOrderKing";
+			};
+			name = Release;
+		};
+		06CCB0061F275A79003091C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				INFOPLIST_FILE = MicroOrderKingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MicroOrderKing;
+			};
+			name = Debug;
+		};
+		06CCB0071F275A79003091C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 8EA9WX9959;
+				INFOPLIST_FILE = MicroOrderKingUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKingUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MicroOrderKing;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06CCAFCD1F275A79003091C0 /* Build configuration list for PBXProject "MicroOrderKing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06CCAFFD1F275A79003091C0 /* Debug */,
+				06CCAFFE1F275A79003091C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06CCAFFF1F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06CCB0001F275A79003091C0 /* Debug */,
+				06CCB0011F275A79003091C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06CCB0021F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06CCB0031F275A79003091C0 /* Debug */,
+				06CCB0041F275A79003091C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06CCB0051F275A79003091C0 /* Build configuration list for PBXNativeTarget "MicroOrderKingUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06CCB0061F275A79003091C0 /* Debug */,
+				06CCB0071F275A79003091C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06CCAFCA1F275A79003091C0 /* Project object */;
+}

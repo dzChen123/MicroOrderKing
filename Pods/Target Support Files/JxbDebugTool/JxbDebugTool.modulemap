@@ -1,0 +1,6 @@
+framework module JxbDebugTool {
+  umbrella header "JxbDebugTool-umbrella.h"
+
+  export *
+  module * { export * }
+}

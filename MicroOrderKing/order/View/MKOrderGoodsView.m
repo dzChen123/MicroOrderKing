@@ -1,0 +1,277 @@
+//
+//  MKOrderGoodsView.m
+//  MicroOrderKing
+//
+//  Created by 陈徳柱 on 17/7/31.
+//  Copyright © 2017年 陈徳柱. All rights reserved.
+//
+
+#import "MKOrderWritingController.h"
+#import "MKOrderDetailController.h"
+
+#import "MKOrderGoodsView.h"
+#import "MKGoodsInfoView.h"
+#import "MKConfirmView.h"
+
+#import "MKOrderCellModel.h"
+
+#define grayColor69 [UIColor hexStringToColor:@"#696969"]
+
+@implementation MKOrderGoodsView
+{
+    UIView *goodsContainerView;
+    UILabel *totalLab;
+    UIView *grayView;
+    UIButton *editButn;
+    UIButton *confirmButn;
+    
+    NSString *orderId;
+    UIView *maskView;
+    MKConfirmView *confirmView;
+    MASConstraint *bottomConstraint;
+}
+
+- (void)CreatView {
+    goodsContainerView = [[UIView alloc] init];
+    totalLab = [[UILabel alloc] init];
+    grayView = [[UIView alloc] init];
+    editButn = [[UIButton alloc] init];
+    confirmButn = [[UIButton alloc] init];
+    
+    [self addSubview:goodsContainerView];
+    [self addSubview:totalLab];
+    [self addSubview:grayView];
+    [self addSubview:editButn];
+    [self addSubview:confirmButn];
+}
+
+- (void)SettingViewAttributes {
+    
+    WS(ws)
+    
+    self.backgroundColor = customWhite;
+    
+    [goodsContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(ws).offset(15 * autoSizeScaleH);
+        make.left.mas_equalTo(ws).offset(leftPadding);
+        make.right.mas_equalTo(ws).offset(rightPadding);
+    }];
+    
+    [totalLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(goodsContainerView);
+        make.top.mas_equalTo(goodsContainerView.mas_bottom).offset(15 * autoSizeScaleH);
+    }];
+    
+    grayView.backgroundColor = VIEWBACKGRAY;
+    [grayView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws);
+        make.top.mas_equalTo(totalLab.mas_bottom).offset(15 * autoSizeScaleH);
+        make.height.mas_equalTo(15 * autoSizeScaleH);
+    }];
+    
+    [confirmButn setTitle:@"确认发货" forState:UIControlStateNormal];
+    [confirmButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    [confirmButn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
+    confirmButn.titleLabel.font = FONT(14);
+    confirmButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    confirmButn.layer.borderWidth = 1.0;
+    confirmButn.layer.masksToBounds = YES;
+    confirmButn.layer.cornerRadius = 5.0;
+    [confirmButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(goodsContainerView);
+        make.top.mas_equalTo(grayView.mas_bottom).offset(10 * autoSizeScaleH);
+        make.size.mas_equalTo(CGSizeMake(80 * autoSizeScaleW, 30 * autoSizeScaleH));
+    }];
+    
+    [editButn setTitle:@"编辑订单" forState:UIControlStateNormal];
+    [editButn addTarget:self action:@selector(goToEdit) forControlEvents:UIControlEventTouchUpInside];
+    [editButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    editButn.titleLabel.font = FONT(14);
+    editButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    editButn.layer.borderWidth = 1.0;
+    editButn.layer.masksToBounds = YES;
+    editButn.layer.cornerRadius = 5.0;
+    [editButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(confirmButn.mas_left).offset(rightPadding);
+        make.size.centerY.mas_equalTo(confirmButn);
+    }];
+    
+    [ws mas_makeConstraints:^(MASConstraintMaker *make) {
+        bottomConstraint = make.bottom.mas_equalTo(confirmButn.mas_bottom).offset(10 * autoSizeScaleH);
+    }];
+}
+
+- (void)setData:(id)model {
+    MKOrderDetailModel *dataModel = (MKOrderDetailModel *)model;
+    WS(ws)
+
+    switch ([dataModel.conditionType integerValue]) {
+        case 0:
+
+            break;
+        case 1:
+            editButn.hidden = YES;
+            [confirmButn setTitle:@"交易完成" forState:UIControlStateNormal];
+            break;
+        case 2:
+        {
+            editButn.hidden = YES;
+            confirmButn.hidden = YES;
+            [bottomConstraint uninstall];
+            [ws mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_equalTo(grayView);
+            }];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    orderId = dataModel.orderId;
+    NSInteger totalCount = 0;
+    for (MKOrderGoodsModel *item in dataModel.goodsInfoArra) {
+        totalCount += [item.payNumber integerValue];
+    }
+    NSString *resultStr = [NSString stringWithFormat:@"共%@件商品 合计(元):¥ %@",[NSString stringWithFormat:@"%ld",totalCount],dataModel.totalCost];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:resultStr];
+    [attr addAttribute:NSFontAttributeName
+                 value:FONT(12)
+                 range:NSMakeRange(0, resultStr.length - dataModel.totalCost.length)];
+    [attr addAttribute:NSForegroundColorAttributeName
+                 value:grayColor69
+                 range:NSMakeRange(0, resultStr.length - dataModel.totalCost.length)];
+    [attr addAttribute:NSFontAttributeName
+                 value:FONT(18)
+                 range:NSMakeRange(resultStr.length - dataModel.totalCost.length, dataModel.totalCost.length)];
+    [attr addAttribute:NSForegroundColorAttributeName
+                 value:[UIColor hexStringToColor:@"#D28382"]
+                 range:NSMakeRange(resultStr.length - dataModel.totalCost.length, dataModel.totalCost.length)];
+    
+    totalLab.attributedText = attr;
+    
+    [self loadGoodsViewsWithData:dataModel.goodsInfoArra];
+}
+
+- (void)loadGoodsViewsWithData:(NSMutableArray *)dataArra {
+    MKGoodsInfoView *lastView;
+    for (int index = 0; index < dataArra.count; index ++) {
+        MKGoodsInfoModel *model = dataArra[index];
+        MKGoodsInfoView *infoView = [[MKGoodsInfoView alloc] initWithType:1];
+        [infoView setDataWithModel:model];
+        [goodsContainerView addSubview:infoView];
+        infoView.backgroundColor = [UIColor hexStringToColor:@"#FAFAFA"];
+        [infoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (!index) {
+                make.top.mas_equalTo(goodsContainerView);
+            }else{
+                make.top.mas_equalTo(lastView.mas_bottom).offset(10 * autoSizeScaleH);
+            }
+            make.left.right.mas_equalTo(goodsContainerView);
+        }];
+        lastView = infoView;
+    }
+    [goodsContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(lastView);
+    }];
+    
+}
+
+- (void)goToEdit {
+    UIViewController *parent = [self parentController];
+    MKOrderWritingController *controller = [[MKOrderWritingController alloc] initWithType:1];
+    controller.orderId = orderId;
+    [parent.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)goToConfirm:(UIButton *)sender {
+    UIViewController *parent = [self parentController];
+    NSString *title = sender.titleLabel.text;
+    NSArray *signArrays = @[
+                            @[@"请确定您已准备好货物并准备发货",@"确认发货"],
+                            @[@"请确定您已收到货款并用户已收货",@"交易成功"]
+                            ];
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [parent.view addSubview:maskView];
+    [parent.view bringSubviewToFront:maskView];
+    WS(ws)
+    WeakObj(parent)
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(parentWeak.view);
+        make.center.mas_equalTo(parentWeak.view);
+    }];
+    confirmView = [[MKConfirmView alloc] init];
+    [confirmView setSignStr:signArrays[[title isEqualToString:@"确认发货"] ? 0 : 1]];
+    [parent.view addSubview:confirmView];
+    confirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    confirmView.confirmBlock =^(){
+        [ws confirm];
+    };
+    confirmView.alpha = 0;
+    confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [confirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(parentWeak.view).offset(leftPadding);
+        make.right.mas_equalTo(parentWeak.view).offset(rightPadding);
+        make.centerY.mas_equalTo(parentWeak.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        confirmView.alpha = 1;
+        confirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)cancelConfirm {
+    
+    [UIView animateWithDuration:.2 animations:^{
+        maskView.alpha = 0;
+        confirmView.alpha = 0;
+        confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    }completion:^(BOOL finished) {
+        maskView.hidden = YES;
+        confirmView.hidden = YES;
+        [maskView removeFromSuperview];
+        [confirmView removeFromSuperview];
+    }];
+}
+
+- (void)confirm {
+    BaseViewController *controller = (BaseViewController *)[self parentController];
+    MKOrderDetailController *detailController;
+    if ([controller isKindOfClass:[MKOrderDetailController class]]) {
+        detailController = (MKOrderDetailController *)controller;
+    }
+    NSString *titleStr = confirmButn.titleLabel.text;
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    BOOL isDeliver = [titleStr isEqualToString:@"确认发货"];
+    [plist setObject: isDeliver ? @"1" : @"2" forKey:@"post_status"];
+    [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@/change",orderId] params:plist success:^(id json) {
+        if (detailController) {
+            detailController.isUpdate = YES;
+        }
+        [controller.hud showTipMessageAutoHide:@"订单状态已更新"];
+        if (detailController) {
+            [detailController loadData];
+        }
+        [self cancelConfirm];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [controller.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+    }];
+}
+
+
+/*
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+}
+*/
+
+@end
