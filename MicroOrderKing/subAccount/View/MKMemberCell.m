@@ -8,7 +8,7 @@
 
 #import "MKMemberCell.h"
 
-#import "MKAccountBaseModel.h"
+#import "MKMemberBaseModel.h"
 
 @implementation MKMemberCell
 {
@@ -68,7 +68,7 @@
 
 - (void)setData:(id)model {
     
-    MKAccountBaseModel *cellModel = (MKAccountBaseModel *)model;
+    MKMemberBaseModel *cellModel = (MKMemberBaseModel *)model;
     nameLab.text = cellModel.name;
     phoneLab.text = [NSString stringWithFormat:@"  %@  ",cellModel.phoneNum];
 }

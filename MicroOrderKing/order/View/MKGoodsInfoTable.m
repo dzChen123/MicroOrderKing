@@ -10,6 +10,8 @@
 
 #import "MKGoodsInfoTable.h"
 
+#import "MKOrderCellModel.h"
+
 @implementation MKGoodsInfoTable
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -33,7 +35,12 @@
 {
 
     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        NSLog(@"点击了删除");
+        tableView.editing = NO;
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (_cellDeleteBlock) {
+            _cellDeleteBlock();
+        }
     }];
     deleteAction.backgroundColor = [UIColor hexStringToColor:@"#D51A2C"];
     

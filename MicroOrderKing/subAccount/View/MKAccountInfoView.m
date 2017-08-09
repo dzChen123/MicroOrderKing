@@ -164,6 +164,7 @@
         conditionLab.text = @"激活";
         conditionLab.backgroundColor = themeGreen;
     }
+    [recordView setUserId:dataModel.accountId];
     [recordView setMemberNum:dataModel.memberNum andOrderNum:dataModel.orderNum];
 }
 
@@ -181,6 +182,8 @@
     UILabel *orderTittle;
     UILabel *orderNum;
     UIImageView *rightArrow2;
+    
+    NSString *userIdStr;
 }
 
 - (instancetype)init {
@@ -299,12 +302,17 @@
     MKPerformanceController *controller = [[MKPerformanceController alloc] init];
     controller.currentIndex = tap.view.tag == 21 ? 0 : 1;
     controller.topTitle = @"录入详情";
+    controller.userId = userIdStr;
     [parent.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)setMemberNum:(NSString *)member andOrderNum:(NSString *)order {
     memberNum.text = member;
     orderNum.text = order;
+}
+
+- (void)setUserId:(NSString *)userId {
+    userIdStr = userId;
 }
 
 

@@ -8,6 +8,7 @@
 
 #import "MKGoodsManageController.h"
 #import "MKNewGoodsController.h"
+#import "MKSearResultController.h"
 
 #import "MKGoodsManageCell.h"
 #import "MKGoodsInfoView.h"
@@ -107,19 +108,41 @@
 }
 
 - (void)deleteGoods {
-    MKGoodsManageController *parent = (MKGoodsManageController *)[self parentController];
+    BaseViewController *parent = (BaseViewController *)[self parentController];
+    MKGoodsManageController *manageController;
+    MKSearResultController *resultController;
+    if ([parent isKindOfClass:[MKGoodsManageController class]]) {
+        manageController = (MKGoodsManageController *)parent;
+    }
+    if ([parent isKindOfClass:[MKSearResultController class]]) {
+        resultController = (MKSearResultController *)parent;
+    }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"goods/%@",goodsId] params:plist success:^(id json) {
-        NSInteger rowNum = 0;
-        for (MKGoodsInfoModel *model in parent.manageTable.dataArray) {
-            if ([model.goodsId isEqualToString:goodsId]) {
-                rowNum = [parent.manageTable.dataArray indexOfObject:model];
-                [parent.manageTable.dataArray removeObject:model];
-                break;
+        if (manageController) {
+            NSInteger rowNum = 0;
+            for (MKGoodsInfoModel *model in manageController.manageTable.dataArray) {
+                if ([model.goodsId isEqualToString:goodsId]) {
+                    rowNum = [manageController.manageTable.dataArray indexOfObject:model];
+                    [manageController.manageTable.dataArray removeObject:model];
+                    break;
+                }
             }
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
+            [manageController.manageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
-        [parent.manageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        if (resultController) {
+            NSInteger rowNum = 0;
+            for (MKGoodsInfoModel *model in resultController.resultTable.dataArray) {
+                if ([model.goodsId isEqualToString:goodsId]) {
+                    rowNum = [resultController.resultTable.dataArray indexOfObject:model];
+                    [resultController.resultTable.dataArray removeObject:model];
+                    break;
+                }
+            }
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
+            [resultController.resultTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
     } fail:^(NSError *error) {
         
     } other:^(id json) {

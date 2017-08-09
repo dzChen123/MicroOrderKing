@@ -10,4 +10,6 @@
 
 @interface MKPersonCenterController : BaseViewController
 
+@property(assign,nonatomic) BOOL isOut; //状态判断表示   是否到期
+
 @end

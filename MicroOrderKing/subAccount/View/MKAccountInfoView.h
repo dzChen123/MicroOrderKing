@@ -17,5 +17,6 @@
 @interface MKAccountRecordView : BaseView
 
 - (void)setMemberNum:(NSString *)member andOrderNum:(NSString *)order;
+- (void)setUserId:(NSString *)userId;
 
 @end

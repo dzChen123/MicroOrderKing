@@ -68,6 +68,10 @@
         heightConstraint = make.height.mas_equalTo(90 * autoSizeScaleH);
     }];
     
+    _infoTable.cellDeleteBlock =^(){
+        [ws cellDeleteUpdate];
+    };
+    
     _isOrdered = NO;
     
     if (_orderId) {
@@ -179,11 +183,14 @@
     }
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     for (MKCountCostCellModel *model in self.infoTable.dataArray) {
-        [dict setObject:@([model.goodsCellModel.buyCount integerValue]) forKey:model.goodsCellModel.goodsId];
+        if ([model.goodsCellModel.buyCount integerValue] > 0) {
+            [dict setObject:@([model.goodsCellModel.buyCount integerValue]) forKey:model.goodsCellModel.goodsId];
+        }
     }
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPost:@"order" params:plist success:^(id json) {
         [self.hud showTipMessageAutoHide:@"订单录入成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -225,11 +232,14 @@
     }
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
     for (MKCountCostCellModel *model in self.infoTable.dataArray) {
-        [dict setObject:@([model.goodsCellModel.buyCount integerValue]) forKey:model.goodsCellModel.goodsId];
+        if ([model.goodsCellModel.buyCount integerValue] > 0) {
+            [dict setObject:@([model.goodsCellModel.buyCount integerValue]) forKey:model.goodsCellModel.goodsId];
+        }
     }
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@",_orderId] params:plist success:^(id json) {
         [self.hud showTipMessageAutoHide:@"订单编辑成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -373,6 +383,18 @@
     [self.view layoutIfNeeded];
     
     [table reloadData];
+}
+
+- (void)cellDeleteUpdate {
+    
+    [heightConstraint uninstall];
+    
+    CGFloat tableHeight = 90 * autoSizeScaleH + 190 * autoSizeScaleH * _infoTable.dataArray.count;
+    [_infoTable mas_makeConstraints:^(MASConstraintMaker *make) {
+        heightConstraint = make.height.mas_equalTo(tableHeight);
+    }];
+    
+//    [self.view layoutIfNeeded];
 }
 
 - (void)getValueFromParent:(MKAddGoodsCellModel *)model SuperModel:(MKGoodsInfoModel *)superModel {

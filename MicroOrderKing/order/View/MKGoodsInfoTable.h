@@ -10,4 +10,6 @@
 
 @interface MKGoodsInfoTable : BaseUITableView
 
+@property (strong,nonatomic) void (^cellDeleteBlock)();
+
 @end

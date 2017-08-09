@@ -10,4 +10,6 @@
 
 @interface MKSearchGoodsController : BaseScrollViewController
 
+- (instancetype)initWithType:(NSInteger)type;
+
 @end

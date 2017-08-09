@@ -193,6 +193,7 @@
     }
     [AFNetWorkingUsing httpPost:@"member" params:plist success:^(id json) {
         [self.hud showTipMessageAutoHide:@"添加会员成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {

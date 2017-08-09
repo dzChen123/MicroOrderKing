@@ -10,4 +10,10 @@
 
 @interface MKTradesDetailController : BaseViewController
 
+@property (strong,nonatomic) NSString *totalCost;
+@property (strong,nonatomic) NSString *totalCount;
+@property (strong,nonatomic) NSString *userId;
+
+- (void)reloadTableView;
+
 @end

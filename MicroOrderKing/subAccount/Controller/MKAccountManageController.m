@@ -108,8 +108,14 @@
     } other:^(id json) {
         [table.dataArray removeAllObjects];
         [table reloadData];
-        [self.hud showTipMessageAutoHide:@"暂时没有数据了"];
         [table.mj_header endRefreshing];
+        if ([[json objectForKey:@"msg"] isEqualToString:@"子账号无权访问！"]) {
+            [self.hud showTipMessageAutoHide:@"子账号无权访问！"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [self.hud showTipMessageAutoHide:@"暂时没有数据了"];
+        }
+
     }];
 }
 

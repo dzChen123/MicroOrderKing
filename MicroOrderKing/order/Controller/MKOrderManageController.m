@@ -66,7 +66,7 @@
 }
 
 - (void)goToSearch {
-    MKSearchGoodsController *controller = [[MKSearchGoodsController alloc] init];
+    MKSearchGoodsController *controller = [[MKSearchGoodsController alloc] initWithType:0];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

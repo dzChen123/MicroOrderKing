@@ -17,6 +17,10 @@
 
 @interface MKGoodsPicView : BaseView
 
+@property (strong,nonatomic) void (^uploadEventBlock)();
+
 - (void)setImage:(UIImage *)image;
+- (void)setImageWithURL:(NSString *)url;
+
 
 @end

@@ -52,6 +52,14 @@
     [self loadData];
 }
 
+- (void)setTopView {
+    [super setTopView];
+    self.topTitle = @"个人中心";
+    if (_isOut) {
+        self.topView.leftButton.hidden = YES;
+    }
+}
+
 - (void)CreatView {
     personInfoView = [[MKPersonInfoView alloc] init];
     changeView = [[MKChangePasdView alloc] init];

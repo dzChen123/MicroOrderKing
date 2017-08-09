@@ -25,6 +25,10 @@
     UILabel *timeTittle;
     UILabel *timeLab;
     UIButton *checkButn;
+    
+    NSString *totalCost;
+    NSString *totalCount;
+    NSString *userId;
 }
 
 - (void)setShadowAndRadius {
@@ -166,6 +170,9 @@
     if (!times.length) { times = @"0"; }
     if (!money.length) { money = @"0"; }
     if (!time.length) { time = @"最近没有进行交易"; }
+    totalCost = money;
+    totalCount = times;
+    userId = dataModel.memberId;
     timesLab.text = [NSString stringWithFormat:@"%@次",times];
     moneyLab.text = [NSString stringWithFormat:@"%@元",money];
     timeLab.text = time;
@@ -175,6 +182,9 @@
 - (void)goToTradesDetail {
     UIViewController *parent = [self parentController];
     MKTradesDetailController *controller = [[MKTradesDetailController alloc] init];
+    controller.totalCount = totalCount;
+    controller.totalCost = totalCost;
+    controller.userId = userId;
     [parent.navigationController pushViewController:controller animated:YES];
 }
 

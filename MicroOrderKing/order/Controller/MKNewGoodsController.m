@@ -6,13 +6,15 @@
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
 
+#import "QiniuSDK.h"
+
 #import "MKNewGoodsController.h"
 
 #import "MKNewGoodsInfoView.h"
 
 #import "MKOrderCellModel.h"
 
-@interface MKNewGoodsController ()
+@interface MKNewGoodsController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
 
@@ -23,15 +25,25 @@
     UIButton *saveButn;
     
     BOOL isEdit;
+    UIImagePickerController *imagePickerController;
+    NSString *smLogo;
+    //UIImage *goodsImage;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    smLogo = @"";
     if (![self.topTitle isEqualToString:@"新增商品"]) {
         isEdit = YES;
     }
+    
+    WS(ws)
+    
+    picView.uploadEventBlock =^(){
+        [ws goToPhotoLibrary];
+    };
     // Do any additional setup after loading the view.
 }
 
@@ -42,9 +54,11 @@
 }
 
 - (void)CreatView {
+    smLogo = @"";
     picView = [[MKGoodsPicView alloc] init];
     infoView = [[MKNewGoodsInfoView alloc] init];
     saveButn = [[UIButton alloc] init];
+    [picView setImage:[UIImage imageNamed:@"comManImg"]];
     
     [self addSubview:picView];
     [self addSubview:infoView];
@@ -55,7 +69,6 @@
     
     WS(ws)
     
-    [picView setImage:[UIImage imageNamed:@"comManImg"]];
     [picView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(ws.view);
         make.top.mas_equalTo(ws.topView.mas_bottom);
@@ -84,6 +97,8 @@
     [AFNetWorkingUsing httpGet:[NSString stringWithFormat:@"goods/%@/edit",_goodsId] params:plist success:^(id json) {
         MKGoodsInfoModel *model = [MKGoodsInfoModel mj_objectWithKeyValues:[json objectForKey:@"data"]];
         [infoView setData:model];
+        NSString *urlStr = [model.imgUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        [picView setImageWithURL:urlStr];
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -119,10 +134,14 @@
     [plist setObject:price forKey:@"price"];
     [plist setObject:unit forKey:@"unit"];
     [plist setObject:number forKey:@"number"];
+    if (smLogo.length > 0) {
+        [plist setObject:smLogo forKey:@"sm_logo"];
+    }
     if (isEdit) {
-        [plist setObject:@"" forKey:@"sm_logo"];
+        //[plist setObject:@"" forKey:@"sm_logo"];
         [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"goods/%@",_goodsId] params:plist success:^(id json) {
             [self.hud showTipMessageAutoHide:@"修改成功"];
+            [self.navigationController popViewControllerAnimated:YES];
         } fail:^(NSError *error) {
             
         } other:^(id json) {
@@ -131,12 +150,74 @@
     }else{
         [AFNetWorkingUsing httpPost:@"goods" params:plist success:^(id json) {
             [self.hud showTipMessageAutoHide:@"添加成功"];
+            [self.navigationController popViewControllerAnimated:YES];
         } fail:^(NSError *error) {
             
         } other:^(id json) {
             [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
         }];
     }
+}
+
+- (void)goToPhotoLibrary {
+    imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [imagePickerController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    [self saveImage:info[UIImagePickerControllerOriginalImage]];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveImage:(UIImage *)img {
+    NSData *imageData;
+    if (UIImagePNGRepresentation(img) == nil) {
+        imageData = UIImageJPEGRepresentation(img, 1.0);
+    } else {
+        imageData = UIImagePNGRepresentation(img);
+    }
+    [self.hud showWaitHudWithMessage:@"储存中"];
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [AFNetWorkingUsing httpGet:@"user/upload/qiniuToken" params:plist success:^(id json) {
+        NSDictionary *dic = [json objectForKey:@"data"];
+        NSString *token = [dic objectForKey:@"token"];
+        NSString *key = [[self GetRandomStr] stringByAppendingString:@".png"];
+        QNUploadManager *upLoadManager = [[QNUploadManager alloc] init];
+        [upLoadManager putData:imageData key:key token:token complete:^(QNResponseInfo *info, NSString *key, NSDictionary *resp) {
+            smLogo = key;
+            [self.hud hideAnimated:YES];
+            [self.hud showTipMessageAutoHide:@"图片上传成功"];
+            [picView setImage:img];
+        } option:nil];
+    } fail:^(NSError *error) {
+        [self.hud hideAnimated:YES];
+    } other:^(id json) {
+        [self.hud hideAnimated:YES];
+        [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+    }];
+}
+
+-(NSString *)GetRandomStr{                       //获取13位随机字符串+当前时间作为key
+    NSString *result = [[NSString alloc]init];
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"YYYY-MM-dd-HH:mm:ss-"];
+    result = [formatter stringFromDate:currentDate];
+    for (int i = 0 ; i < 13; i ++ ) {
+        int figure = (arc4random()%26) + 97;
+        char c = figure;
+        NSString *temp = [NSString stringWithFormat:@"%c",c];
+        result = [NSString stringWithFormat:@"%@%@",result,temp];
+    }
+    [result dataUsingEncoding:NSUTF8StringEncoding];
+    return result;
 }
 
 - (void)didReceiveMemoryWarning {

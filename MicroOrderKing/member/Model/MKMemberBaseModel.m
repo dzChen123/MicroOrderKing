@@ -63,3 +63,23 @@
 }
 
 @end
+
+@implementation MKTradesModel
+
+@end
+
+@implementation MKMemberTradesInfoModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"sumCount" : @"sum_count"
+             };
+}
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"data" : @"MKOrderCellModel"
+             };
+}
+
+@end

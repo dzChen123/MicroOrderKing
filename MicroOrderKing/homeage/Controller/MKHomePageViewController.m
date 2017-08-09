@@ -90,6 +90,7 @@
 
 - (void)goToPersonCenter {
     MKPersonCenterController *controller = [[MKPersonCenterController alloc] initWithTitle:@"个人中心"];
+    controller.isOut = NO;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

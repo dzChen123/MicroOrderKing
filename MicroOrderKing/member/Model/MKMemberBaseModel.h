@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "MKHttpModel.h"
+#import "MKOrderCellModel.h"
 
 @interface MKMemberBaseModel : NSObject
 
@@ -43,6 +44,20 @@
 @property (strong,nonatomic) NSString *lastTime;
 @property (strong,nonatomic) MKMemOwnerModel *owner;
 @property (strong,nonatomic) NSMutableArray *address;
+
+@end
+
+@interface MKTradesModel : NSObject
+
+@property (strong,nonatomic) NSString *sum;
+@property (strong,nonatomic) NSString *count;
+
+@end
+
+@interface MKMemberTradesInfoModel : NSObject
+
+@property (strong,nonatomic) MKTradesModel *sumCount;
+@property (strong,nonatomic) NSMutableArray *data;
 
 @end
 

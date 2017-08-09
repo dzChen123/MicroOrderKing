@@ -9,6 +9,7 @@
 #import "AFNetWorkingUsing.h"
 
 #import "MKLoginViewController.h"
+#import "MKPersonCenterController.h"
 #import "BaseNavigationController.h"
 
 #import "ZYFDeviceHelper.h"
@@ -71,6 +72,23 @@ NSString *const TRoperationInfoKey = @"operationInfoKey";
     if (type == 1) {
         success((NSDictionary *)dict);
     }
+    else if (type == 10002){
+        NSDictionary *data = [dict objectForKey:@"data"];
+        NSString *token = [data objectForKey:@"token"];
+        [ZYFUserDefaults setObject:token key:@"token"];
+        [ZYFUserDefaults setBool:YES key:@"loginFlag"];
+        NSString *key = @"transition";
+        CATransition *transition=[CATransition animation];
+        //动画时长
+        transition.duration=0.6;
+        //动画类型wodou
+        transition.type=kCATransitionFade;
+        transition.removedOnCompletion = YES;
+        MKPersonCenterController *vc =[[MKPersonCenterController alloc] init];
+        vc.isOut = YES;
+        [UIApplication sharedApplication].delegate.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:vc];
+        [[UIApplication sharedApplication].delegate.window.layer addAnimation:transition forKey:key];
+    }
     else if(type == 10001) {
         [ZYFUserDefaults setBool:NO key:@"loginFlag"];
         NSString *key = @"transition";
@@ -83,8 +101,7 @@ NSString *const TRoperationInfoKey = @"operationInfoKey";
         MKLoginViewController *vc =[[MKLoginViewController alloc] init];
         [UIApplication sharedApplication].delegate.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:vc];
         [[UIApplication sharedApplication].delegate.window.layer addAnimation:transition forKey:key];
-    }
-    else {
+    }else {
 //        NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
 //        userInfo[TRoperationInfoKey] = operation;
 //        //BOOL isError = [status isEqualToString:@"error"];

@@ -109,18 +109,22 @@
     [plist setObject:@"1" forKey:@"list"];
     [AFNetWorkingUsing httpGet:@"goods" params:plist success:^(id json) {
         NSMutableArray *modelArra = [MKAddGoodsCellHttpModel mj_objectWithKeyValues:json].data;
+        [tableView.dataArray removeAllObjects];
+        NSInteger count = 0;
         for (MKAddGoodsCellModel *model in modelArra) {
             model.buyCount = @"0";
             if (_tableViewData != nil && _tableViewData.count > 0) {
                 for (MKCountCostCellModel *costModel in _tableViewData) {
                     if ([costModel.goodsCellModel.goodsId isEqualToString:model.goodsId]) {
                         model.buyCount = costModel.goodsCellModel.buyCount;
+                        count += [costModel.goodsCellModel.buyCount integerValue];
                         break;
                     }
                 }
             }
             [tableView.dataArray addObject:model];
         }
+        self.totalCount = count;
         [tableView reloadData];
     } fail:^(NSError *error) {
         

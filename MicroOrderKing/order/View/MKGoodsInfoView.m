@@ -47,7 +47,7 @@
     
     self.backgroundColor = [UIColor hexStringToColor:@"#FAFAFA"];
     
-    goodsPic.backgroundColor = [UIColor lightGrayColor];
+    //goodsPic.backgroundColor = [UIColor lightGrayColor];
     [goodsPic mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ws).offset(leftPadding);
         make.top.mas_equalTo(ws).offset(15 * autoSizeScaleH);
@@ -119,7 +119,7 @@
 
 - (void)setDataWithModel:(id)model {
     
-    MKGoodsInfoModel *goodsModel;
+    MKGoodsInfoModel *goodsModel = [[MKGoodsInfoModel alloc] init];
     NSString *priceStr,*numberStr,*unitStr;
     if (!_type) {
         MKAddGoodsCellModel *dataModel = (MKAddGoodsCellModel *)model;
@@ -127,6 +127,7 @@
         priceStr = dataModel.price;
         unitStr = dataModel.unit;
         nameLab.text = dataModel.goodsName;
+        goodsModel.imgUrl = dataModel.imgUrl;
     }else if(_type == 1){
         MKOrderGoodsModel *dataModel = (MKOrderGoodsModel *)model;
         goodsModel = dataModel.goods;
@@ -141,8 +142,24 @@
         unitStr = goodsModel.unit;
         nameLab.text = goodsModel.goodsName;
     }
+    if (goodsModel.imgUrl) {
 
-//    [goodsPic sd_setImageWithURL:[[NSURL alloc] initWithString:goodsModel.imgUrl]];
+        NSString *urlStr;
+
+        urlStr = [goodsModel.imgUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//        NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
+//        NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+//        
+//        NSArray *parts = [goodsModel.imgUrl componentsSeparatedByCharactersInSet:whitespaces];
+//        NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
+//        urlStr = [filteredArray componentsJoinedByString:@""];
+        
+        //LxDBAnyVar(urlStr);
+        
+        NSURL *url = [[NSURL alloc] initWithString:urlStr];
+        [goodsPic sd_setImageWithURL:url];
+        
+    }
     if (!_type) {       //添加商品
         numLab.text = [NSString stringWithFormat:@"库存(%@): %@",unitStr,numberStr];
         priceLab.text = [NSString stringWithFormat:@"单价(元): ¥%@",priceStr];

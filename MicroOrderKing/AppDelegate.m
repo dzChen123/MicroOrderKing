@@ -33,6 +33,7 @@
 
 - (void)setRootViewController {
 //    [ZYFUserDefaults setBool:NO key:@"loginFlag"];
+    LxDBAnyVar([ZYFUserDefaults boolForKey:@"loginFlag"]);
     Class controllerClass = [ZYFUserDefaults boolForKey:@"loginFlag"] ? [MKHomePageViewController class] : [MKLoginViewController class];
     self.window.rootViewController = [[BaseNavigationController alloc] initWithRootViewController:[[controllerClass alloc] init]];
 }

@@ -221,13 +221,14 @@
 
 @implementation MKGoodsPicView
 {
-    UIButton *picButn;
+    UIImageView *picView;
 }
 
 - (void)CreatView {
-    picButn = [[UIButton alloc] init];
     
-    [self addSubview:picButn];
+    picView = [[UIImageView alloc] init];
+    
+    [self addSubview:picView];
 }
 
 - (void)SettingViewAttributes {
@@ -236,19 +237,32 @@
     
     self.backgroundColor = customWhite;
     
-    [picButn mas_makeConstraints:^(MASConstraintMaker *make) {
+    picView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectGoodsPic)];
+    [picView addGestureRecognizer:tap];
+    [picView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws);
         make.top.mas_equalTo(ws).offset(15 * autoSizeScaleH);
         make.width.height.mas_equalTo(100 * autoSizeScaleH);
     }];
     
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(picButn).offset(15 * autoSizeScaleH);
+        make.bottom.mas_equalTo(picView).offset(15 * autoSizeScaleH);
     }];
 }
 
 - (void)setImage:(UIImage *)image {
-    [picButn setImage:[image imageByScalingToSize:CGSizeMake(100 * autoSizeScaleW, 100 * autoSizeScaleW)] forState:UIControlStateNormal];
+    picView.image = image;
+}
+
+- (void)setImageWithURL:(NSString *)url {
+    [picView sd_setImageWithURL:[[NSURL alloc] initWithString:url]];
+}
+
+- (void)selectGoodsPic {
+    if (_uploadEventBlock) {
+        _uploadEventBlock();
+    }
 }
 
 

@@ -12,4 +12,6 @@
 
 @property(strong,nonatomic) NSString *userId;
 
+- (void)reloadSecondTable;
+
 @end

@@ -9,10 +9,15 @@
 #import "MKTradesDetailController.h"
 
 #import "MKTradesHeaderView.h"
-#import "BaseUITableView.h"
+#import "MKPerformceOrderTable.h"
 #import "MKOrderManageCell.h"
 
 #import "MKOrderCellModel.h"
+#import "MKMemberBaseModel.h"
+
+#define deliverCellid @"orderDeliver"
+#define confirmCellid @"orderConfirm"
+#define historyCellid @"orderHistory"
 
 @interface MKTradesDetailController ()
 
@@ -21,31 +26,43 @@
 @implementation MKTradesDetailController
 {
     MKTradesHeaderView *headerView;
-    BaseUITableView *tradesTable;
+    MKPerformceOrderTable *tradesTable;
+    
+    NSInteger page;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    WS(ws)
-    tradesTable.reloadMessage =^(UITableView *tableView){
-        [ws tableViewReload:tableView];
-    };
+    
+    tradesTable.mj_header = nil;
+    tradesTable.mj_footer = nil;
     // Do any additional setup after loading the view.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self loadData];
+
+}
+
+- (void)reloadTableView {
     [tradesTable.mj_header beginRefreshing];
 }
 
 - (void)CreatView {
+    
+    self.topTitle = @"查看详情";
+    
     headerView = [[MKTradesHeaderView alloc] init];
-    tradesTable = [[BaseUITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderHistory" class:[MKOrderManageCell class]];
+    tradesTable = [[MKPerformceOrderTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:historyCellid class:[MKOrderManageCell class]];
+    [tradesTable registerClass:[MKOrderManageCell class] forCellReuseIdentifier:confirmCellid];
+    [tradesTable registerClass:[MKOrderManageCell class] forCellReuseIdentifier:deliverCellid];
     [self addSubview:headerView];
     [self addSubview:tradesTable];
     
-    [headerView setCost:@"1200" andCount:@"100"];
+    [headerView setCost:@"..." andCount:@"..."];
 }
 
 - (void)updateViewConstraints {
@@ -65,39 +82,25 @@
     [super updateViewConstraints];
 }
 
--(void)tableViewReload:(UITableView *)tableView
-{
-    BaseUITableView *table = (BaseUITableView *)tableView;
-    MKGoodsInfoModel *goodsModel = [[MKGoodsInfoModel alloc] init];
-    goodsModel.imgUrl = @"goods1";
-    goodsModel.goodsName = @"泰国金枕头榴莲泰国金枕头榴莲泰国金枕头榴莲泰国金枕头榴莲";
-    goodsModel.price = @"99";
-//    goodsModel.count = @"20";
-    MKOrderCellModel *model3 = [[MKOrderCellModel alloc] init];
-    model3.goodsInfoArra = [[NSMutableArray alloc] init];
-    model3.orderId = @"201710258984565616";
-//    model3.conditionType = 3;
-    model3.address = @"浙江省温州市鹿城区松台街道XXXXXX";
-    model3.totalAmount = @"40";
-    model3.totalCost = @"3600";
-    [model3.goodsInfoArra addObject:goodsModel];
-    [model3.goodsInfoArra addObject:goodsModel];
-    
-    MKOrderCellModel *model4 = [[MKOrderCellModel alloc] init];
-    model4.goodsInfoArra = [[NSMutableArray alloc] init];
-    model4.orderId = @"201710258984565616";
-//    model4.conditionType = 3;
-    model4.address = @"浙江省温州市鹿城区松台街道XXXXXX";
-    model4.totalAmount = @"40";
-    model4.totalCost = @"3600";
-    [model4.goodsInfoArra addObject:goodsModel];
-    [model4.goodsInfoArra addObject:goodsModel];
-    
-    [table.dataArray removeAllObjects];
-    [table.dataArray addObject:model3];
-    [table.dataArray addObject:model4];
-    [tableView reloadData];
-    [tableView.mj_header endRefreshing];
+- (void)loadData {
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [AFNetWorkingUsing httpGet:[NSString stringWithFormat:@"member/%@/detail",_userId] params:plist success:^(id json) {
+        LxDBAnyVar(json);
+        MKMemberTradesInfoModel *model = [MKMemberTradesInfoModel mj_objectWithKeyValues:[json objectForKey:@"data"]];
+        [headerView setCost:model.sumCount.sum andCount:model.sumCount.count];
+        [tradesTable.dataArray removeAllObjects];
+        for (MKOrderCellModel *orderModel in model.data) {
+            [tradesTable.dataArray addObject:orderModel];
+        }
+        [tradesTable reloadData];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [headerView setCost:_totalCost andCount:_totalCount];
+        [tradesTable.dataArray removeAllObjects];
+        [tradesTable reloadData];
+        [self.hud showTipMessageAutoHide:@"暂时没有数据"];
+    }];
 }
 
 

@@ -9,24 +9,29 @@
 #import "MKMemberManageController.h"
 #import "MKAddAccountController.h"
 #import "MKMemberDetailController.h"
+#import "MKSearchGoodsController.h"
 
 #import "MKMemManageCell.h"
 #import "MKMemManageTable.h"
 
 #import "MKMemberBaseModel.h"
 
-@interface MKMemberManageController ()
+@interface MKMemberManageController ()<UISearchBarDelegate>
 
 @end
 
 @implementation MKMemberManageController
 {
-    UISearchBar *searchBar;
+    UISearchBar *searcherBar;
+    UIView *maskView;   //遮盖在searchBar上
     MKMemManageTable *memberTable;
+    BOOL isSearched;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isSearched = NO;
     
     WS(ws)
     memberTable.cellSelcet =^(UITableView *tableView,NSIndexPath *indexPath){
@@ -54,24 +59,27 @@
 }
 
 - (void)CreatView {
-    searchBar = [[UISearchBar alloc] init];
+    searcherBar = [[UISearchBar alloc] init];
     memberTable = [[MKMemManageTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"memberCell" class:[MKMemManageCell class]];
+    maskView = [[UIView alloc] init];
     
-    [self addSubview:searchBar];
+    [self addSubview:searcherBar];
     [self addSubview:memberTable];
+    [self addSubview:maskView];
 }
 
 - (void)updateViewConstraints {
     
     WS(ws)
     
-    searchBar.placeholder = @"搜索";
-    searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    UITextField *searchField = [searchBar valueForKey:@"_searchField"];
+    searcherBar.placeholder = @"搜索";
+    searcherBar.searchBarStyle = UISearchBarStyleMinimal;
+    UITextField *searchField = [searcherBar valueForKey:@"_searchField"];
     [searchField setValue:FONT(12) forKeyPath:@"_placeholderLabel.font"];
     searchField.font = FONT(12);
     searchField.backgroundColor = VIEWBACKGRAY;
-    [searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    searcherBar.delegate = self;
+    [searcherBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws.topView.mas_bottom);
         make.left.right.mas_equalTo(ws.view);
         make.height.mas_equalTo(40 * autoSizeScaleH);
@@ -80,11 +88,23 @@
     memberTable.sectionIndexBackgroundColor = [UIColor clearColor];
     memberTable.sectionIndexColor = [UIColor hexStringToColor:@"#A5A5A5"];
     [memberTable mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(searchBar.mas_bottom);
+        make.top.mas_equalTo(searcherBar.mas_bottom);
         make.left.right.bottom.mas_equalTo(ws.view);
     }];
     
+    maskView.backgroundColor = [UIColor clearColor];
+    [maskView addTapEventWith:self action:@selector(goToSearch)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(searcherBar);
+        make.center.mas_equalTo(searcherBar);
+    }];
+    
     [super updateViewConstraints];
+}
+
+- (void)goToSearch{
+    MKSearchGoodsController *controller = [[MKSearchGoodsController alloc] initWithType:2];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)setMemberTableDataArras {

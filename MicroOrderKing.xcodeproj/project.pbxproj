@@ -42,6 +42,7 @@
 		06A0D7B71F3311B700B7CE09 /* MKSignOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7B61F3311B700B7CE09 /* MKSignOutView.m */; };
 		06A0D7BA1F33532600B7CE09 /* MKConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7B91F33532600B7CE09 /* MKConfirmView.m */; };
 		06A0D7BD1F3465B100B7CE09 /* MKMemberBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */; };
+		06C42A361F3B0AB700B7048C /* MKSearchMenberTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C42A351F3B0AB700B7048C /* MKSearchMenberTable.m */; };
 		06C82A931F2EDCA7004E2F25 /* MKOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */; };
 		06C82A961F2EFF82004E2F25 /* MKOrderGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A951F2EFF82004E2F25 /* MKOrderGoodsView.m */; };
 		06C82AA01F2F1ECD004E2F25 /* MKNewGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */; };
@@ -106,6 +107,8 @@
 		06ECE3161F36A9DF001DDFF3 /* MKAddreManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3151F36A9DF001DDFF3 /* MKAddreManageTable.m */; };
 		06ECE3191F36AB1E001DDFF3 /* MKEditMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */; };
 		06ECE31C1F378FF9001DDFF3 /* MKAddreMatchModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE31B1F378FF9001DDFF3 /* MKAddreMatchModel.m */; };
+		06ECE3251F39EA4D001DDFF3 /* MKPerformceOrderTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3241F39EA4D001DDFF3 /* MKPerformceOrderTable.m */; };
+		06ECE3291F3AD372001DDFF3 /* MKSearResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3281F3AD372001DDFF3 /* MKSearResultController.m */; };
 		AFAEA7F24E0972E457594BA6 /* Pods_MicroOrderKing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */; };
 /* End PBXBuildFile section */
 
@@ -197,6 +200,8 @@
 		06A0D7B91F33532600B7CE09 /* MKConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKConfirmView.m; path = order/View/MKConfirmView.m; sourceTree = "<group>"; };
 		06A0D7BB1F3465B100B7CE09 /* MKMemberBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKMemberBaseModel.h; path = member/Model/MKMemberBaseModel.h; sourceTree = "<group>"; };
 		06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberBaseModel.m; path = member/Model/MKMemberBaseModel.m; sourceTree = "<group>"; };
+		06C42A341F3B0AB700B7048C /* MKSearchMenberTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSearchMenberTable.h; path = member/View/MKSearchMenberTable.h; sourceTree = "<group>"; };
+		06C42A351F3B0AB700B7048C /* MKSearchMenberTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSearchMenberTable.m; path = member/View/MKSearchMenberTable.m; sourceTree = "<group>"; };
 		06C82A911F2EDCA7004E2F25 /* MKOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderDetailView.h; path = order/View/MKOrderDetailView.h; sourceTree = "<group>"; };
 		06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderDetailView.m; path = order/View/MKOrderDetailView.m; sourceTree = "<group>"; };
 		06C82A941F2EFF82004E2F25 /* MKOrderGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderGoodsView.h; path = order/View/MKOrderGoodsView.h; sourceTree = "<group>"; };
@@ -329,6 +334,10 @@
 		06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKEditMemberController.m; path = member/Controller/MKEditMemberController.m; sourceTree = "<group>"; };
 		06ECE31A1F378FF9001DDFF3 /* MKAddreMatchModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreMatchModel.h; path = order/Model/MKAddreMatchModel.h; sourceTree = "<group>"; };
 		06ECE31B1F378FF9001DDFF3 /* MKAddreMatchModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreMatchModel.m; path = order/Model/MKAddreMatchModel.m; sourceTree = "<group>"; };
+		06ECE3231F39EA4D001DDFF3 /* MKPerformceOrderTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPerformceOrderTable.h; path = subAccount/View/MKPerformceOrderTable.h; sourceTree = "<group>"; };
+		06ECE3241F39EA4D001DDFF3 /* MKPerformceOrderTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPerformceOrderTable.m; path = subAccount/View/MKPerformceOrderTable.m; sourceTree = "<group>"; };
+		06ECE3271F3AD372001DDFF3 /* MKSearResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKSearResultController.h; sourceTree = "<group>"; };
+		06ECE3281F3AD372001DDFF3 /* MKSearResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKSearResultController.m; sourceTree = "<group>"; };
 		27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MicroOrderKing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BECADD553E1FAA9E2BD614F5 /* Pods-MicroOrderKing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MicroOrderKing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing.debug.xcconfig"; sourceTree = "<group>"; };
 		F76AD51BEE9725B54AEF006E /* Pods-MicroOrderKing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MicroOrderKing.release.xcconfig"; path = "Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing.release.xcconfig"; sourceTree = "<group>"; };
@@ -519,6 +528,7 @@
 		06CCAFD41F275A79003091C0 /* MicroOrderKing */ = {
 			isa = PBXGroup;
 			children = (
+				06ECE3261F3AD33B001DDFF3 /* SearchPart */,
 				06A0D6C71F31816000B7CE09 /* Model */,
 				06CCB0681F277040003091C0 /* SubAccount(子账户) */,
 				06CCB0671F276F67003091C0 /* MemberPart(会员管理) */,
@@ -843,6 +853,8 @@
 				063CE5431F2C566400A5A9F9 /* MKTittleTextView.m */,
 				063CE56F1F2E3DD000A5A9F9 /* MKMemberCell.h */,
 				063CE5701F2E3DD000A5A9F9 /* MKMemberCell.m */,
+				06ECE3231F39EA4D001DDFF3 /* MKPerformceOrderTable.h */,
+				06ECE3241F39EA4D001DDFF3 /* MKPerformceOrderTable.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -897,6 +909,17 @@
 				062EB0E51F35563F00945BE9 /* MKAddreChoiceView.m */,
 			);
 			name = "录入订单";
+			sourceTree = "<group>";
+		};
+		06ECE3261F3AD33B001DDFF3 /* SearchPart */ = {
+			isa = PBXGroup;
+			children = (
+				06C42A341F3B0AB700B7048C /* MKSearchMenberTable.h */,
+				06C42A351F3B0AB700B7048C /* MKSearchMenberTable.m */,
+				06ECE3271F3AD372001DDFF3 /* MKSearResultController.h */,
+				06ECE3281F3AD372001DDFF3 /* MKSearResultController.m */,
+			);
+			name = SearchPart;
 			sourceTree = "<group>";
 		};
 		0A419410DD84DA0F008BFE2C /* Pods */ = {
@@ -1113,6 +1136,7 @@
 				06CCB0BC1F2B12FA003091C0 /* MKAddGoodsCell.m in Sources */,
 				064DB2491F35FC2100087865 /* MKAddreManageController.m in Sources */,
 				06C82AA61F2F5303004E2F25 /* MKSearchGoodsController.m in Sources */,
+				06C42A361F3B0AB700B7048C /* MKSearchMenberTable.m in Sources */,
 				06CCB04F1F276867003091C0 /* BaseNavigationController.m in Sources */,
 				06CCB08D1F29A846003091C0 /* MKGoodsInfoView.m in Sources */,
 				063CE53E1F2C4CC200A5A9F9 /* MKOrderOtherView.m in Sources */,
@@ -1151,6 +1175,7 @@
 				064DB24C1F35FCA000087865 /* MKAddreMangeCell.m in Sources */,
 				06ECE3161F36A9DF001DDFF3 /* MKAddreManageTable.m in Sources */,
 				06CCAFDA1F275A79003091C0 /* AppDelegate.m in Sources */,
+				06ECE3251F39EA4D001DDFF3 /* MKPerformceOrderTable.m in Sources */,
 				06CCB04E1F276867003091C0 /* UIView+ZYFUIViewCategory.m in Sources */,
 				06ECE31C1F378FF9001DDFF3 /* MKAddreMatchModel.m in Sources */,
 				064DB2461F35F68700087865 /* MKEditAddreController.m in Sources */,
@@ -1176,6 +1201,7 @@
 				06CCB0B41F2AEE26003091C0 /* MKAccountInfoView.m in Sources */,
 				06A0D6CA1F31817B00B7CE09 /* MKHttpModel.m in Sources */,
 				063CE56B1F2E303400A5A9F9 /* MKMemManageTable.m in Sources */,
+				06ECE3291F3AD372001DDFF3 /* MKSearResultController.m in Sources */,
 				063CE5741F2E472F00A5A9F9 /* MKGoodsManageCell.m in Sources */,
 				06CCB0781F288373003091C0 /* MKTradesInfoView.m in Sources */,
 				06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */,

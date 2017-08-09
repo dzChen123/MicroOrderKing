@@ -8,6 +8,9 @@
 
 #import "MKOrderManageController.h"
 #import "MKOrderWritingController.h"
+#import "MKPerformanceController.h"
+#import "MKTradesDetailController.h"
+#import "MKSearResultController.h"
 
 #import "MKOrderManageCell.h"
 #import "MKGoodsInfoView.h"
@@ -316,8 +319,20 @@
 - (void)confirm {
     BaseViewController *controller = (BaseViewController *)[self parentController];
     MKOrderManageController *manageController;
+    MKPerformanceController *performController;
+    MKTradesDetailController *tradesController;
+    MKSearResultController *resultController;
     if ([controller isKindOfClass:[MKOrderManageController class]]) {
         manageController = (MKOrderManageController *)controller;
+    }
+    if ([controller isKindOfClass:[MKPerformanceController class]]) {
+        performController = (MKPerformanceController *)controller;
+    }
+    if ([controller isKindOfClass:[MKTradesDetailController class]]) {
+        tradesController = (MKTradesDetailController *)controller;
+    }
+    if ([controller isKindOfClass:[MKSearResultController class]]) {
+        resultController = (MKSearResultController *)controller;
     }
     NSString *titleStr = confirmBtn.titleLabel.text;
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
@@ -327,6 +342,15 @@
         [controller.hud showTipMessageAutoHide:@"订单状态已更新"];
         if (manageController) {
             [manageController reloadTableView:isDeliver ? 0 : 1];
+        }
+        if (performController) {
+            [performController reloadSecondTable];
+        }
+        if (tradesController) {
+            [tradesController reloadTableView];
+        }
+        if (resultController) {
+            [resultController reloadTableView];
         }
         [self cancelConfirm];
     } fail:^(NSError *error) {
