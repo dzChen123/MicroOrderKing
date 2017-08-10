@@ -11,6 +11,8 @@
 #import "MKHomePageViewController.h"
 #import "BaseNavigationController.h"
 
+#import "MKAddressManager.h"
+
 #import "MKLoginModel.h"
 
 #define bgGrayColor [UIColor hexStringToColor:@"#F8F8F8"]
@@ -203,6 +205,7 @@
         [ZYFUserDefaults setObject:model.data.parent_id key:@"parentId"];
         [ZYFUserDefaults setObject:pasdField.text key:@"pasd"];
         [self.hud hideAnimated:YES];
+        [[MKAddressManager sharedAddressManager] allNeedsUpdate];
         [self goToHomePage];
     } fail:^(NSError *error) {
         [self.hud hideAnimated:YES];

@@ -7,6 +7,7 @@
 //
 
 #import "MKTradesDetailController.h"
+#import "MKOrderDetailController.h"
 
 #import "MKTradesHeaderView.h"
 #import "MKPerformceOrderTable.h"
@@ -34,6 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    WS(ws)
+    tradesTable.cellSelcet =^(UITableView *tableView,NSIndexPath *indexPath){
+        [ws goToOrderDetail:(BaseUITableView *)tableView indexPath:indexPath];
+    };
     
     tradesTable.mj_header = nil;
     tradesTable.mj_footer = nil;
@@ -48,7 +53,7 @@
 }
 
 - (void)reloadTableView {
-    [tradesTable.mj_header beginRefreshing];
+    [self loadData];
 }
 
 - (void)CreatView {
@@ -90,6 +95,7 @@
         [headerView setCost:model.sumCount.sum andCount:model.sumCount.count];
         [tradesTable.dataArray removeAllObjects];
         for (MKOrderCellModel *orderModel in model.data) {
+            orderModel.conditionType = @"2";
             [tradesTable.dataArray addObject:orderModel];
         }
         [tradesTable reloadData];
@@ -101,6 +107,14 @@
         [tradesTable reloadData];
         [self.hud showTipMessageAutoHide:@"暂时没有数据"];
     }];
+}
+
+- (void)goToOrderDetail:(BaseUITableView *)tableView indexPath:(NSIndexPath *)indexPath {
+    MKOrderDetailController *controller = [[MKOrderDetailController alloc] initWithTitle:@"订单详情"];
+    MKOrderCellModel *model = tableView.dataArray[indexPath.row];
+    controller.orderId = model.orderId;
+    controller.postStatus = model.conditionType;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 

@@ -8,6 +8,8 @@
 
 #import "BaseViewController.h"
 
+#import "MKAddressManager.h"
+
 #import "MKSearchMenberTable.h"
 
 #import "MKMemberBaseModel.h"
@@ -35,6 +37,9 @@
         [AFNetWorkingUsing httpDelete:deleteUrl params:plist success:^(id json) {
             [parent.hud hideAnimated:YES];
             tableView.editing = NO;
+            MKMemberBaseModel *baseModel = self.dataArray[indexPath.row];
+            [[MKAddressManager sharedAddressManager] needsUpdate:baseModel.memberId];
+            [[MKAddressManager sharedAddressManager] saveLocalInfo];
             [self.dataArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         } fail:^(NSError *error) {

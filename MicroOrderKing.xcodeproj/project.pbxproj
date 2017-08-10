@@ -43,6 +43,7 @@
 		06A0D7BA1F33532600B7CE09 /* MKConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7B91F33532600B7CE09 /* MKConfirmView.m */; };
 		06A0D7BD1F3465B100B7CE09 /* MKMemberBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */; };
 		06C42A361F3B0AB700B7048C /* MKSearchMenberTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C42A351F3B0AB700B7048C /* MKSearchMenberTable.m */; };
+		06C42A3A1F3C017000B7048C /* MKAddressManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C42A391F3C017000B7048C /* MKAddressManager.m */; };
 		06C82A931F2EDCA7004E2F25 /* MKOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */; };
 		06C82A961F2EFF82004E2F25 /* MKOrderGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A951F2EFF82004E2F25 /* MKOrderGoodsView.m */; };
 		06C82AA01F2F1ECD004E2F25 /* MKNewGoodsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */; };
@@ -202,6 +203,8 @@
 		06A0D7BC1F3465B100B7CE09 /* MKMemberBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKMemberBaseModel.m; path = member/Model/MKMemberBaseModel.m; sourceTree = "<group>"; };
 		06C42A341F3B0AB700B7048C /* MKSearchMenberTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKSearchMenberTable.h; path = member/View/MKSearchMenberTable.h; sourceTree = "<group>"; };
 		06C42A351F3B0AB700B7048C /* MKSearchMenberTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKSearchMenberTable.m; path = member/View/MKSearchMenberTable.m; sourceTree = "<group>"; };
+		06C42A381F3C017000B7048C /* MKAddressManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAddressManager.h; sourceTree = "<group>"; };
+		06C42A391F3C017000B7048C /* MKAddressManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAddressManager.m; sourceTree = "<group>"; };
 		06C82A911F2EDCA7004E2F25 /* MKOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderDetailView.h; path = order/View/MKOrderDetailView.h; sourceTree = "<group>"; };
 		06C82A921F2EDCA7004E2F25 /* MKOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKOrderDetailView.m; path = order/View/MKOrderDetailView.m; sourceTree = "<group>"; };
 		06C82A941F2EFF82004E2F25 /* MKOrderGoodsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKOrderGoodsView.h; path = order/View/MKOrderGoodsView.h; sourceTree = "<group>"; };
@@ -477,6 +480,15 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		06C42A371F3C013300B7048C /* AddressPart */ = {
+			isa = PBXGroup;
+			children = (
+				06C42A381F3C017000B7048C /* MKAddressManager.h */,
+				06C42A391F3C017000B7048C /* MKAddressManager.m */,
+			);
+			name = AddressPart;
+			sourceTree = "<group>";
+		};
 		06C82A901F2EDC64004E2F25 /* 订单详情 */ = {
 			isa = PBXGroup;
 			children = (
@@ -528,6 +540,7 @@
 		06CCAFD41F275A79003091C0 /* MicroOrderKing */ = {
 			isa = PBXGroup;
 			children = (
+				06C42A371F3C013300B7048C /* AddressPart */,
 				06ECE3261F3AD33B001DDFF3 /* SearchPart */,
 				06A0D6C71F31816000B7CE09 /* Model */,
 				06CCB0681F277040003091C0 /* SubAccount(子账户) */,
@@ -1207,6 +1220,7 @@
 				06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */,
 				06CCB0901F29D25D003091C0 /* MKOrderCellModel.m in Sources */,
 				06CCB0571F276867003091C0 /* BaseTopView.m in Sources */,
+				06C42A3A1F3C017000B7048C /* MKAddressManager.m in Sources */,
 				06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */,
 				06CCAFD71F275A79003091C0 /* main.m in Sources */,
 				06CCB04A1F276867003091C0 /* NSString+ZYFCategory.m in Sources */,

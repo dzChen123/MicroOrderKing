@@ -178,12 +178,13 @@
                 make.right.mas_equalTo(confirmBtn.mas_left).offset(-10 * autoSizeScaleW);
             }];
 
-            [printBtn removeFromSuperview];
-//            [self customButn:printBtn withTittle:@"打印小票"];
-//            [printBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.centerY.mas_equalTo(editBtn);
-//                make.right.mas_equalTo(editBtn.mas_left).offset(-10 * autoSizeScaleW);
-//            }];
+            //[printBtn removeFromSuperview];
+            [self customButn:printBtn withTittle:@"删除订单"];
+            [printBtn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
+            [printBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.size.centerY.mas_equalTo(editBtn);
+                make.right.mas_equalTo(editBtn.mas_left).offset(-10 * autoSizeScaleW);
+            }];
         } else {
             confirmTittle = @"交易完成";
             [printBtn removeFromSuperview];
@@ -264,6 +265,7 @@
     UIViewController *parent = [self parentController];
     NSString *title = sender.titleLabel.text;
     NSArray *signArrays = @[
+                            @[@"请确定您要删除订单",@"删除订单"],
                             @[@"请确定您已准备好货物并准备发货",@"确认发货"],
                             @[@"请确定您已收到货款并用户已收货",@"交易成功"]
                             ];
@@ -280,7 +282,13 @@
         make.center.mas_equalTo(parentWeak.view);
     }];
     confirmView = [[MKConfirmView alloc] init];
-    [confirmView setSignStr:signArrays[[title isEqualToString:@"确认发货"] ? 0 : 1]];
+    if ([title isEqualToString:@"删除订单"]) {
+        [confirmView setSignStr:signArrays[0]];
+    }else if ([title isEqualToString:@"确认发货"]){
+        [confirmView setSignStr:signArrays[1]];
+    }else{
+        [confirmView setSignStr:signArrays[2]];
+    }
     [parent.view addSubview:confirmView];
     confirmView.cancelBlock =^(){
         [ws cancelConfirm];
@@ -337,7 +345,12 @@
     NSString *titleStr = confirmBtn.titleLabel.text;
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     BOOL isDeliver = [titleStr isEqualToString:@"确认发货"];
-    [plist setObject: isDeliver ? @"1" : @"2" forKey:@"post_status"];
+    BOOL isDelete = [titleStr isEqualToString:@"删除订单"];
+    if (isDelete) {
+        [plist setObject:@"3" forKey:@"post_status"];
+    }else{
+        [plist setObject: isDeliver ? @"1" : @"2" forKey:@"post_status"];
+    }
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@/change",orderId] params:plist success:^(id json) {
         [controller.hud showTipMessageAutoHide:@"订单状态已更新"];
         if (manageController) {

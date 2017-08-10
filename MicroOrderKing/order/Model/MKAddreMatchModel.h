@@ -10,6 +10,7 @@
 
 @interface MKAddreMatchModel : NSObject
 
+@property (assign,nonatomic) BOOL needsUpdate;      //本地数据更新标识
 @property (strong,nonatomic) NSString *matchId;
 @property (strong,nonatomic) NSString *mobile;
 @property (strong,nonatomic) NSString *name;

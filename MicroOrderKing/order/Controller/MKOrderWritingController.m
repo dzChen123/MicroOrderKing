@@ -8,6 +8,8 @@
 
 #import "MKOrderWritingController.h"
 
+#import "MKAddressManager.h"
+
 #import "MKCopyBoard.h"
 #import "MKReceiverInfoView.h"
 #import "MKGoodsInfoCell.h"
@@ -34,6 +36,7 @@
     BOOL isMatched;
     NSString *memberId;
     NSString *addressId;
+    NSString *addressStr;
     MASConstraint *heightConstraint;
 }
 
@@ -219,6 +222,9 @@
         [self.hud showTipMessageAutoHide:@"请先选择一些商品"];
         return;
     }
+    if (![addressStr isEqualToString:address]) {
+        [[MKAddressManager sharedAddressManager] needsUpdate:memberId];
+    }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:memberId forKey:@"member_id"];
     [plist setObject:isPaid ? @"1" : @"0" forKey:@"pay_status"];
@@ -249,15 +255,13 @@
 
 - (void)goToChoose:(NSString *)phoneNum {
     
-    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    [plist setObject:phoneNum forKey:@"address"];
-    [AFNetWorkingUsing httpPost:@"match/mobile" params:plist success:^(id json) {
+    MKAddreMatchModel *localModel = [[MKAddressManager sharedAddressManager] getAddreModelWithPhone:phoneNum];
+    if (localModel != nil && localModel.needsUpdate == NO) {
         WS(ws)
         [self.view bringSubviewToFront:maskView];
         maskView.hidden = NO;
         addreChoiceView = [[MKAddreChoiceView alloc] init];
-        MKAddreMatchModel *model = [MKAddreMatchModel mj_objectWithKeyValues:[json objectForKey:@"data"]];
-        [addreChoiceView setData:model];
+        [addreChoiceView setData:localModel];
         addreChoiceView.transform = CGAffineTransformMakeScale(.0001, .0001);
         addreChoiceView.alpha = 0;
         addreChoiceView.cancelClickBock =^(){
@@ -277,11 +281,47 @@
             addreChoiceView.alpha = 1;
             addreChoiceView.transform = CGAffineTransformMakeScale(1,1);
         }];
-    } fail:^(NSError *error) {
-        
-    } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"匹配失败"];
-    }];
+    }else{
+        NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+        [plist setObject:phoneNum forKey:@"address"];
+        [AFNetWorkingUsing httpPost:@"match/mobile" params:plist success:^(id json) {
+            WS(ws)
+            [self.view bringSubviewToFront:maskView];
+            maskView.hidden = NO;
+            addreChoiceView = [[MKAddreChoiceView alloc] init];
+            MKAddreMatchModel *model = [MKAddreMatchModel mj_objectWithKeyValues:[json objectForKey:@"data"]];
+            model.needsUpdate = NO;
+            if (!localModel) {
+                [[MKAddressManager sharedAddressManager].memberArray addObject:model];
+            }else{
+                [[MKAddressManager sharedAddressManager] updadteLocalInfo:model];
+            }
+            [addreChoiceView setData:model];
+            addreChoiceView.transform = CGAffineTransformMakeScale(.0001, .0001);
+            addreChoiceView.alpha = 0;
+            addreChoiceView.cancelClickBock =^(){
+                [ws cancelChoose];
+            };
+            addreChoiceView.confirmClickBock =^(MKAddreMatchModel *model,NSInteger index){
+                [ws confirmChoose:model Index:index];
+            };
+            [self.view addSubview:addreChoiceView];
+            [addreChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(ws.view).offset(leftPadding);
+                make.right.mas_equalTo(ws.view).offset(rightPadding);
+                make.centerY.mas_equalTo(ws.view);
+            }];
+            [UIView animateWithDuration:.3 animations:^{
+                maskView.alpha = 1;
+                addreChoiceView.alpha = 1;
+                addreChoiceView.transform = CGAffineTransformMakeScale(1,1);
+            }];
+        } fail:^(NSError *error) {
+            
+        } other:^(id json) {
+            [self.hud showTipMessageAutoHide:@"匹配失败"];
+        }];
+    }
 
 }
 
@@ -304,6 +344,7 @@
     MKAddreMatchItemModel *itemModel = model.address[index];
     memberId = model.matchId;
     addressId = itemModel.itemId;
+    addressStr = itemModel.address;
     [receiverInfoView setReceiverInfo:model.name Phone:model.mobile Address:itemModel.address];
 }
 
@@ -315,6 +356,12 @@
     }
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [super viewDidDisappear:animated];
+    
+    [[MKAddressManager sharedAddressManager] saveLocalInfo];
+}
 
 
 - (void)loadEditionData {

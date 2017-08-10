@@ -19,6 +19,9 @@
     NSInteger _maxCount;
     NSInteger _buyCount;
     NSString *goodsId;
+    
+    BOOL countFlag;
+    BOOL overFlag;
 }
 
 - (void)createView {
@@ -89,10 +92,10 @@
         for (MKAddGoodsCellModel *model in controller.goodsTable.dataArray) {
             if ([model.goodsId isEqualToString:goodsId]) {
                 model.buyCount  =[NSString stringWithFormat:@"%ld",(long)_buyCount];
-                controller.totalCount += _buyCount;
                 break;
             }
         }
+        [controller setBottomCount];
     } else {
         
     }
@@ -102,18 +105,22 @@
 
 - (void)showTip:(UIButton *)sender {
     BaseViewController *parent = (BaseViewController *)[self parentController];
-    
+    overFlag = NO;
     if (sender.tag == 3 ) {
         if (_buyCount + 1 > _maxCount) {
             [parent.hud showTipMessageAutoHide:@"购买数量已达最大了哦"];
+            overFlag = YES;
             return;
         }
+        countFlag = YES;
         _buyCount ++;
     }else{
         if (_buyCount - 1 < 0) {
             [parent.hud showTipMessageAutoHide:@"已经是0件了，不用再点了～"];
+            overFlag = YES;
             return;
         }
+        countFlag = YES;
         _buyCount --;
     }
     numLab.text = [NSString stringWithFormat:@"%ld",(long)_buyCount];

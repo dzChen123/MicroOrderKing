@@ -8,6 +8,8 @@
 
 #import "MKEditAddreController.h"
 
+#import "MKAddressManager.h"
+
 #import "MKMemberBaseModel.h"
 
 #define holderColor [UIColor hexStringToColor:@"#D7D7D8"]
@@ -146,7 +148,10 @@
     [plist setObject:address forKey:@"address"];
     [plist setObject:_memberId forKey:@"member_id"];
     [AFNetWorkingUsing httpPost:@"address" params:plist success:^(id json) {
+        [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
+        [[MKAddressManager sharedAddressManager] saveLocalInfo];
         [self.hud showTipMessageAutoHide:@"地址添加成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -166,7 +171,10 @@
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:address forKey:@"address"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"address/%@",_addreId] params:plist success:^(id json) {
+        [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
+        [[MKAddressManager sharedAddressManager] saveLocalInfo];
         [self.hud showTipMessageAutoHide:@"地址更新成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -177,6 +185,8 @@
 - (void)deleteAddress {
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",_addreId] params:plist success:^(id json) {
+        [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
+        [[MKAddressManager sharedAddressManager] saveLocalInfo];
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         

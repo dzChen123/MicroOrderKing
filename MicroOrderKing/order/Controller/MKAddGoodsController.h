@@ -16,4 +16,6 @@
 @property (assign,nonatomic) NSInteger totalCount;
 @property (strong,nonatomic) NSMutableArray *tableViewData;
 
+- (void)setBottomCount;
+
 @end

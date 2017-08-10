@@ -25,6 +25,7 @@
     
     NSString *placeHolder;
     MASConstraint *topConstraint;
+    NSArray *matchedArray;
 }
 
 - (void)CreatView {
@@ -161,7 +162,8 @@
 }
 
 - (void)fillOrder {
-    if ([copyView.text isEqualToString:placeHolder]||![self isMobileNumber:copyView.text]) {
+    [self getPhoneNumber:copyView.text];
+    if ([copyView.text isEqualToString:placeHolder]||!matchedArray.count) {
         [topConstraint uninstall];
         [fillButn mas_makeConstraints:^(MASConstraintMaker *make) {
             topConstraint = make.top.mas_equalTo(signView.mas_bottom);
@@ -175,7 +177,84 @@
         return;
     }
     if (_fillClickBlock) {
-        _fillClickBlock(copyView.text);
+        LxDBAnyVar(matchedArray[0]);
+        _fillClickBlock(matchedArray[0]);
+    }
+}
+
+- (void)getPhoneNumber:(NSString *)checkString {
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    NSString * MOBILE = @"1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}";
+    /**
+     * 中国移动：China Mobile
+     * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     */
+    NSString * CM = @"1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}";
+    /**
+     * 中国联通：China Unicom
+     * 130,131,132,152,155,156,185,186
+     */
+    NSString * CU = @"1(3[0-2]|5[256]|8[56])\\d{8}";
+    /**
+     * 中国电信：China Telecom
+     * 133,1349,153,180,189
+     */
+    NSString * CT = @"1((33|53|8[09])[0-9]|349)\\d{7}";
+    
+    [self getPhoneNum:checkString regexStr:MOBILE];
+    [self getPhoneNum:checkString regexStr:CM];
+    [self getPhoneNum:checkString regexStr:CU];
+    [self getPhoneNum:checkString regexStr:CT];
+
+}
+
+- (void)getPhoneNum:(NSString *)phoneNum regexStr:(NSString *)regexStr {
+    NSArray *arra = [self matchString:phoneNum toRegexString:regexStr];
+    if (arra.count > 0) {
+        matchedArray = arra;
+    }
+}
+
+- (NSArray *)matchString:(NSString *)string toRegexString:(NSString *)regexStr {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSArray * matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+    
+    //match: 所有匹配到的字符,根据() 包含级
+    
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (NSTextCheckingResult *match in matches) {
+        
+        for (int i = 0; i < [match numberOfRanges]; i++) {
+            //以正则中的(),划分成不同的匹配部分
+            NSString *component = [string substringWithRange:[match rangeAtIndex:i]];
+            
+            [array addObject:component];
+            
+        }
+        
+    }
+    
+    return array;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if ([textView.text isEqualToString:placeHolder]) {
+        textView.text = @"";
+        textView.textColor = wordThreeColor;
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if(textView.text.length < 1) {
+        textView.text = placeHolder;
+        textView.textColor = holderColor;
     }
 }
 
@@ -188,32 +267,32 @@
      * 联通：130,131,132,152,155,156,185,186
      * 电信：133,1349,153,180,189
      */
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
+    NSString * MOBILE = @"1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}";
     /**
      * 中国移动：China Mobile
      * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
      */
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";
+    NSString * CM = @"1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}";
     /**
      * 中国联通：China Unicom
      * 130,131,132,152,155,156,185,186
      */
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";
+    NSString * CU = @"1(3[0-2]|5[256]|8[56])\\d{8}";
     /**
      * 中国电信：China Telecom
      * 133,1349,153,180,189
      */
-    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";
+    NSString * CT = @"1((33|53|8[09])[0-9]|349)\\d{7}";
     /**
      * 大陆地区固话及小灵通
      * 区号：010,020,021,022,023,024,025,027,028,029
      * 号码：七位或八位
      */
     // NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];
+    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", MOBILE];
+    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", CM];
+    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", CU];
+    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@", CT];
     
     if (([regextestmobile evaluateWithObject:mobileNum] == YES)
         || ([regextestcm evaluateWithObject:mobileNum] == YES)
@@ -235,20 +314,6 @@
     else
     {
         return NO;
-    }
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:placeHolder]) {
-        textView.text = @"";
-        textView.textColor = wordThreeColor;
-    }
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if(textView.text.length < 1) {
-        textView.text = placeHolder;
-        textView.textColor = holderColor;
     }
 }
 

@@ -65,6 +65,14 @@
     [bottomView setSelecNum:totalCount];
 }
 
+- (void)setBottomCount {
+    NSInteger count = 0;
+    for (MKAddGoodsCellModel *model in _goodsTable.dataArray) {
+        count += [model.buyCount integerValue];
+    }
+    self.totalCount = count;
+}
+
 - (void)clearBlock {
     self.totalCount = 0;
     for (MKAddGoodsCellModel *model in _goodsTable.dataArray) {
