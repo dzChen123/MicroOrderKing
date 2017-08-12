@@ -264,6 +264,7 @@
     [plist setObject:remark forKey:@"remark"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"member/%@",_memberId] params:plist success:^(id json) {
         [self.hud showTipMessageAutoHide:@"更新会员成功"];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         
     } other:^(id json) {

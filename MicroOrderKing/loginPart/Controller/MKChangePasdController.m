@@ -112,8 +112,8 @@
     }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:current forKey:@"old_password"];
-    [plist setObject:[new md5String] forKey:@"password"];
-    [plist setObject:[repeat md5String] forKey:@"confirm_password"];
+    [plist setObject:new forKey:@"password"];
+    [plist setObject:repeat forKey:@"confirm_password"];
     [self.hud showWaitHudWithMessage:@"修改密码中..."];
     [AFNetWorkingUsing httpPost:@"user/profile/changePassword" params:plist success:^(id json) {
         [self.hud hideAnimated:YES];

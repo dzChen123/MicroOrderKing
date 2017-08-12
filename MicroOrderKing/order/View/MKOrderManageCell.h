@@ -10,4 +10,6 @@
 
 @interface MKOrderManageCell : BaseTableViewCell
 
+@property (strong,nonatomic) void (^clickButnClickBlock)(BOOL isSelect,NSString *orderId);
+
 @end

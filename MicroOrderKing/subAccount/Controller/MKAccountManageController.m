@@ -52,7 +52,7 @@
 
 - (void)setTopView {
     [super setTopView];
-    self.topTitle = @"子账户管理";
+    self.topTitle = @"分账号管理";
     [self.topView.rightButton setImage:[[UIImage imageNamed:@"mberManAdd"] imageByScalingToSize:CGSizeMake(20, 20)]
                               forState:UIControlStateNormal];
     [self.topView setRightEvent:self action:@selector(gotoAddAccount)];
@@ -98,8 +98,8 @@
     [AFNetWorkingUsing httpGet:@"subaccount" params:plist success:^(id json) {
         [table.dataArray removeAllObjects];
         MKAccountHttpBaseModel *model = [MKAccountHttpBaseModel mj_objectWithKeyValues:json];
-        for (MKAccountBaseModel *dataModel in model.data) {
-            [table.dataArray addObject:dataModel];
+        for (int count = 0; count < model.data.count; count ++) {
+            [table.dataArray addObject:model.data[count]];
         }
         [table reloadData];
         [table.mj_header endRefreshing];
@@ -113,7 +113,7 @@
             [self.hud showTipMessageAutoHide:@"子账号无权访问！"];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
-            [self.hud showTipMessageAutoHide:@"暂时没有数据了"];
+            [self.hud showTipMessageAutoHide:@"暂无数据"];
         }
 
     }];
@@ -127,15 +127,15 @@
     [plist setObject:@(page) forKey:@"page"];
     [AFNetWorkingUsing httpGet:@"subaccount" params:plist success:^(id json) {
         MKAccountHttpBaseModel *model = [MKAccountHttpBaseModel mj_objectWithKeyValues:json];
-        for (MKAccountBaseModel *dataModel in model.data) {
-            [table.dataArray addObject:dataModel];
+        for (int count = 0; count < model.data.count; count ++) {
+            [table.dataArray addObject:model.data[count]];
         }
         [table reloadData];
         [table.mj_footer endRefreshing];
     } fail:^(NSError *error) {
         [table.mj_footer endRefreshing];
     } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"没有啦～"];
+        [self.hud showTipMessageAutoHide:@"没有更多数据"];
         [table.mj_footer endRefreshing];
     }];
 }

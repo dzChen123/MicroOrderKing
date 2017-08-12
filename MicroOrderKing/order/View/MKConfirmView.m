@@ -39,10 +39,12 @@
     
     //signLab.text = @"请确定您已收到货款并用户已收货";
     signLab.font = FONT(14);
+    signLab.numberOfLines = 0;
     signLab.textColor = [UIColor hexStringToColor:@"#222324"];
     [signLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(ws).offset(10 * autoSizeScaleW);
         make.top.mas_equalTo(ws).offset(40 * autoSizeScaleH);
+        make.right.lessThanOrEqualTo(ws).offset(-50 * autoSizeScaleW);
     }];
     
     [infoIcon mas_makeConstraints:^(MASConstraintMaker *make) {

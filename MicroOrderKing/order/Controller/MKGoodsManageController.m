@@ -111,8 +111,8 @@
     [AFNetWorkingUsing httpGet:@"goods" params:plist success:^(id json) {
         NSMutableArray *modelArr = [MKGoodsInfoHttpModel mj_objectWithKeyValues:json].data;
         [tableView.dataArray removeAllObjects];
-        for (MKGoodsInfoModel *model in modelArr) {
-            [tableView.dataArray addObject:model];
+        for (int count = 0; count < modelArr.count; count ++) {
+            [tableView.dataArray addObject:modelArr[count]];
         }
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
@@ -120,6 +120,7 @@
  
     } other:^(id json) {
         [tableView.dataArray removeAllObjects];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
     }];
@@ -134,8 +135,8 @@
     [plist setObject:@(listRows) forKey:@"list_rows"];
     [AFNetWorkingUsing httpGet:@"goods" params:plist success:^(id json) {
         NSMutableArray *modelArr = [MKGoodsInfoHttpModel mj_objectWithKeyValues:json].data;
-        for (MKGoodsInfoModel *model in modelArr) {
-            [tableView.dataArray addObject:model];
+        for (int count = 0; count < modelArr.count; count ++) {
+            [tableView.dataArray addObject:modelArr[count]];
         }
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
@@ -144,7 +145,7 @@
     } other:^(id json) {
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
-        [self.hud showTipMessageAutoHide:@"没有啦"];
+        [self.hud showTipMessageAutoHide:@"没有更多数据"];
     }];
 }
 

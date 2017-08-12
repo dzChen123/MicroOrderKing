@@ -38,7 +38,7 @@
                                                                         @[@"homeEnterMenber",@"录入会员"],
                                                                         @[@"homeMember",@"会员管理"],
                                                                         @[@"homeCManage",@"商品管理"],
-                                                                        @[@"homeSubAccount",@"子账户管理"],nil];
+                                                                        @[@"homeSubAccount",@"分账号管理"],nil];
     for (int i = 0; i < dataArra.count; i ++) {
         [((MKSectionItemView *)itemArra[i]) setData:dataArra[i]];
     }
@@ -87,6 +87,12 @@
         make.top.mas_equalTo(((MKSectionItemView *)itemArra[2]).mas_bottom);
     }];
     
+    UIView *view = itemArra[5];
+    if ([[ZYFUserDefaults objectForKey:@"parentId"] integerValue] > 0) {
+        view.hidden = YES;
+    }else{
+        view.hidden = NO;
+    }
     [itemArra[5] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.centerY.mas_equalTo(itemArra[4]);
         make.right.mas_equalTo(ws);
@@ -118,7 +124,7 @@
             pushedController = [[MKGoodsManageController alloc] initWithTitle:@"商品管理"];
             break;
         case 16:
-            pushedController = [[MKAccountManageController alloc] initWithTitle:@"子账户管理"];
+            pushedController = [[MKAccountManageController alloc] initWithTitle:@"分账号管理"];
             break;
             
         default:
@@ -152,7 +158,11 @@
     self.backgroundColor = customWhite;
     
     [sectionIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws).offset(20 * autoSizeScaleH);
+        if(SCREEN_WIDTH == 320){
+            make.top.mas_equalTo(ws).offset(5 * autoSizeScaleH);
+        }else{
+            make.top.mas_equalTo(ws).offset(15 * autoSizeScaleH);
+        }
         make.centerX.mas_equalTo(ws);
         make.size.mas_equalTo(CGSizeMake(63 * autoSizeScaleW, 38 * autoSizeScaleW));
     }];
@@ -165,7 +175,7 @@
     }];
     
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(sectionName).offset(15 * autoSizeScaleH);
+        make.bottom.mas_equalTo(sectionName).offset(10 * autoSizeScaleH);
     }];
     
 }

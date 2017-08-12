@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface MKReceiverInfoView : BaseView<UITextViewDelegate>
+@interface MKReceiverInfoView : BaseView<UITextViewDelegate,UITextFieldDelegate>
 
 - (void)setReceiverInfo:(NSString *)name Phone:(NSString *)phone Address:(NSString *)address;
 - (NSArray *)getReceiverInfo;

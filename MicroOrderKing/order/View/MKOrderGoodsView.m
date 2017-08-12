@@ -22,12 +22,8 @@
     UIView *goodsContainerView;
     UILabel *totalLab;
     UIView *grayView;
-    UIButton *editButn;
-    UIButton *confirmButn;
     
     NSString *orderId;
-    UIView *maskView;
-    MKConfirmView *confirmView;
     MASConstraint *bottomConstraint;
 }
 
@@ -35,14 +31,11 @@
     goodsContainerView = [[UIView alloc] init];
     totalLab = [[UILabel alloc] init];
     grayView = [[UIView alloc] init];
-    editButn = [[UIButton alloc] init];
-    confirmButn = [[UIButton alloc] init];
     
     [self addSubview:goodsContainerView];
     [self addSubview:totalLab];
     [self addSubview:grayView];
-    [self addSubview:editButn];
-    [self addSubview:confirmButn];
+
 }
 
 - (void)SettingViewAttributes {
@@ -69,64 +62,13 @@
         make.height.mas_equalTo(15 * autoSizeScaleH);
     }];
     
-    [confirmButn setTitle:@"确认发货" forState:UIControlStateNormal];
-    [confirmButn setTitleColor:grayColor69 forState:UIControlStateNormal];
-    [confirmButn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
-    confirmButn.titleLabel.font = FONT(14);
-    confirmButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
-    confirmButn.layer.borderWidth = 1.0;
-    confirmButn.layer.masksToBounds = YES;
-    confirmButn.layer.cornerRadius = 5.0;
-    [confirmButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(goodsContainerView);
-        make.top.mas_equalTo(grayView.mas_bottom).offset(10 * autoSizeScaleH);
-        make.size.mas_equalTo(CGSizeMake(80 * autoSizeScaleW, 30 * autoSizeScaleH));
-    }];
-    
-    [editButn setTitle:@"编辑订单" forState:UIControlStateNormal];
-    [editButn addTarget:self action:@selector(goToEdit) forControlEvents:UIControlEventTouchUpInside];
-    [editButn setTitleColor:grayColor69 forState:UIControlStateNormal];
-    editButn.titleLabel.font = FONT(14);
-    editButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
-    editButn.layer.borderWidth = 1.0;
-    editButn.layer.masksToBounds = YES;
-    editButn.layer.cornerRadius = 5.0;
-    [editButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(confirmButn.mas_left).offset(rightPadding);
-        make.size.centerY.mas_equalTo(confirmButn);
-    }];
-    
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-        bottomConstraint = make.bottom.mas_equalTo(confirmButn.mas_bottom).offset(10 * autoSizeScaleH);
+        make.bottom.mas_equalTo(grayView);
     }];
 }
 
 - (void)setData:(id)model {
     MKOrderDetailModel *dataModel = (MKOrderDetailModel *)model;
-    WS(ws)
-
-    switch ([dataModel.conditionType integerValue]) {
-        case 0:
-
-            break;
-        case 1:
-            editButn.hidden = YES;
-            [confirmButn setTitle:@"交易完成" forState:UIControlStateNormal];
-            break;
-        case 2:
-        {
-            editButn.hidden = YES;
-            confirmButn.hidden = YES;
-            [bottomConstraint uninstall];
-            [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.bottom.mas_equalTo(grayView);
-            }];
-        }
-            break;
-            
-        default:
-            break;
-    }
     orderId = dataModel.orderId;
     NSInteger totalCount = 0;
     for (MKOrderGoodsModel *item in dataModel.goodsInfoArra) {
@@ -154,6 +96,11 @@
 
 - (void)loadGoodsViewsWithData:(NSMutableArray *)dataArra {
     MKGoodsInfoView *lastView;
+    for (UIView *view in goodsContainerView.subviews) {
+        if ([view isKindOfClass:[MKGoodsInfoView class]]) {
+            [view removeFromSuperview];
+        }
+    }
     for (int index = 0; index < dataArra.count; index ++) {
         MKGoodsInfoModel *model = dataArra[index];
         MKGoodsInfoView *infoView = [[MKGoodsInfoView alloc] initWithType:1];
@@ -170,10 +117,89 @@
         }];
         lastView = infoView;
     }
+    if (bottomConstraint) {
+        [bottomConstraint uninstall];
+    }
     [goodsContainerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(lastView);
+        bottomConstraint = make.bottom.mas_equalTo(lastView);
     }];
     
+    UIViewController *parent = [self parentController];
+    [parent.view layoutIfNeeded];
+    
+}
+
+
+
+@end
+
+@implementation MKOrderBottomView
+{
+    UIButton *editButn;
+    UIButton *confirmButn;
+    UIButton *deleteButn;
+    
+    UIView *maskView;
+    MKConfirmView *confirmView;
+    NSString *orderId;
+    NSString *senderTittle;
+}
+
+- (void)CreatView {
+    editButn = [[UIButton alloc] init];
+    confirmButn = [[UIButton alloc] init];
+    deleteButn = [[UIButton alloc] init];
+    
+    [self addSubview:editButn];
+    [self addSubview:confirmButn];
+    [self addSubview:deleteButn];
+}
+
+- (void)SettingViewAttributes {
+    
+    WS(ws)
+    
+    self.backgroundColor = customWhite;
+    
+    [confirmButn setTitle:@"确认发货" forState:UIControlStateNormal];
+    [confirmButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    [confirmButn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
+    confirmButn.titleLabel.font = FONT(14);
+    confirmButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    confirmButn.layer.borderWidth = 1.0;
+    confirmButn.layer.masksToBounds = YES;
+    confirmButn.layer.cornerRadius = 5.0;
+    [confirmButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws).offset(rightPadding);
+        make.centerY.mas_equalTo(ws);
+        make.size.mas_equalTo(CGSizeMake(80 * autoSizeScaleW, 30 * autoSizeScaleH));
+    }];
+    
+    [editButn setTitle:@"编辑订单" forState:UIControlStateNormal];
+    [editButn addTarget:self action:@selector(goToEdit) forControlEvents:UIControlEventTouchUpInside];
+    [editButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    editButn.titleLabel.font = FONT(14);
+    editButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    editButn.layer.borderWidth = 1.0;
+    editButn.layer.masksToBounds = YES;
+    editButn.layer.cornerRadius = 5.0;
+    [editButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(confirmButn.mas_left).offset(rightPadding);
+        make.size.centerY.mas_equalTo(confirmButn);
+    }];
+    
+    [deleteButn setTitle:@"删除订单" forState:UIControlStateNormal];
+    [deleteButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    [deleteButn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
+    deleteButn.titleLabel.font = FONT(14);
+    deleteButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    deleteButn.layer.borderWidth = 1.0;
+    deleteButn.layer.masksToBounds = YES;
+    deleteButn.layer.cornerRadius = 5.0;
+    [deleteButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(editButn.mas_left).offset(rightPadding);
+        make.size.centerY.mas_equalTo(confirmButn);
+    }];
 }
 
 - (void)goToEdit {
@@ -185,10 +211,11 @@
 
 - (void)goToConfirm:(UIButton *)sender {
     UIViewController *parent = [self parentController];
-    NSString *title = sender.titleLabel.text;
+    senderTittle = sender.titleLabel.text;
     NSArray *signArrays = @[
                             @[@"请确定您已准备好货物并准备发货",@"确认发货"],
-                            @[@"请确定您已收到货款并用户已收货",@"交易成功"]
+                            @[@"是否确认发货",@"交易成功"],
+                            @[@"请确定您要删除这笔订单",@"删除订单"]
                             ];
     maskView = [[UIView alloc] init];
     maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
@@ -203,7 +230,13 @@
         make.center.mas_equalTo(parentWeak.view);
     }];
     confirmView = [[MKConfirmView alloc] init];
-    [confirmView setSignStr:signArrays[[title isEqualToString:@"确认发货"] ? 0 : 1]];
+    if ([senderTittle isEqualToString:@"确认发货"]) {
+         [confirmView setSignStr:signArrays[0]];
+    }else if([senderTittle isEqualToString:@"删除订单"]){
+         [confirmView setSignStr:signArrays[2]];
+    }else{
+         [confirmView setSignStr:signArrays[1]];
+    }
     [parent.view addSubview:confirmView];
     confirmView.cancelBlock =^(){
         [ws cancelConfirm];
@@ -245,10 +278,14 @@
     if ([controller isKindOfClass:[MKOrderDetailController class]]) {
         detailController = (MKOrderDetailController *)controller;
     }
-    NSString *titleStr = confirmButn.titleLabel.text;
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    BOOL isDeliver = [titleStr isEqualToString:@"确认发货"];
-    [plist setObject: isDeliver ? @"1" : @"2" forKey:@"post_status"];
+    if ([senderTittle isEqualToString:@"确认发货"]) {
+        [plist setObject:@"1" forKey:@"post_status"];
+    }else if([senderTittle isEqualToString:@"删除订单"]){
+        [plist setObject:@"3" forKey:@"post_status"];
+    }else{
+        [plist setObject:@"2" forKey:@"post_status"];
+    }
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@/change",orderId] params:plist success:^(id json) {
         if (detailController) {
             detailController.isUpdate = YES;
@@ -256,6 +293,9 @@
         [controller.hud showTipMessageAutoHide:@"订单状态已更新"];
         if (detailController) {
             [detailController loadData];
+        }
+        if ([senderTittle isEqualToString:@"删除订单"]) {
+            [controller.navigationController popViewControllerAnimated:YES];
         }
         [self cancelConfirm];
     } fail:^(NSError *error) {
@@ -265,13 +305,16 @@
     }];
 }
 
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)setData:(id)model {
+    MKOrderDetailModel *dataModel = (MKOrderDetailModel *)model;
+    
+    orderId = dataModel.orderId;
+    
+    if ([dataModel.conditionType integerValue] == 1) {
+        deleteButn.hidden = YES;
+        editButn.hidden = YES;
+        [confirmButn setTitle:@"交易完成" forState:UIControlStateNormal];
+    }
 }
-*/
 
 @end

@@ -27,6 +27,7 @@
     MKConfirmView *confirmView;
     
     NSMutableArray *pageArray;
+    NSMutableArray *selectIdArray;
 }
 
 - (void)viewDidLoad {
@@ -73,6 +74,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     BaseUITableView *table = self.tableViewArray[self.currentIndex];
     [table.mj_header beginRefreshing];
 }
@@ -82,7 +87,7 @@
     
     self.tableViewArray = [[NSMutableArray alloc] initWithObjects:
                            [[BaseUITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderDeliver" class:[MKOrderManageCell class]],
-                           [[MKOrderManageTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderConfirm" class:[MKOrderManageCell class] type:1],
+                           [[MKOrderManageTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderConfirmCenter" class:[MKOrderManageCell class] type:1],
                            [[BaseUITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderHistory" class:[MKOrderManageCell class]], nil];
     [self setTabDataSource:[[NSMutableArray alloc] initWithObjects:@"待发货订单",@"待确认订单",@"历史订单", nil]];
     [self.tabScrollerView SetButnNormalColor:[UIColor hexStringToColor:@"#666666"] andSelectedColor:themeGreen];
@@ -114,6 +119,7 @@
         NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
         [dataArra removeAllObjects];
         for (MKOrderCellModel *model in modelArra) {
+            model.isSelected = NO;
             [dataArra addObject:model];
         }
         [tableView reloadData];
@@ -124,7 +130,7 @@
         [dataArra removeAllObjects];
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
-//        [self.hud showTipMessageAutoHide:@"没有啦～"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
     }];
 }
 
@@ -144,8 +150,8 @@
     [plist setObject:@(refreshIndex) forKey:@"post_status"];
     [AFNetWorkingUsing httpGet:@"order" params:plist success:^(id json) {
         NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
-        for (MKOrderCellModel *model in modelArra) {
-            [dataArra addObject:model];
+        for (int count = 0; count < modelArra.count; count ++) {
+            [dataArra addObject:modelArra[count]];
         }
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
@@ -154,12 +160,30 @@
     } other:^(id json) {
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
-        //        [self.hud showTipMessageAutoHide:@"没有啦～"];
+        [self.hud showTipMessageAutoHide:@"没有更多数据"];
     }];
 }
 
 - (void)goToConfirm{
-
+    
+    NSInteger selectCount = 0;
+    NSString *signStr = @"您勾选了";
+    selectIdArray = [[NSMutableArray alloc] init];
+    MKOrderManageTable *secondTable = (MKOrderManageTable *)self.tableViewArray[1];
+    for (MKOrderCellModel *model in secondTable.dataArray) {
+        if (model.isSelected) {
+            selectCount ++;
+            [selectIdArray addObject:model.orderId];
+            if (selectCount < 4) {
+                signStr = [signStr stringByAppendingString:[NSString stringWithFormat:@"%@,",model.orderSn]];
+            }
+        }
+    }
+    signStr = [signStr substringWithRange:NSMakeRange(0, signStr.length - 1)];
+    if (selectCount > 3) {
+        signStr = [signStr stringByAppendingString:@"..."];
+    }
+    signStr = [signStr stringByAppendingString:[NSString stringWithFormat:@"这%ld笔订单,请确认用户已收货，且您已收到这%ld笔贷款",selectCount,selectCount]];
     maskView = [[UIView alloc] init];
     maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
     maskView.alpha = 0;
@@ -172,7 +196,7 @@
         make.center.mas_equalTo(ws.view);
     }];
     confirmView = [[MKConfirmView alloc] init];
-    [confirmView setSignStr:@[@"请确定您已收到货款并用户已收货",@"交易成功"]];
+    [confirmView setSignStr:@[signStr,@"交易成功"]];
     [self addSubview:confirmView];
     confirmView.cancelBlock =^(){
         [ws cancelConfirm];
@@ -210,10 +234,8 @@
 
 - (void)confirm {
     NSString *requestStr = @"order/";
-    NSMutableArray *dataArra = self.dataAllArray[1];
-    for (int index = 0; index < dataArra.count; index ++) {
-        MKOrderCellModel *model = dataArra[index];
-        requestStr = [requestStr stringByAppendingString:!index ? model.orderId : [NSString stringWithFormat:@",%@",model.orderId]];
+    for (int index = 0; index < selectIdArray.count; index ++) {
+        requestStr = [requestStr stringByAppendingString:!index ? selectIdArray[index] : [NSString stringWithFormat:@",%@",selectIdArray[index]]];
     }
     requestStr = [requestStr stringByAppendingString:@"/change"];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];

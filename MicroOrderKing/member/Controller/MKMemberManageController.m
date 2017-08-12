@@ -7,7 +7,7 @@
 //
 
 #import "MKMemberManageController.h"
-#import "MKAddAccountController.h"
+#import "MKAddMemberController.h"
 #import "MKMemberDetailController.h"
 #import "MKSearchGoodsController.h"
 
@@ -125,8 +125,8 @@
             NSMutableArray *dataArra = tableView.dataArray[index];
             NSArray *datas = [MKMemberBaseModel mj_objectArrayWithKeyValuesArray:obj];
             [dataArra removeAllObjects];
-            for (MKMemberBaseModel *item in datas) {
-                [dataArra addObject:item];
+            for (int count = 0; count < datas.count; count ++) {
+                [dataArra addObject:datas[count]];
             }
         }];
         [tableView reloadData];
@@ -134,7 +134,7 @@
     } fail:^(NSError *error) {
         [tableView.mj_header endRefreshing];
     } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"没有啦"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
         [tableView.mj_header endRefreshing];
     }];
     
@@ -150,7 +150,7 @@
 
 - (void)gotoAddMember {
 
-    MKAddAccountController *controller = [[MKAddAccountController alloc] initWithType:1];
+    MKAddMemberController *controller = [[MKAddMemberController alloc] initWithTitle:@"新增会员"];
     [self.navigationController pushViewController:controller animated:YES];
 }
 

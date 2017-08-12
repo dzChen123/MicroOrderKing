@@ -114,19 +114,19 @@
     unit = infoArr[2];
     number = infoArr[3];
     if (!name.length) {
-        [self.hud showTipMessageAutoHide:@"请填写商品名"];
+        [self.hud showTipMessageAutoHide:@"请输入商品名"];
         return;
     }
     if (!price.length) {
-        [self.hud showTipMessageAutoHide:@"请填写价格"];
+        [self.hud showTipMessageAutoHide:@"请输入价格"];
         return;
     }
     if (!unit.length) {
-        [self.hud showTipMessageAutoHide:@"请填写商品单位"];
+        [self.hud showTipMessageAutoHide:@"请输入商品单位"];
         return;
     }
     if (!number.length) {
-        [self.hud showTipMessageAutoHide:@"请填写库存"];
+        [self.hud showTipMessageAutoHide:@"请输入库存"];
         return;
     }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];

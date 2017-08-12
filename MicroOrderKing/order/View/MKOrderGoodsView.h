@@ -13,3 +13,9 @@
 - (void)setData:(id)model;
 
 @end
+
+@interface MKOrderBottomView : BaseView
+
+- (void)setData:(id)model;
+
+@end

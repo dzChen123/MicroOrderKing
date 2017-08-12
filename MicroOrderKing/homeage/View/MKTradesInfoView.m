@@ -172,7 +172,11 @@
     todayNum.textColor = customWhite;
     todayNum.font = FONT(26);
     [todayNum mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(todayPart).offset(20 * autoSizeScaleH);
+        if (SCREEN_WIDTH == 320) {
+            make.top.mas_equalTo(5 * autoSizeScaleH);
+        }else{
+            make.top.mas_equalTo(todayPart).offset(20 * autoSizeScaleH);
+        }
         make.left.mas_equalTo(todayPart).offset(50 * autoSizeScaleH);
     }];
     
@@ -261,6 +265,9 @@
     UIImageView *confirmIcon;
     UILabel *confirmTittle;
     UILabel *confirmBadge;
+    
+    MASConstraint *widthConstraint;
+    MASConstraint *widthConstraint2;
 }
 
 - (instancetype)init {
@@ -288,12 +295,12 @@
     NSString *deliverStr = [self ConvertToString:deliver];
     deliverBadge.hidden = deliverStr.length == 0 ? YES : NO;
     if (deliverStr.length) {
-        deliverBadge.text = deliverStr;
+        deliverBadge.text = [NSString stringWithFormat:@" %@ ",deliverStr];
     }
     NSString *confirmStr = [self ConvertToString:confirm];
     confirmBadge.hidden = confirmStr.length == 0 ? YES : NO;
     if (confirmStr.length) {
-        confirmBadge.text = confirmStr;
+        confirmBadge.text = [NSString stringWithFormat:@" %@ ",confirmStr];
     }
 }
 
@@ -351,7 +358,7 @@
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
     
-    toDoTittle.text = @"代办事务";
+    toDoTittle.text = @"待办事务";
     toDoTittle.textColor = [UIColor hexStringToColor:@"#7A7A7A"];
     toDoTittle.font = FONT(12);
     [toDoTittle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -385,8 +392,8 @@
     [self addSubview:deliverBtn];
     [deliverBtn addTarget:self action:@selector(gotoOrderManage:) forControlEvents:UIControlEventTouchUpInside];
     [deliverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(deliverIcon);
-        make.size.mas_equalTo(deliverIcon);
+        make.center.mas_equalTo(toDeliverView);
+        make.size.mas_equalTo(toDeliverView);
     }];
     
     deliverTittle.text = @"待发货";
@@ -433,8 +440,8 @@
     [self addSubview:confirmBtn];
     [confirmBtn addTarget:self action:@selector(gotoOrderManage:) forControlEvents:UIControlEventTouchUpInside];
     [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(confirmIcon);
-        make.size.mas_equalTo(confirmIcon);
+        make.center.mas_equalTo(toConfirmView);
+        make.size.mas_equalTo(toConfirmView);
     }];
     
     confirmTittle.text = @"待确认";

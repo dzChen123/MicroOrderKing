@@ -36,11 +36,13 @@
     UIButton *confirmBtn;
     UIView *lineView;
     UILabel *sumLab;
+    UIButton *clickButn;
     
     UIView *maskView;
     MKConfirmView *confirmView;
     MASConstraint *bottomConstraint;
     NSString *orderId;
+    BOOL isSelected;
 }
 
 - (void)createView {
@@ -58,6 +60,7 @@
     confirmBtn = [[UIButton alloc] init];
     lineView = [[UIView alloc] init];
     sumLab = [[UILabel alloc] init];
+    clickButn = [[UIButton alloc] init];
     
     [self.contentView addSubview:grayView];
     [self.contentView addSubview:orderIDIcon];
@@ -73,6 +76,7 @@
     [butnView addSubview:confirmBtn];
     [self.contentView addSubview:lineView];
     [self.contentView addSubview:sumLab];
+    [self.contentView addSubview:clickButn];
     
 }
 
@@ -95,6 +99,20 @@
         make.top.mas_equalTo(grayView.mas_bottom).offset(15 * autoSizeScaleH);
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
+    
+    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"]) {
+        orderIDIcon.hidden = YES;
+        clickButn.hidden = NO;
+        [clickButn setImage:[UIImage imageNamed:@"moreAdresNodef"] forState:UIControlStateNormal];
+        [clickButn addTarget:self action:@selector(clickButnClick) forControlEvents:UIControlEventTouchUpInside];
+        [clickButn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(orderIDIcon);
+            make.center.mas_equalTo(orderIDIcon);
+        }];
+    }else{
+        orderIDIcon.hidden = NO;
+        clickButn.hidden = YES;
+    }
 
     orderID.font = FONT(14);
     orderID.textColor = [UIColor hexStringToColor:@"#6F6F6F"];
@@ -247,11 +265,24 @@
                  value:FONT(18)
                  range:NSMakeRange(resultStr.length - cellModel.totalCost.length, cellModel.totalCost.length)];
     [attr addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor hexStringToColor:@"#D28382"]
+                 value:[UIColor hexStringToColor:@"#ff7878"]
                  range:NSMakeRange(resultStr.length - cellModel.totalCost.length, cellModel.totalCost.length)];
     
     sumLab.attributedText = attr;
     
+    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"]) {
+        [clickButn setImage:[UIImage imageNamed:cellModel.isSelected ? @"moreAdresDef" : @"moreAdresNodef"] forState:UIControlStateNormal];
+        isSelected = cellModel.isSelected;
+    }
+    
+}
+
+- (void)clickButnClick {
+    isSelected = !isSelected;
+    [clickButn setImage:[UIImage imageNamed:isSelected ? @"moreAdresDef" : @"moreAdresNodef"] forState:UIControlStateNormal];
+    if (_clickButnClickBlock) {
+        _clickButnClickBlock(isSelected,orderId);
+    }
 }
 
 - (void)goToEdit {
@@ -266,7 +297,7 @@
     NSString *title = sender.titleLabel.text;
     NSArray *signArrays = @[
                             @[@"请确定您要删除订单",@"删除订单"],
-                            @[@"请确定您已准备好货物并准备发货",@"确认发货"],
+                            @[@"是否确认发货",@"确认发货"],
                             @[@"请确定您已收到货款并用户已收货",@"交易成功"]
                             ];
     maskView = [[UIView alloc] init];
@@ -407,7 +438,7 @@
 - (void)customButn:(UIButton *)butn withTittle:(NSString *)tittle {
     [butn setTitle:tittle forState:UIControlStateNormal];
     [butn setTitleColor:grayColor69 forState:UIControlStateNormal];
-    butn.titleLabel.font = FONT(12);
+    butn.titleLabel.font = FONT(14);
     butn.layer.cornerRadius = 5.0;
     butn.layer.masksToBounds = YES;
     butn.borderWidth = 1.0;

@@ -11,6 +11,7 @@
 
 @interface MKOrderCellModel : NSObject  //订单管理Cell
 
+@property (assign,nonatomic) BOOL isSelected;
 @property (strong,nonatomic) NSString *orderId;
 @property (strong,nonatomic) NSString *conditionType;   //0 未发货  1已发货   2收到货并确认付款 3删除订单
 @property (strong,nonatomic) NSString *payStatus;       //0 未支付  1已支付

@@ -196,7 +196,7 @@
     [self.hud showWaitHudWithMessage:@"登录中,请耐心等待..."];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:phoneField.text forKey:@"username"];
-    [plist setObject:[pasdField.text md5String] forKey:@"password"];
+    [plist setObject:pasdField.text forKey:@"password"];
     [plist setObject:@"iphone" forKey:@"device_type"];
     [AFNetWorkingUsing httpPost:@"user/public/login" params:plist success:^(id json) {
         MKHttpLoginModel *model =  [MKHttpLoginModel mj_objectWithKeyValues:json];

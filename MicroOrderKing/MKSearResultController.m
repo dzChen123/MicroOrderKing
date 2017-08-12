@@ -150,6 +150,7 @@
 
 - (void)tableViewReload:(BaseUITableView *)tableView {
     page = 1;
+    isReload = YES;
     switch (_type) {
         case 0:
             [self loadOrder];
@@ -168,6 +169,7 @@
 
 - (void)tableViewLoadMore:(BaseUITableView *)tableView {
     page ++;
+    isReload = NO;
     [self loadOrder];
 }
 
@@ -177,10 +179,12 @@
     [plist setObject:_searchContent forKey:@"search"];
     [AFNetWorkingUsing httpGet:@"order" params:plist success:^(id json) {
         LxDBAnyVar(json);
-        [orderTable.dataArray removeAllObjects];
+        if (isReload) {
+            [orderTable.dataArray removeAllObjects];
+        }
         NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
-        for (MKOrderCellModel *model in modelArra) {
-            [orderTable.dataArray addObject:model];
+        for (int count = 0; count < modelArra.count; count ++) {
+            [orderTable.dataArray addObject:modelArra[count]];
         }
         [orderTable reloadData];
         if (isReload) {
@@ -195,14 +199,17 @@
             [orderTable.mj_footer endRefreshing];
         }
     } other:^(id json) {
-        [orderTable.dataArray removeAllObjects];
+        if (isReload) {
+            [orderTable.dataArray removeAllObjects];
+        }
         [orderTable reloadData];
+        NSString *signStr;
         if (isReload) {
             [orderTable.mj_header endRefreshing];
         } else {
             [orderTable.mj_footer endRefreshing];
         }
-        [self.hud showTipMessageAutoHide:@"抱歉，没有相关数据"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
     }];
 }
 
@@ -215,8 +222,8 @@
         [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             NSArray *datas = [MKMemberBaseModel mj_objectArrayWithKeyValuesArray:obj];
             if (datas.count > 0) {
-                for (MKMemberBaseModel *item in datas) {
-                    [memberTable.dataArray addObject:item];
+                for (int count = 0; count < datas.count; count ++) {
+                    [memberTable.dataArray addObject:datas[count]];
                 }
             }
         }];
@@ -230,7 +237,7 @@
         [memberTable.dataArray removeAllObjects];
         [memberTable reloadData];
         [memberTable.mj_header endRefreshing];
-        [self.hud showTipMessageAutoHide:@"抱歉，没有相关数据"];
+        [self.hud showTipMessageAutoHide:isReload ? @"暂无数据" : @"没有更多数据"];
     }];
 }
 
@@ -241,8 +248,8 @@
     [AFNetWorkingUsing httpGet:@"goods" params:plist success:^(id json) {
         NSMutableArray *modelArr = [MKGoodsInfoHttpModel mj_objectWithKeyValues:json].data;
         [_resultTable.dataArray removeAllObjects];
-        for (MKGoodsInfoModel *model in modelArr) {
-            [_resultTable.dataArray addObject:model];
+        for (int count = 0; count < modelArr.count; count ++) {
+            [_resultTable.dataArray addObject:modelArr[count]];
         }
         [_resultTable reloadData];
         [_resultTable.mj_header endRefreshing];
@@ -254,7 +261,7 @@
         [_resultTable.dataArray removeAllObjects];
         [_resultTable reloadData];
         [_resultTable.mj_header endRefreshing];
-        [self.hud showTipMessageAutoHide:@"抱歉，没有相关数据"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
     }];
 }
 

@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface MKNewGoodsInfoView : BaseView<UITextViewDelegate>
+@interface MKNewGoodsInfoView : BaseView<UITextViewDelegate,UITextFieldDelegate>
 
 - (void)setData:(id)model;
 - (NSArray *)getGoodsInfo;

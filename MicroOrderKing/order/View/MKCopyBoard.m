@@ -98,7 +98,7 @@
     [signView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(grayView);
         make.top.mas_equalTo(grayView.mas_bottom).offset(10 * autoSizeScaleH);
-        make.bottom.mas_equalTo(instanceLab).offset(15 * autoSizeScaleH);
+        make.bottom.mas_equalTo(infoLab).offset(15 * autoSizeScaleH);
     }];
     
     [errorView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,7 +106,7 @@
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
     
-    infoLab.text = @"未成功提取到手机信息，请按照如下格式调整输入内容";
+    infoLab.text = @"未匹配到相应的会员，请自行输入用户信息";
     infoLab.font = FONT(10);
     infoLab.textColor = [UIColor hexStringToColor:@"#ff0000"];
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -114,6 +114,7 @@
         make.centerY.mas_equalTo(errorView);
     }];
     
+    instanceLab.hidden = YES;
     instanceLab.text = @"例：张三，18288888888，广东省深圳市南山区XX街道XX号";
     instanceLab.font = FONT(10);
     instanceLab.textColor = [UIColor hexStringToColor:@"#ff0000"];
@@ -164,22 +165,26 @@
 - (void)fillOrder {
     [self getPhoneNumber:copyView.text];
     if ([copyView.text isEqualToString:placeHolder]||!matchedArray.count) {
-        [topConstraint uninstall];
-        [fillButn mas_makeConstraints:^(MASConstraintMaker *make) {
-            topConstraint = make.top.mas_equalTo(signView.mas_bottom);
-        }];
-        UIViewController *parent = [self parentController];
-        [UIView animateWithDuration:.3 animations:^{
-            [parent.view layoutIfNeeded];
-        }completion:^(BOOL finished) {
-            signView.hidden = NO;
-        }];
+        [self showSignContent];
         return;
     }
     if (_fillClickBlock) {
         LxDBAnyVar(matchedArray[0]);
         _fillClickBlock(matchedArray[0]);
     }
+}
+
+- (void)showSignContent {
+    [topConstraint uninstall];
+    [fillButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        topConstraint = make.top.mas_equalTo(signView.mas_bottom);
+    }];
+    UIViewController *parent = [self parentController];
+    [UIView animateWithDuration:.3 animations:^{
+        [parent.view layoutIfNeeded];
+    }completion:^(BOOL finished) {
+        signView.hidden = NO;
+    }];
 }
 
 - (void)getPhoneNumber:(NSString *)checkString {

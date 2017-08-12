@@ -17,6 +17,7 @@
 - (UIButton *)getCloseButn;
 
 @property (strong,nonatomic) NSString *text;
+@property (assign,nonatomic) BOOL isNumber;
 @property (strong,nonatomic) void (^closeClickblock)(MKTittleTextView *textView);
 
 @end

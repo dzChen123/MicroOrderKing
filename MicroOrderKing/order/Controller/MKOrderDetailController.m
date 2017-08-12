@@ -21,38 +21,65 @@
 {
     MKOrderDetailView *orderDetailView;
     MKOrderGoodsView *orderGoodsView;
+    MKOrderBottomView *orderBottomView;
+    
+    UIScrollView *scrollerView;
+    UIView *containerView;
+    MASConstraint *bottomConstraint;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _isUpdate = NO;
+    
+    WS(ws)
+    [scrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws.view);
+        make.top.mas_equalTo(ws.topView.mas_bottom);
+        bottomConstraint = make.bottom.mas_equalTo(orderBottomView.mas_top);
+    }];
+
     // Do any additional setup after loading the view.
 }
 
 - (void)CreatView {
     orderDetailView = [[MKOrderDetailView alloc] init];
     orderGoodsView = [[MKOrderGoodsView alloc] init];
+    orderBottomView = [[MKOrderBottomView alloc] init];
+    scrollerView = [[UIScrollView alloc] init];
+    containerView = [[UIView alloc] init];
     
-    [self addSubview:orderDetailView];
-    [self addSubview:orderGoodsView];
+    [self addSubview:scrollerView];
+    [scrollerView addSubview:containerView];
+    [containerView addSubview:orderDetailView];
+    [containerView addSubview:orderGoodsView];
+    [self addSubview:orderBottomView];
 }
 
 - (void)updateViewConstraints {
     
     WS(ws)
     
+    [orderBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(ws.view);
+        make.height.mas_equalTo(50 * autoSizeScaleH);
+    }];
+    
+    [containerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(scrollerView);
+        make.width.mas_equalTo(scrollerView);
+        make.bottom.mas_equalTo(orderGoodsView);
+    }];
+    
     [orderDetailView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(ws.containerView);
-        make.left.right.mas_equalTo(ws.containerView);
+        make.left.right.top.mas_equalTo(containerView);
     }];
     
     [orderGoodsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(orderDetailView.mas_bottom).offset(15 * autoSizeScaleH);
-        make.left.right.mas_equalTo(ws.containerView);
+        make.left.right.mas_equalTo(containerView);
     }];
-    
-    [self setBottomView:orderGoodsView withHeight:.1f];
     
     [super updateViewConstraints];
 }
@@ -85,6 +112,19 @@
 
         [orderDetailView setData:model];
         [orderGoodsView setData:model];
+        if ([model.conditionType integerValue] > 1) {
+            orderBottomView.hidden = YES;
+            
+            WS(ws)
+            if (bottomConstraint) {
+                [bottomConstraint uninstall];
+            }
+            [scrollerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                bottomConstraint = make.bottom.mas_equalTo(ws.view);
+            }];
+        }else{
+            [orderBottomView setData:model];
+        }
     } fail:^(NSError *error) {
         
     } other:^(id json) {

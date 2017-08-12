@@ -19,6 +19,7 @@
     UILabel *paidTittle;
     UISwitch *switchButn;
     UIButton *confirmButn;
+    UIButton *deleteButn;
     
     NSInteger _type;
     NSString *placeHolder;
@@ -39,11 +40,13 @@
     paidTittle = [[UILabel alloc] init];
     switchButn = [[UISwitch alloc] init];
     confirmButn = [[UIButton alloc] init];
+    deleteButn = [[UIButton alloc] init];
     
     [self addSubview:remarkTittle];
     [self addSubview:whiteView];
     [self addSubview:whiteView2];
     [self addSubview:confirmButn];
+    [self addSubview:deleteButn];
     [whiteView addSubview:remarkView];
     [whiteView2 addSubview:paidTittle];
     [whiteView2 addSubview:switchButn];
@@ -109,10 +112,29 @@
     confirmButn.titleLabel.textColor = customWhite;
     confirmButn.titleLabel.font = FONT(16);
     [confirmButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(ws);
+        if (!_type) {
+             make.left.right.mas_equalTo(ws);
+        } else {
+            make.width.mas_equalTo(ws).multipliedBy(.5);
+            make.right.mas_equalTo(ws);
+        }
         make.top.mas_equalTo(whiteView2.mas_bottom).offset(15 * autoSizeScaleH);
         make.height.mas_equalTo(45 * autoSizeScaleH);
     }];
+    
+    if (_type) {
+        deleteButn.backgroundColor = [UIColor hexStringToColor:@"#cccccc"];
+        [deleteButn setTitle: @"删除" forState: UIControlStateNormal];
+        [deleteButn addTarget:self action:@selector(deleteButnClick) forControlEvents:UIControlEventTouchUpInside];
+        deleteButn.titleLabel.textColor = customWhite;
+        deleteButn.titleLabel.font = FONT(16);
+        [deleteButn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.centerY.mas_equalTo(confirmButn);
+            make.left.mas_equalTo(ws);
+        }];
+    }else{
+    
+    }
     
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(confirmButn);
@@ -153,6 +175,12 @@
 - (void)confirmButnClick {
     if (_confirmButnBlock) {
         _confirmButnBlock();
+    }
+}
+
+- (void)deleteButnClick {
+    if (_deleteButnBlock) {
+        _deleteButnBlock();
     }
 }
 

@@ -5,6 +5,7 @@
 //  Created by 陈徳柱 on 17/7/31.
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
+#import "BaseViewController.h"
 
 #import "MKNewGoodsInfoView.h"
 
@@ -126,6 +127,8 @@
     priceField.textColor = [UIColor hexStringToColor:@"#35B067"];
     priceField.font = FONT(20);
     priceField.placeholder = @"请输入单价";
+    priceField.delegate = self;
+    priceField.tag = 100;
     [priceField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(RMBLab);
         make.right.mas_equalTo(yuanLab.mas_left).offset(-10 * autoSizeScaleW);
@@ -173,6 +176,7 @@
     
     stockField.font = FONT(14);
     stockField.placeholder = @"请输入库存数量（例：1000）";
+    stockField.delegate = self;
     stockField.textColor = [UIColor hexStringToColor:@"#3D3D3D"];
     [stockField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.left.mas_equalTo(unitField);
@@ -215,6 +219,56 @@
     }else{
         name = textView.text;
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    return [self validateNumber:string textField:textField];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.tag == 100) {
+        NSString *priceStr = textField.text;
+        if ([self isPureInt:priceStr] == NO && [self isPureFloat:priceStr] == NO ) {
+            textField.text = @"";
+            BaseViewController *controller = (BaseViewController *)[self parentController];
+            [controller.hud showTipMessageAutoHide:@"请输入合法数字"];
+        }
+    }
+}
+
+- (BOOL)isPureInt:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    int val;
+    return[scan scanInt:&val] && [scan isAtEnd];
+}
+
+//判断是否为浮点形：
+
+- (BOOL)isPureFloat:(NSString*)string{
+    NSScanner* scan = [NSScanner scannerWithString:string];
+    float val;
+    return[scan scanFloat:&val] && [scan isAtEnd];
+}
+
+- (BOOL)validateNumber:(NSString*)number textField:(UITextField *)textField {
+    BOOL res = YES;
+    NSCharacterSet* tmpSet;
+    if (textField.tag == 100) {
+        tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789."];
+    } else {
+        tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    }
+    int i = 0;
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i, 1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length == 0) {
+            res = NO;
+            break;
+        }
+        i++;
+    }
+    return res;
 }
 
 @end

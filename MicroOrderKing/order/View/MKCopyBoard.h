@@ -12,4 +12,6 @@
 
 @property (strong,nonatomic) void (^fillClickBlock)(NSString *phoneNum);
 
+- (void)showSignContent;
+
 @end

@@ -91,18 +91,39 @@
 //    barImageView.layer.borderColor = customWhite.CGColor;
 //    barImageView.layer.borderWidth = 1;
 //    searchBar.barTintColor = customWhite;
-    searcherBar.placeholder = @"搜索";
     searcherBar.showsCancelButton = YES;
     searcherBar.delegate = self;
     searcherBar.searchBarStyle = UISearchBarStyleMinimal;
+    for (id obj in [searcherBar subviews]) {
+        if ([obj isKindOfClass:[UIView class]]) {
+            for (id obj2 in [obj subviews]) {
+                if ([obj2 isKindOfClass:[UIButton class]]) {
+                    UIButton *btn = (UIButton *)obj2;
+                    [btn setTitle:@"取消" forState:UIControlStateNormal];
+                    btn.titleLabel.font = FONT(14);
+                    [btn setTitleColor:wordSixColor forState:UIControlStateNormal];
+                }
+            }
+        }
+    }
     UITextField *searchField = [searcherBar valueForKey:@"_searchField"];
     searchField.backgroundColor = VIEWBACKGRAY;
-    if (SCREEN_WIDTH == 320) {
-        searcherBar.placeholder = @"搜索                                            ";
-    }else if (SCREEN_WIDTH == 375 ){
-        searcherBar.placeholder = @"搜索                                                         ";
-    }else if (SCREEN_WIDTH == 414 ){
-        searcherBar.placeholder = @"搜索                                                                   ";
+    if (!_type) {
+        if (SCREEN_WIDTH == 320) {
+            searcherBar.placeholder = @"搜索订单编号、收货人姓名、手机号";
+        }else if (SCREEN_WIDTH == 375 ){
+            searcherBar.placeholder = @"搜索订单编号、收货人姓名、手机号          ";
+        }else if (SCREEN_WIDTH == 414 ){
+            searcherBar.placeholder = @"搜索订单编号、收货人姓名、手机号                    ";
+        }
+    }else{
+        if (SCREEN_WIDTH == 320) {
+            searcherBar.placeholder = @"搜索                                            ";
+        }else if (SCREEN_WIDTH == 375 ){
+            searcherBar.placeholder = @"搜索                                                         ";
+        }else if (SCREEN_WIDTH == 414 ){
+            searcherBar.placeholder = @"搜索                                                                   ";
+        }
     }
     [searcherBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(ws.containerView);
@@ -132,7 +153,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    
+    UITextField *searchField = [searcherBar valueForKey:@"_searchField"];
+    if (SCREEN_WIDTH == 320) {
+        [searchField setValue:FONT(13) forKeyPath:@"_placeholderLabel.font"];
+    }
     
 }
 

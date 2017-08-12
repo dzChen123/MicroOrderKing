@@ -11,6 +11,7 @@
 @interface MKOrderOtherView : BaseView<UITextViewDelegate>
 
 @property (strong,nonatomic) void (^confirmButnBlock)();
+@property (strong,nonatomic) void (^deleteButnBlock)();
 
 - (instancetype)initWithType:(NSInteger)type;
 - (NSArray *)getOrderOtherInfo;

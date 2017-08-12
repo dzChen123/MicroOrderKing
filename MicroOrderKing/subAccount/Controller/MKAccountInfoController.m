@@ -37,7 +37,7 @@
 
 - (void)setTopView {
     [super setTopView];
-    self.topTitle = @"子账户详情";
+    self.topTitle = @"分账号详情";
     [self.topView.rightButton setImage:[[UIImage imageNamed:@"mberManDetEdit"] imageByScalingToSize:CGSizeMake(20, 20)] forState:UIControlStateNormal];
     [self.topView setRightEvent:self action:@selector(goToEdit)];
 }
@@ -52,7 +52,7 @@
 
 - (void)goToEdit {
     MKAddAccountController *controller = [[MKAddAccountController alloc] initWithType:0];
-    controller.topTitle = @"子账户编辑";
+    controller.topTitle = @"分账号编辑";
     controller.editId = _accountId;
     [self.navigationController pushViewController:controller animated:YES];
 }

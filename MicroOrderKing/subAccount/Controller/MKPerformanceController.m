@@ -122,15 +122,15 @@
             [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
                 NSArray *datas = [MKMemberBaseModel mj_objectArrayWithKeyValuesArray:obj];
                 if (datas.count > 0) {
-                    for (MKMemberBaseModel *item in datas) {
-                        [dataArra addObject:item];
+                    for (int count = 0; count < datas.count; count ++) {
+                        [dataArra addObject:datas[count]];
                     }
                 }
             }];
         }else{
             NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
-            for (MKOrderCellModel *model in modelArra) {
-                [dataArra addObject:model];
+            for (int count = 0 ; count < modelArra.count; count ++) {
+                [dataArra addObject:modelArra[count]];
             }
         }
         [tableView reloadData];
@@ -141,7 +141,7 @@
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
     } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"没有了"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
         [dataArra removeAllObjects];
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
@@ -167,13 +167,14 @@
         [plist setObject:_userId forKey:@"single"];
         [AFNetWorkingUsing httpGet:@"order" params:plist success:^(id json) {
             NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
-            for (MKOrderCellModel *model in modelArra) {
-                [dataArra addObject:model];
+            for (int count = 0; count < modelArra.count; count ++) {
+                [dataArra addObject:modelArra[count]];
             }
             [tableView.mj_footer endRefreshing];
         } fail:^(NSError *error) {
             [tableView.mj_footer endRefreshing];
         } other:^(id json) {
+            [self.hud showTipMessageAutoHide:@"没有更多数据"];
             [tableView.mj_footer endRefreshing];
         }];
     }

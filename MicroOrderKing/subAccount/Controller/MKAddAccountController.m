@@ -39,8 +39,8 @@
 
 - (void)setTopView {
     [super setTopView];
-    if(![self.topTitle isEqualToString:@"子账户编辑"] && ![self.topTitle isEqualToString:@"会员编辑"]){
-        self.topTitle = _type == 0 ? @"新增子账户" : @"新增会员";
+    if(![self.topTitle isEqualToString:@"分账号编辑"] && ![self.topTitle isEqualToString:@"会员编辑"]){
+        self.topTitle = _type == 0 ? @"新增分账号" : @"新增会员";
         isEdit = NO;
     }else{
         isEdit = YES;
@@ -71,6 +71,7 @@
             if (count == 3) { model.whiteHeight = 110 * autoSizeScaleH; }
         }
         MKTittleTextView *textView = [[MKTittleTextView alloc] initWithModel:model];
+        textView.isNumber = count == 0 ? YES : NO;
         [textViewArray addObject:textView];
     }
     
@@ -206,10 +207,10 @@
     [plist setObject:phoneNum forKey:@"mobile"];
     [plist setObject:name forKey: !_type ? @"user_nickname" : @"name"];
     if (!_type || (_type == 1 && pasd.length)) {
-        [plist setObject:[pasd md5String] forKey: !_type ? @"password" : @"remark"];
+        [plist setObject:pasd forKey: !_type ? @"password" : @"remark"];
     }
     if (!_type) {
-        [plist setObject:[repeat md5String] forKey:@"repassword"];
+        [plist setObject:repeat forKey:@"repassword"];
     }else{
         [plist setObject:@[repeat] forKey:@"address"];
     }
@@ -220,6 +221,7 @@
         for (MKTittleTextView *itemView in textViewArray) {
             [itemView CleanText];
         }
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         [self.hud hideAnimated:YES];
     } other:^(id json) {
@@ -280,6 +282,7 @@
     [AFNetWorkingUsing httpPut:requestStr params:plist success:^(id json) {
         [self.hud hideAnimated:YES];
         [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+        [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
         [self.hud hideAnimated:YES];
     } other:^(id json) {

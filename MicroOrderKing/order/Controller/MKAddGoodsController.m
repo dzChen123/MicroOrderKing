@@ -137,7 +137,7 @@
     } fail:^(NSError *error) {
         
     } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"没有啦"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
     }];
 }
 

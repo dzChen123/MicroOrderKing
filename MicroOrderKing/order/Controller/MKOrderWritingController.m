@@ -62,6 +62,9 @@
     otherView.confirmButnBlock =^(){
         [ws confirmButnBlock];
     };
+    otherView.deleteButnBlock =^(){
+        [ws deleteButnBlock];
+    };
     
     _infoTable.mj_header = nil;
     _infoTable.mj_footer = nil;
@@ -147,6 +150,19 @@
     }else{
         [self addOrder];
     }
+}
+
+- (void)deleteButnBlock {
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [plist setObject:@"3" forKey:@"post_status"];
+    [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@/change",_orderId] params:plist success:^(id json) {
+        [self.hud showTipMessageAutoHide:@"订单已删除"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+    }];
 }
 
 - (void)addOrder {
@@ -319,6 +335,10 @@
         } fail:^(NSError *error) {
             
         } other:^(id json) {
+            NSString *signStr = [json objectForKey:@"msg"];
+            if ([signStr isEqualToString:@"获取收货信息失败"]) {
+                [copyBoard showSignContent];
+            }
             [self.hud showTipMessageAutoHide:@"匹配失败"];
         }];
     }

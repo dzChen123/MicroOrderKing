@@ -160,6 +160,7 @@
     
     pasdField.placeholder = @"请输入密码";
     pasdField.font = FONT(14);
+    pasdField.secureTextEntry = YES;
     pasdField.clearButtonMode = UITextFieldViewModeAlways;
     [pasdField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
     [pasdField setValue:[UIColor hexStringToColor:@"#C6C6C6"] forKeyPath:@"_placeholderLabel.textColor"];
@@ -177,6 +178,7 @@
     confirmField.placeholder = @"请确认密码";
     confirmField.font = FONT(14);
     confirmField.clearButtonMode = UITextFieldViewModeAlways;
+    confirmField.secureTextEntry = YES;
     [confirmField setValue:FONT(14) forKeyPath:@"_placeholderLabel.font"];
     [confirmField setValue:[UIColor hexStringToColor:@"#C6C6C6"] forKeyPath:@"_placeholderLabel.textColor"];
     [confirmField mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -263,7 +265,7 @@
     [self.hud showWaitHudWithMessage:waitStr];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:phoneField.text forKey:@"username"];
-    [plist setObject:[pasdField.text md5String] forKey:@"password"];
+    [plist setObject:pasdField.text forKey:@"password"];
     if (!_type) {
          [plist setObject:nameField.text forKey:@"user_nickname"];   
     }

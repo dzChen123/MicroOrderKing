@@ -86,7 +86,7 @@
     } other:^(id json) {
         [tableView.dataArray removeAllObjects];
         [tableView reloadData];
-        [self.hud showTipMessageAutoHide:@"没有啦"];
+        [self.hud showTipMessageAutoHide:@"暂无数据"];
     }];
 }
 

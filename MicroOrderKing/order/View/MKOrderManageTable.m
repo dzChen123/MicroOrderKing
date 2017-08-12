@@ -7,6 +7,9 @@
 //
 
 #import "MKOrderManageTable.h"
+#import "MKOrderManageCell.h"
+
+#import "MKOrderCellModel.h"
 
 @implementation MKOrderManageTable
 {
@@ -19,6 +22,27 @@
         _type = type;   
     }
     return self;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    MKOrderManageCell *cell =[tableView dequeueReusableCellWithIdentifier:self.cellIdentifier forIndexPath:indexPath];
+    cell.imageLoadedEvent=^()
+    {
+        if([tableView cellForRowAtIndexPath:indexPath])
+        {
+            [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    };
+    
+    WS(ws)
+    cell.clickButnClickBlock =^(BOOL isSelect,NSString *orderId){
+        [ws clickButnClickBlock:isSelect OrderID:orderId];
+    };
+    cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    [cell setData:self.dataArray[indexPath.row]];
+    return cell;
 }
 
 
@@ -58,6 +82,15 @@
 - (void)butnClick {
     if (_greenButnBlock) {
         _greenButnBlock();
+    }
+}
+
+- (void)clickButnClickBlock:(BOOL)isSelect  OrderID:(NSString *)orderId{
+    for (MKOrderCellModel *model in self.dataArray) {
+        if ([model.orderId isEqualToString:orderId]) {
+            model.isSelected = isSelect;
+            return;
+        }
     }
 }
 

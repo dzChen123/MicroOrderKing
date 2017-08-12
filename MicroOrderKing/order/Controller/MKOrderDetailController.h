@@ -6,9 +6,9 @@
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
 
-#import "BaseScrollViewController.h"
+#import "BaseViewController.h"
 
-@interface MKOrderDetailController : BaseScrollViewController
+@interface MKOrderDetailController : BaseViewController
 
 @property (strong,nonatomic) NSString *orderId;
 @property (strong,nonatomic) NSString *postStatus;

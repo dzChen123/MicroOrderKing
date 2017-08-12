@@ -90,17 +90,15 @@
     for (int count = 0; count < 4; count ++) {
         MKTextViewModel *model = [[MKTextViewModel alloc] init];
         model.superView = containerView;
-        model.type = count < 2 ? 0 : 1;
+        model.type = count < 3 ? 0 : 1;
         model.tittle = titleArra[count];
         model.placeHolder = holderArra[count];
         model.isNumberPod = !count ? 1 : 0;
-        if (count == 2) {
-            model.whiteHeight = 80 * autoSizeScaleH;
-        }
         if (count == 3) {
             model.whiteHeight = 110 * autoSizeScaleH;
         }
         MKTittleTextView *textView = [[MKTittleTextView alloc] initWithModel:model];
+        textView.isNumber = count == 0 ? YES : NO;
         [textViewArray addObject:textView];
     }
     
