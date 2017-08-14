@@ -1022,8 +1022,8 @@
 				TargetAttributes = {
 					06CCAFD11F275A79003091C0 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8EA9WX9959;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 732E2MFAKM;
+						ProvisioningStyle = Manual;
 					};
 					06CCAFEA1F275A79003091C0 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1323,7 +1323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1365,7 +1365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1378,13 +1378,17 @@
 			baseConfigurationReference = BECADD553E1FAA9E2BD614F5 /* Pods-MicroOrderKing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8EA9WX9959;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				DEVELOPMENT_TEAM = 732E2MFAKM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
+				PROVISIONING_PROFILE_SPECIFIER = MicroOrderKingAdhoc;
 			};
 			name = Debug;
 		};
@@ -1393,13 +1397,17 @@
 			baseConfigurationReference = F76AD51BEE9725B54AEF006E /* Pods-MicroOrderKing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8EA9WX9959;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				DEVELOPMENT_TEAM = 732E2MFAKM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
+				PROVISIONING_PROFILE_SPECIFIER = MicroOrderKingAdhoc;
 			};
 			name = Release;
 		};
