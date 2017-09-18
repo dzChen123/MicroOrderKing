@@ -12,6 +12,7 @@
 
 #import "MKGoodsManageCell.h"
 #import "MKGoodsInfoView.h"
+#import "MKConfirmView.h"
 
 #import "MKOrderCellModel.h"
 
@@ -24,6 +25,8 @@
     UIButton *deleteButn;
     
     NSString *goodsId;
+    UIView *maskView;
+    MKConfirmView *confirmView;
 }
 
 - (void)createView {
@@ -69,7 +72,7 @@
 
     [deleteButn setTitle:@" 删除" forState:UIControlStateNormal];
     [deleteButn setImage:[[UIImage imageNamed:@"comManDel"] imageByScalingToSize:CGSizeMake(15 * autoSizeScaleW, 15 * autoSizeScaleW)]forState:UIControlStateNormal];
-    [deleteButn addTarget:self action:@selector(deleteGoods) forControlEvents:UIControlEventTouchUpInside];
+    [deleteButn addTarget:self action:@selector(goToConfirm) forControlEvents:UIControlEventTouchUpInside];
     [deleteButn setTitleColor:[UIColor hexStringToColor:@"#7A7A7A"] forState:UIControlStateNormal];
     deleteButn.titleLabel.font = FONT(14);
     deleteButn.layer.masksToBounds = YES;
@@ -143,10 +146,71 @@
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
             [resultController.resultTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
+        [self cancelConfirm];
     } fail:^(NSError *error) {
         
+        [self cancelConfirm];
+        
     } other:^(id json) {
+        
+        [self cancelConfirm];
         [parent.hud showTipMessageAutoHide:@"删除失败"];
+        
+    }];
+}
+
+- (void)goToConfirm {
+    UIViewController *parent = [self parentController];
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [parent.view addSubview:maskView];
+    [parent.view bringSubviewToFront:maskView];
+    
+    WS(ws)
+    WeakObj(parent)
+    
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(parentWeak.view);
+        make.center.mas_equalTo(parentWeak.view);
+    }];
+    confirmView = [[MKConfirmView alloc] init];
+    [confirmView setSignStr:@[@"请确定您要删除此商品",@"删除"]];
+
+    [parent.view addSubview:confirmView];
+    confirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    confirmView.confirmBlock =^(){
+        [ws deleteGoods];
+    };
+    confirmView.alpha = 0;
+    confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [confirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(parentWeak.view).offset(leftPadding);
+        make.right.mas_equalTo(parentWeak.view).offset(rightPadding);
+        make.centerY.mas_equalTo(parentWeak.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        confirmView.alpha = 1;
+        confirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)cancelConfirm {
+    
+    [UIView animateWithDuration:.2 animations:^{
+        maskView.alpha = 0;
+        confirmView.alpha = 0;
+        confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    }completion:^(BOOL finished) {
+        maskView.hidden = YES;
+        confirmView.hidden = YES;
+        [maskView removeFromSuperview];
+        [confirmView removeFromSuperview];
     }];
 }
 

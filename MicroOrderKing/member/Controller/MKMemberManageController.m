@@ -10,6 +10,7 @@
 #import "MKAddMemberController.h"
 #import "MKMemberDetailController.h"
 #import "MKSearchGoodsController.h"
+#import "MKHomePageViewController.h"
 
 #import "MKMemManageCell.h"
 #import "MKMemManageTable.h"
@@ -120,15 +121,18 @@
     [AFNetWorkingUsing httpGet:@"member" params:plist success:^(id json) {
         NSMutableDictionary *dic = (NSMutableDictionary *)[json objectForKey:@"data"];
         NSMutableArray *indexes = tableView.indexes;
+        NSMutableArray *memberDicArra = [[NSMutableArray alloc] init];
         [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
             NSInteger index = [indexes indexOfObject:key];
             NSMutableArray *dataArra = tableView.dataArray[index];
             NSArray *datas = [MKMemberBaseModel mj_objectArrayWithKeyValuesArray:obj];
+            [memberDicArra addObject:obj];
             [dataArra removeAllObjects];
             for (int count = 0; count < datas.count; count ++) {
                 [dataArra addObject:datas[count]];
             }
         }];
+        [ZYFUserDefaults setObject:memberDicArra key:@"memberDics"];
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
     } fail:^(NSError *error) {

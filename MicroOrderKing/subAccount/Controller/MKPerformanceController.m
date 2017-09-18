@@ -41,14 +41,18 @@
     [super viewDidLoad];
     
     WS(ws)
+    
     BaseUITableView *table = self.tableViewArray[1];
     table.cellSelcet =^(UITableView *tableView,NSIndexPath *indexPath){
         [ws goToOrderDetail:(BaseUITableView *)tableView indexPath:indexPath];
     };
+    //table.mj_footer = nil;
+    
     BaseUITableView *table2 = self.tableViewArray[0];
     table2.cellSelcet =^(UITableView *tableView,NSIndexPath *indexPath){
         [ws cellSelect:(BaseUITableView *)tableView indexPath:indexPath];
     };
+    //table2.mj_footer = nil;
     // Do any additional setup after loading the view.
 }
 
@@ -107,14 +111,20 @@
 {
     NSInteger refreshIndex = self.currentIndex;
     NSMutableArray *dataArra = self.dataAllArray[refreshIndex];
-    NSString *requestStr = !refreshIndex ? @"member" : @"order";
+    NSString *requestStr;
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    [plist setObject:@"1" forKey:@"single"];
-    [plist setObject:_userId forKey:@"id"];
-    if (refreshIndex == 1) {
+    if (!refreshIndex) {
+        requestStr = @"member";
+    }else{
+        requestStr = @"order";
+        
         page = 1;
         [plist setObject:@(page) forKey:@"page"];
+        [plist setObject:@"2" forKey:@"post_status"];
+        
     }
+    [plist setObject:_userId forKey:@"single"];
+    
     [AFNetWorkingUsing httpGet:requestStr params:plist success:^(id json) {
         [dataArra removeAllObjects];
         if (!refreshIndex) {
@@ -135,7 +145,7 @@
         }
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
-        LxDBAnyVar(json);
+        //LxDBAnyVar(json);
     } fail:^(NSError *error) {
         [dataArra removeAllObjects];
         [tableView reloadData];
@@ -164,6 +174,7 @@
         page ++;
         NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
         [plist setObject:@(page) forKey:@"page"];
+        [plist setObject:@"2" forKey:@"post_status"];
         [plist setObject:_userId forKey:@"single"];
         [AFNetWorkingUsing httpGet:@"order" params:plist success:^(id json) {
             NSMutableArray *modelArra = [MKOrderCellHttpModel mj_objectWithKeyValues:json].data;
@@ -174,7 +185,7 @@
         } fail:^(NSError *error) {
             [tableView.mj_footer endRefreshing];
         } other:^(id json) {
-            [self.hud showTipMessageAutoHide:@"没有更多数据"];
+            [self.hud showTipMessageAutoHide:@"已无新数据"];
             [tableView.mj_footer endRefreshing];
         }];
     }

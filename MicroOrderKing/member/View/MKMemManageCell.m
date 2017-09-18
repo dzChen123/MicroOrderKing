@@ -35,6 +35,7 @@
     nameLab.textColor = [UIColor hexStringToColor:@"#1D1D1D"];
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ws.contentView).offset(leftPadding);
+        make.right.lessThanOrEqualTo(ws.contentView).offset(-150 * autoSizeScaleW);
         make.centerY.mas_equalTo(ws.contentView);
     }];
     

@@ -11,7 +11,9 @@
 @interface MKCopyBoard : BaseView<UITextViewDelegate>
 
 @property (strong,nonatomic) void (^fillClickBlock)(NSString *phoneNum);
+@property (strong,nonatomic) void (^autoFillBlock)(NSArray *infoArray);
 
-- (void)showSignContent;
+- (void)showSignContentWithSign:(NSString *)signStr;
+- (void)setText:(NSString *)content;
 
 @end

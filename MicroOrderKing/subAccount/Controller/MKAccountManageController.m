@@ -90,7 +90,7 @@
 }
 
 - (void)tableViewReload:(UITableView *)tableView {
-    page = 0;
+    page = 1;
     BaseUITableView *table = (BaseUITableView *)tableView;
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:@(listRows) forKey:@"list_rows"];
@@ -135,7 +135,7 @@
     } fail:^(NSError *error) {
         [table.mj_footer endRefreshing];
     } other:^(id json) {
-        [self.hud showTipMessageAutoHide:@"没有更多数据"];
+        [self.hud showTipMessageAutoHide:@"已无新数据"];
         [table.mj_footer endRefreshing];
     }];
 }

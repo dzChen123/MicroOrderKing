@@ -99,13 +99,10 @@
     for (int count = 0; count < 3; count ++) {
         MKTextViewModel *model = [[MKTextViewModel alloc] init];
         model.superView = containerView;
-        model.type = count < 2 ? 0 : 1;
+        model.type = 0;
         model.tittle = titleArra[count];
         model.placeHolder = holderArra[count];
         model.isNumberPod = !count ? 1 : 0;
-        if (count == 2) {
-            model.whiteHeight = 80 * autoSizeScaleH;
-        }
         MKTittleTextView *textView = [[MKTittleTextView alloc] initWithModel:model];
         [textViewArray addObject:textView];
     }
@@ -257,6 +254,14 @@
     }
     if (!nameStr.length) {
         [self.hud showTipMessageAutoHide:@"名字不能为空哦"];
+        return;
+    }
+    if (nameStr.length > 5) {
+        [self.hud showTipMessageAutoHide:@"名字长度不能大于5"];
+        return;
+    }
+    if (remark.length > 11) {
+        [self.hud showTipMessageAutoHide:@"备注长度不能大于11"];
         return;
     }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];

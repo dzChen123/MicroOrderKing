@@ -6,6 +6,8 @@
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
 
+#import "BaseViewController.h"
+
 #import "MKContactView.h"
 
 #import "MKContactModel.h"
@@ -19,9 +21,13 @@
     UIButton *weChatButn;
     UILabel *contactWayLab;
     UILabel *phoneLab;
+    UILabel *qqNumLab;
+    
+    NSString *weChatNum;
 }
 
 - (void)setColorAndRadius {
+    
     self.backgroundColor = customWhite;
     self.layer.cornerRadius = 6.0;
     self.layer.masksToBounds = YES;
@@ -35,6 +41,7 @@
     weChatButn = [[UIButton alloc] init];
     contactWayLab = [[UILabel alloc] init];
     phoneLab = [[UILabel alloc] init];
+    qqNumLab = [[UILabel alloc] init];
     
     [self addSubview:tittleLab];
     [self addSubview:QRCodeView];
@@ -43,6 +50,7 @@
     [self addSubview:weChatButn];
     [self addSubview:contactWayLab];
     [self addSubview:phoneLab];
+    [self addSubview:qqNumLab];
     
     [self setColorAndRadius];
 }
@@ -59,7 +67,8 @@
         make.top.mas_equalTo(ws.mas_top).offset(25 * autoSizeScaleH);
     }];
     
-    QRCodeView.backgroundColor = VIEWBACKGRAY;
+    //QRCodeView.backgroundColor = VIEWBACKGRAY;
+    QRCodeView.image = [UIImage imageNamed:@"weChatNum"];
     [QRCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(tittleLab.mas_bottom).offset(20 * autoSizeScaleH);
         make.centerX.mas_equalTo(ws);
@@ -82,6 +91,7 @@
         make.top.mas_equalTo(serverTittle.mas_bottom).offset(10 * autoSizeScaleH);
     }];
     
+    [weChatButn addTarget:self action:@selector(copyWeChatNumToPasteboard) forControlEvents:UIControlEventTouchUpInside];
     [weChatButn setTitleColor:[UIColor hexStringToColor:@"#868686"] forState:UIControlStateNormal];
     weChatButn.layer.masksToBounds = YES;
     weChatButn.layer.cornerRadius = 6.0;
@@ -108,15 +118,34 @@
         make.top.mas_equalTo(contactWayLab.mas_bottom).offset(12 * autoSizeScaleH);
     }];
     
+    qqNumLab.font = FONT(12);
+    qqNumLab.textColor = [UIColor hexStringToColor:@"#919191"];
+    [qqNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(ws);
+        make.top.mas_equalTo(phoneLab.mas_bottom).offset(10 * autoSizeScaleH);
+    }];
+    
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(phoneLab).offset(25 * autoSizeScaleH);
+        make.bottom.mas_equalTo(qqNumLab).offset(25 * autoSizeScaleH);
     }];
 }
 
 - (void)setData:(id)model {
     MKContactModel *dataModel = (MKContactModel *)model;
+    weChatNum = dataModel.weChatNum;
     [weChatButn setTitle:dataModel.weChatNum forState:UIControlStateNormal];
-    phoneLab.text = dataModel.phoneNum;
+    phoneLab.text = [NSString stringWithFormat:@"手机号：%@",dataModel.phoneNum];
+    qqNumLab.text = [NSString stringWithFormat:@"QQ号：%@",dataModel.qqNum];
+}
+
+- (void)copyWeChatNumToPasteboard {
+    
+    BaseViewController *controller = (BaseViewController *)[self parentController];
+    [controller.hud showTipMessageAutoHide:@"已复制微信号"];
+    
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = weChatNum;
+    
 }
 
 

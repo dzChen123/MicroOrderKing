@@ -62,6 +62,8 @@
     
     WS(ws)
     
+    self.backgroundColor = customWhite;
+    
     [itemArra[0] mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(ws);
         make.width.mas_equalTo(ws).multipliedBy(.5);

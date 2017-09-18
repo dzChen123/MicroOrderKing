@@ -97,6 +97,7 @@
     
     WS(ws)
     
+    _goodsTable.backgroundColor = [UIColor clearColor];
     [_goodsTable mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(ws.topView.mas_bottom);
         make.left.right.mas_equalTo(ws.view);

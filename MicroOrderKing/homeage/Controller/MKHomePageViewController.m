@@ -14,6 +14,7 @@
 #import "MKSectionView.h"
 
 #import "MKHomeModel.h"
+#import "MKPersonModel.h"
 
 @interface MKHomePageViewController ()
 
@@ -81,6 +82,22 @@
     [AFNetWorkingUsing httpGet:@"" params:plist success:^(id json) {
         MKHomeModel *model = [MKHomeHttpModel mj_objectWithKeyValues:json].data;
         [tradesInfoView setUpdateModel:model];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+    }];
+    
+    //NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [AFNetWorkingUsing httpGet:@"user/public/userInfo" params:plist success:^(id json) {
+        MKPersonModel *model = [MKPersonHttpModel mj_objectWithKeyValues:json].data;
+        if ([model.isHide integerValue] == 1) {
+            self.topView.rightView.hidden = YES;
+            self.topView.rightButton.hidden = YES;
+        }else{
+            self.topView.rightView.hidden = NO;
+            self.topView.rightButton.hidden = NO;
+        }
     } fail:^(NSError *error) {
         
     } other:^(id json) {

@@ -29,6 +29,7 @@
 		064DB2461F35F68700087865 /* MKEditAddreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2451F35F68700087865 /* MKEditAddreController.m */; };
 		064DB2491F35FC2100087865 /* MKAddreManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2481F35FC2100087865 /* MKAddreManageController.m */; };
 		064DB24C1F35FCA000087865 /* MKAddreMangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */; };
+		065A9C9D1F5452A300D791A4 /* MKCheckFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A9C9C1F5452A300D791A4 /* MKCheckFormController.m */; };
 		06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */; };
 		06A0D6B21F304CB800B7CE09 /* MKPersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B11F304CB800B7CE09 /* MKPersonInfoView.m */; };
 		06A0D6B61F305B1700B7CE09 /* MKPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B51F305B1700B7CE09 /* MKPersonModel.m */; };
@@ -104,6 +105,10 @@
 		06CCB0C61F2B483E003091C0 /* MKCopyBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0C51F2B483E003091C0 /* MKCopyBoard.m */; };
 		06CCB0C91F2B5A4C003091C0 /* MKReceiverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0C81F2B5A4C003091C0 /* MKReceiverInfoView.m */; };
 		06CCB0CC1F2B6CA2003091C0 /* MKGoodsInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CCB0CB1F2B6CA2003091C0 /* MKGoodsInfoCell.m */; };
+		06EB3C681F5D20CD004A11F6 /* MKScanSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EB3C671F5D20CD004A11F6 /* MKScanSuccessController.m */; };
+		06EB3C6B1F5D2E6F004A11F6 /* MKScanConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EB3C6A1F5D2E6F004A11F6 /* MKScanConfirmView.m */; };
+		06EB3C6E1F5D5735004A11F6 /* MKScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EB3C6D1F5D5735004A11F6 /* MKScanViewController.m */; };
+		06EB3C711F5D5890004A11F6 /* TNWCameraScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06EB3C701F5D5890004A11F6 /* TNWCameraScanView.m */; };
 		06ECE3101F36A30B001DDFF3 /* MKAddreManageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE30F1F36A30B001DDFF3 /* MKAddreManageModel.m */; };
 		06ECE3161F36A9DF001DDFF3 /* MKAddreManageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3151F36A9DF001DDFF3 /* MKAddreManageTable.m */; };
 		06ECE3191F36AB1E001DDFF3 /* MKEditMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ECE3181F36AB1E001DDFF3 /* MKEditMemberController.m */; };
@@ -175,6 +180,8 @@
 		064DB2481F35FC2100087865 /* MKAddreManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageController.m; path = member/Controller/MKAddreManageController.m; sourceTree = "<group>"; };
 		064DB24A1F35FCA000087865 /* MKAddreMangeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreMangeCell.h; path = member/View/MKAddreMangeCell.h; sourceTree = "<group>"; };
 		064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreMangeCell.m; path = member/View/MKAddreMangeCell.m; sourceTree = "<group>"; };
+		065A9C9B1F5452A300D791A4 /* MKCheckFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKCheckFormController.h; path = order/Controller/MKCheckFormController.h; sourceTree = "<group>"; };
+		065A9C9C1F5452A300D791A4 /* MKCheckFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKCheckFormController.m; path = order/Controller/MKCheckFormController.m; sourceTree = "<group>"; };
 		06A0D6AD1F304C2300B7CE09 /* MKPersonCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonCenterController.h; path = homeage/Controller/MKPersonCenterController.h; sourceTree = "<group>"; };
 		06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPersonCenterController.m; path = homeage/Controller/MKPersonCenterController.m; sourceTree = "<group>"; };
 		06A0D6B01F304CB800B7CE09 /* MKPersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonInfoView.h; path = homeage/View/MKPersonInfoView.h; sourceTree = "<group>"; };
@@ -329,6 +336,14 @@
 		06CCB0C81F2B5A4C003091C0 /* MKReceiverInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKReceiverInfoView.m; path = order/View/MKReceiverInfoView.m; sourceTree = "<group>"; };
 		06CCB0CA1F2B6CA2003091C0 /* MKGoodsInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKGoodsInfoCell.h; path = order/View/MKGoodsInfoCell.h; sourceTree = "<group>"; };
 		06CCB0CB1F2B6CA2003091C0 /* MKGoodsInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKGoodsInfoCell.m; path = order/View/MKGoodsInfoCell.m; sourceTree = "<group>"; };
+		06EB3C661F5D20CD004A11F6 /* MKScanSuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKScanSuccessController.h; path = order/Controller/MKScanSuccessController.h; sourceTree = "<group>"; };
+		06EB3C671F5D20CD004A11F6 /* MKScanSuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKScanSuccessController.m; path = order/Controller/MKScanSuccessController.m; sourceTree = "<group>"; };
+		06EB3C691F5D2E6F004A11F6 /* MKScanConfirmView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKScanConfirmView.h; path = order/View/MKScanConfirmView.h; sourceTree = "<group>"; };
+		06EB3C6A1F5D2E6F004A11F6 /* MKScanConfirmView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKScanConfirmView.m; path = order/View/MKScanConfirmView.m; sourceTree = "<group>"; };
+		06EB3C6C1F5D5735004A11F6 /* MKScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKScanViewController.h; path = order/Controller/MKScanViewController.h; sourceTree = "<group>"; };
+		06EB3C6D1F5D5735004A11F6 /* MKScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKScanViewController.m; path = order/Controller/MKScanViewController.m; sourceTree = "<group>"; };
+		06EB3C6F1F5D5890004A11F6 /* TNWCameraScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TNWCameraScanView.h; path = order/View/TNWCameraScanView.h; sourceTree = "<group>"; };
+		06EB3C701F5D5890004A11F6 /* TNWCameraScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TNWCameraScanView.m; path = order/View/TNWCameraScanView.m; sourceTree = "<group>"; };
 		06ECE30E1F36A30B001DDFF3 /* MKAddreManageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreManageModel.h; path = member/Model/MKAddreManageModel.h; sourceTree = "<group>"; };
 		06ECE30F1F36A30B001DDFF3 /* MKAddreManageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageModel.m; path = member/Model/MKAddreManageModel.m; sourceTree = "<group>"; };
 		06ECE3141F36A9DF001DDFF3 /* MKAddreManageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreManageTable.h; path = member/View/MKAddreManageTable.h; sourceTree = "<group>"; };
@@ -811,6 +826,12 @@
 				063CE5761F2EC63B00A5A9F9 /* MKGoodsManageController.m */,
 				06C82A9E1F2F1ECD004E2F25 /* MKNewGoodsController.h */,
 				06C82A9F1F2F1ECD004E2F25 /* MKNewGoodsController.m */,
+				065A9C9B1F5452A300D791A4 /* MKCheckFormController.h */,
+				065A9C9C1F5452A300D791A4 /* MKCheckFormController.m */,
+				06EB3C661F5D20CD004A11F6 /* MKScanSuccessController.h */,
+				06EB3C671F5D20CD004A11F6 /* MKScanSuccessController.m */,
+				06EB3C6C1F5D5735004A11F6 /* MKScanViewController.h */,
+				06EB3C6D1F5D5735004A11F6 /* MKScanViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -890,6 +911,10 @@
 				06CCB0961F29DDC2003091C0 /* MKOrderManageTable.m */,
 				06A0D7B81F33532600B7CE09 /* MKConfirmView.h */,
 				06A0D7B91F33532600B7CE09 /* MKConfirmView.m */,
+				06EB3C691F5D2E6F004A11F6 /* MKScanConfirmView.h */,
+				06EB3C6A1F5D2E6F004A11F6 /* MKScanConfirmView.m */,
+				06EB3C6F1F5D5890004A11F6 /* TNWCameraScanView.h */,
+				06EB3C701F5D5890004A11F6 /* TNWCameraScanView.m */,
 			);
 			name = "订单管理";
 			sourceTree = "<group>";
@@ -1142,6 +1167,7 @@
 				06A0D6C51F317F8300B7CE09 /* MKLoginModel.m in Sources */,
 				06CCB0C21F2B40C4003091C0 /* MKOrderWritingController.m in Sources */,
 				06CCB0591F276867003091C0 /* BaseView.m in Sources */,
+				06EB3C6B1F5D2E6F004A11F6 /* MKScanConfirmView.m in Sources */,
 				06CCB05A1F276867003091C0 /* Container.m in Sources */,
 				06C82AA91F2F5348004E2F25 /* MKSearchTable.m in Sources */,
 				06A0D7B71F3311B700B7CE09 /* MKSignOutView.m in Sources */,
@@ -1153,6 +1179,7 @@
 				06CCB04F1F276867003091C0 /* BaseNavigationController.m in Sources */,
 				06CCB08D1F29A846003091C0 /* MKGoodsInfoView.m in Sources */,
 				063CE53E1F2C4CC200A5A9F9 /* MKOrderOtherView.m in Sources */,
+				06EB3C711F5D5890004A11F6 /* TNWCameraScanView.m in Sources */,
 				06CCB04B1F276867003091C0 /* UIColor+ZYFCategory.m in Sources */,
 				06A0D6B61F305B1700B7CE09 /* MKPersonModel.m in Sources */,
 				064DB2431F35B59100087865 /* MKAddMemberController.m in Sources */,
@@ -1166,12 +1193,14 @@
 				063CE53B1F2C36D500A5A9F9 /* MKGoodsInfoTable.m in Sources */,
 				06CCB0B71F2B11C3003091C0 /* MKAddGoodsController.m in Sources */,
 				06A0D6C21F30769A00B7CE09 /* MKContactModel.m in Sources */,
+				065A9C9D1F5452A300D791A4 /* MKCheckFormController.m in Sources */,
 				063CE5611F2E101B00A5A9F9 /* MKMemTradesInfoView.m in Sources */,
 				06CCB0551F276867003091C0 /* BaseTableViewCell.m in Sources */,
 				06A0D6BC1F306FA800B7CE09 /* MKContactController.m in Sources */,
 				06CCB0AE1F2AD0AC003091C0 /* MKAccountManageTable.m in Sources */,
 				06ECE3191F36AB1E001DDFF3 /* MKEditMemberController.m in Sources */,
 				06CCB0601F276867003091C0 /* ZYFUserDefaults.m in Sources */,
+				06EB3C6E1F5D5735004A11F6 /* MKScanViewController.m in Sources */,
 				06A0D7BA1F33532600B7CE09 /* MKConfirmView.m in Sources */,
 				06ECE3101F36A30B001DDFF3 /* MKAddreManageModel.m in Sources */,
 				06CCB0511F276867003091C0 /* BaseScrollViewController.m in Sources */,
@@ -1217,6 +1246,7 @@
 				06ECE3291F3AD372001DDFF3 /* MKSearResultController.m in Sources */,
 				063CE5741F2E472F00A5A9F9 /* MKGoodsManageCell.m in Sources */,
 				06CCB0781F288373003091C0 /* MKTradesInfoView.m in Sources */,
+				06EB3C681F5D20CD004A11F6 /* MKScanSuccessController.m in Sources */,
 				06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */,
 				06CCB0901F29D25D003091C0 /* MKOrderCellModel.m in Sources */,
 				06CCB0571F276867003091C0 /* BaseTopView.m in Sources */,
@@ -1287,6 +1317,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1304,9 +1335,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 732E2MFAKM;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1323,9 +1356,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1335,6 +1369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1352,9 +1387,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 732E2MFAKM;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1365,8 +1402,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1384,11 +1422,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
 				PROVISIONING_PROFILE_SPECIFIER = MicroOrderKingAdhoc;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1403,11 +1443,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Sedion.MicroOrderKing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b6b4baca-c44a-436e-b6eb-b2100bd4ab53";
 				PROVISIONING_PROFILE_SPECIFIER = MicroOrderKingAdhoc;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

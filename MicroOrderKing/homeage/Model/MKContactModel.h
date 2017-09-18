@@ -13,5 +13,6 @@
 @property(strong,nonatomic) NSString *QRCodeImgUrl;
 @property(strong,nonatomic) NSString *weChatNum;
 @property(strong,nonatomic) NSString *phoneNum;
+@property(strong,nonatomic) NSString *qqNum;
 
 @end

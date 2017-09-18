@@ -203,7 +203,7 @@
             [orderTable.dataArray removeAllObjects];
         }
         [orderTable reloadData];
-        NSString *signStr;
+        //NSString *signStr;
         if (isReload) {
             [orderTable.mj_header endRefreshing];
         } else {
@@ -214,31 +214,47 @@
 }
 
 - (void)loadMember {
-    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    [plist setObject:_searchContent forKey:@"name"];
-    [AFNetWorkingUsing httpGet:@"member" params:plist success:^(id json) {
-        [memberTable.dataArray removeAllObjects];
-        NSMutableDictionary *dic = (NSMutableDictionary *)[json objectForKey:@"data"];
-        [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-            NSArray *datas = [MKMemberBaseModel mj_objectArrayWithKeyValuesArray:obj];
-            if (datas.count > 0) {
-                for (int count = 0; count < datas.count; count ++) {
-                    [memberTable.dataArray addObject:datas[count]];
+    
+    //本地查询  先搜名字  再搜其他的
+    
+    NSMutableArray *total = [[NSMutableArray alloc] init];
+    NSMutableArray *matchedArra = [[NSMutableArray alloc] init];
+    for (NSArray *arra in [ZYFUserDefaults objectForKey:@"memberDics"]) {
+        for (NSDictionary *dic in arra) {
+            [total addObject:[MKMemberBaseModel mj_objectWithKeyValues:dic]];
+        }
+    }
+    //NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF CONTAINS %@",_searchContent];
+    for (MKMemberBaseModel *model in total) {
+        if ([model.name rangeOfString:_searchContent].location != NSNotFound) {
+            [matchedArra addObject:model];
+        }else{
+            if ([model.phoneNum rangeOfString:_searchContent].location != NSNotFound) {
+                [matchedArra addObject:model];
+            }else{
+                if ([model.remark rangeOfString:_searchContent].location != NSNotFound) {
+                    [matchedArra addObject:model];
                 }
             }
-        }];
-        [memberTable reloadData];
-        [memberTable.mj_header endRefreshing];
-    } fail:^(NSError *error) {
+        }
+        //if ([pred evaluateWithObject:model.phoneNum] || [pred evaluateWithObject:model.remark]) {
+        //    [matchedArra addObject:model];
+        //}
+    }
+    if (!matchedArra.count) {
         [memberTable.dataArray removeAllObjects];
         [memberTable reloadData];
         [memberTable.mj_header endRefreshing];
-    } other:^(id json) {
+        [self.hud showTipMessageAutoHide:isReload ? @"暂无数据" : @"已无新数据"];
+    } else {
         [memberTable.dataArray removeAllObjects];
+        for (MKMemberBaseModel *model in matchedArra) {
+            [memberTable.dataArray addObject:model];
+        }
         [memberTable reloadData];
         [memberTable.mj_header endRefreshing];
-        [self.hud showTipMessageAutoHide:isReload ? @"暂无数据" : @"没有更多数据"];
-    }];
+        
+    }
 }
 
 - (void)loadGoods {

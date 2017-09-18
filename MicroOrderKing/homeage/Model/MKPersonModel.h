@@ -16,6 +16,7 @@
 @property (strong,nonatomic) NSString *name;
 @property (strong,nonatomic) NSString *timeStr;
 @property (strong,nonatomic) NSString *isTry;
+@property (strong,nonatomic) NSString *isHide;
 
 @end
 

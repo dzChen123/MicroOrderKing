@@ -10,7 +10,8 @@
 
 @interface MKOrderManageTable : BaseUITableView
 
-@property(strong,nonatomic) void (^greenButnBlock)();
+@property (strong,nonatomic) void (^confirmButnBlock)();
+@property (strong,nonatomic) void (^printButnBlock)(NSInteger tag);
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style cellIdentifier:(NSString *)cellIdentifier class:(Class)cellClass type:(NSInteger)type;
 - (void)SetGreenBtn;

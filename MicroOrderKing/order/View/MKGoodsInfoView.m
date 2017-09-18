@@ -63,7 +63,7 @@
     }];
     
     if (_type != 1) {
-        numLab.font = FONT(10);
+        numLab.font = FONT(12);
         numLab.textColor = [UIColor hexStringToColor:@"#7B7B7B"];
     }
     
@@ -97,7 +97,7 @@
         }];
         
         if (!_type) {
-            priceLab.font = FONT(10);
+            priceLab.font = FONT(12);
             priceLab.textColor = [UIColor hexStringToColor:@"#7B7B7B"];
             
             [numLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -132,7 +132,8 @@
         MKOrderGoodsModel *dataModel = (MKOrderGoodsModel *)model;
         goodsModel = dataModel.goods;
         numberStr = dataModel.payNumber;
-        priceStr = goodsModel.price;
+        //priceStr = goodsModel.price;
+        priceStr = dataModel.price;
         unitStr = goodsModel.unit;
         nameLab.text = goodsModel.goodsName;
     }else{
@@ -168,10 +169,10 @@
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:resultStr];
         [attr addAttribute:NSFontAttributeName
                      value:FONT(14)
-                     range:NSMakeRange(2, priceStr.length)];
+                     range:NSMakeRange(0, priceStr.length + 2)];
         [attr addAttribute:NSForegroundColorAttributeName
                      value:[UIColor hexStringToColor:@"#1E1E1E"]
-                     range:NSMakeRange(2, priceStr.length)];
+                     range:NSMakeRange(0, priceStr.length + 2)];
         [attr addAttribute:NSForegroundColorAttributeName
                      value:[UIColor hexStringToColor:@"#7B7B7B"]
                      range:NSMakeRange(2 + priceStr.length, numberStr.length + 2)];
@@ -183,7 +184,7 @@
         numLab.text = [NSString stringWithFormat:@"库存(%@): %@",unitStr,numberStr];
         NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"单价(元): ¥%@",priceStr]];
         [attr addAttribute:NSFontAttributeName
-                     value:FONT(10)
+                     value:FONT(12)
                      range:NSMakeRange(0, attr.length)];
         [attr addAttribute:NSForegroundColorAttributeName
                      value:[UIColor hexStringToColor:@"#7B7B7B"]

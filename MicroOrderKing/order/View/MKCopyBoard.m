@@ -6,6 +6,9 @@
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
 
+#import "MKCheckFormController.h"
+#import "BaseViewController.h"
+
 #import "MKCopyBoard.h"
 
 #define holderColor [UIColor hexStringToColor:@"#DBDADB"]
@@ -22,10 +25,12 @@
     UILabel *instanceLab;
     UIButton *clearButn;
     UIButton *fillButn;
+    UILabel *formLab;
     
     NSString *placeHolder;
     MASConstraint *topConstraint;
     NSArray *matchedArray;
+    NSArray *saparatArra;
 }
 
 - (void)CreatView {
@@ -39,6 +44,7 @@
     instanceLab = [[UILabel alloc] init];
     clearButn = [[UIButton alloc] init];
     fillButn = [[UIButton alloc] init];
+    formLab = [[UILabel alloc] init];
     
     [self addSubview:copyIcon];
     [self addSubview:copyTittle];
@@ -48,6 +54,7 @@
     [signView addSubview:errorView];
     [signView addSubview:infoLab];
     [signView addSubview:instanceLab];
+    [signView addSubview:formLab];
     [self addSubview:clearButn];
     [self addSubview:fillButn];
 }
@@ -56,6 +63,7 @@
     
     WS(ws)
     
+    saparatArra = @[@",",@"，",@"。",@"！",@"!",@" "];
     self.backgroundColor = customWhite;
     
     [copyIcon mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -106,8 +114,8 @@
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
     
-    infoLab.text = @"未匹配到相应的会员，请自行输入用户信息";
-    infoLab.font = FONT(10);
+    //infoLab.text = @"未匹配到相应的会员，请自行输入用户信息";
+    infoLab.font = FONT(12);
     infoLab.textColor = [UIColor hexStringToColor:@"#ff0000"];
     [infoLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(errorView.mas_right).offset(5 * autoSizeScaleW);
@@ -116,11 +124,28 @@
     
     instanceLab.hidden = YES;
     instanceLab.text = @"例：张三，18288888888，广东省深圳市南山区XX街道XX号";
-    instanceLab.font = FONT(10);
+    instanceLab.font = FONT(12);
     instanceLab.textColor = [UIColor hexStringToColor:@"#ff0000"];
     [instanceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(infoLab);
         make.top.mas_equalTo(infoLab.mas_bottom).offset(10 * autoSizeScaleH);
+    }];
+    
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:@"查看支持格式"];
+    NSRange range = NSMakeRange(0, attr.length);
+    
+    [attr addAttribute:NSFontAttributeName value:FONT(12) range:range];
+    [attr addAttribute:NSForegroundColorAttributeName value:wordSixColor range:range];
+    [attr addAttribute:NSUnderlineColorAttributeName value:wordSixColor range:range];
+    [attr addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleSingle) range:range];
+    
+    formLab.attributedText = attr;
+    formLab.userInteractionEnabled = YES;
+    formLab.hidden = YES;
+    [formLab addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToCheckForm:)]];
+    [formLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(grayView);
+        make.centerY.mas_equalTo(errorView);
     }];
     
     [clearButn addTarget:self action:@selector(clearContent) forControlEvents:UIControlEventTouchUpInside];
@@ -156,25 +181,91 @@
     
 }
 
+
+
+- (void)goToCheckForm:(UITapGestureRecognizer *)tap {
+    MKCheckFormController *controller = [[MKCheckFormController alloc] initWithTitle:@"查看支持格式"];
+    UIViewController *parent = [self parentController];
+    [parent.navigationController pushViewController:controller animated:YES];
+}
+
 - (void)clearContent {
     copyView.text = @"";
     copyView.text = placeHolder;
     copyView.textColor = holderColor;
 }
 
-- (void)fillOrder {
-    [self getPhoneNumber:copyView.text];
-    if ([copyView.text isEqualToString:placeHolder]||!matchedArray.count) {
-        [self showSignContent];
-        return;
-    }
-    if (_fillClickBlock) {
-        LxDBAnyVar(matchedArray[0]);
-        _fillClickBlock(matchedArray[0]);
-    }
+- (void)setText:(NSString *)content {
+    copyView.text = content;
+    copyView.textColor = wordThreeColor;
 }
 
-- (void)showSignContent {
+- (void)fillOrder {
+    BaseViewController *parent = (BaseViewController *)[self parentController];
+    if ([copyView.text isEqualToString:placeHolder]) {
+        [parent.hud showTipMessageAutoHide:@"请先输入内容在进行智能填单"];
+        return;
+    }
+    
+    matchedArray = @[];
+    [self getPhoneNumber:copyView.text];
+    if (!matchedArray.count) {
+        formLab.hidden = NO;
+        [self showSignContentWithSign:@"识别失败，请修改文本格式或自行填入内容"];
+        return;
+    }
+    NSArray *resultArray = @[];
+    NSString *phoneNum = matchedArray[0];
+    //有分隔符
+    for (NSString *separator in saparatArra) {
+        if ([copyView.text containsString:separator]) {
+            NSArray *result = [copyView.text componentsSeparatedByString:separator];
+            NSString *str1,*str2;
+            NSInteger count = 0;
+            if (result.count != 3) {
+                continue;
+            }
+            for (NSString *item in result) {    //赋值
+                if (![item isEqualToString:phoneNum]) {
+                    if (!count) {
+                        str1 = item;
+                        count ++;
+                    }else{
+                        str2 = item;
+                    }
+                }
+            }
+            //最后数组按  名字 号码 地址  的顺序排
+            resultArray = str1.length < str2.length ? @[str1,phoneNum,str2] : @[str2,phoneNum,str1];
+        }
+    }
+    
+    if (!resultArray.count) {
+        //无分隔符
+        NSArray *result = [copyView.text componentsSeparatedByString:phoneNum];
+        if (result.count != 2) {
+            resultArray = @[phoneNum];
+        }else{
+            NSString *str1,*str2;
+            str1 = result[0]; str2 = result[1];
+            //最后数组按  名字 号码 地址  的顺序排
+            resultArray = str1.length < str2.length ? @[str1,phoneNum,str2] : @[str2,phoneNum,str1];
+        }
+    }
+    
+    formLab.hidden = YES;
+    [self showSignContentWithSign:@"已完成智能填单，如有误差请自行调整"];
+    
+    if (_autoFillBlock) {
+        _autoFillBlock(resultArray);
+    }
+    
+}
+
+- (void)showSignContentWithSign:(NSString *)signStr {
+    
+    infoLab.text = signStr;
+    
     [topConstraint uninstall];
     [fillButn mas_makeConstraints:^(MASConstraintMaker *make) {
         topConstraint = make.top.mas_equalTo(signView.mas_bottom);
@@ -257,9 +348,23 @@
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
+    
     if(textView.text.length < 1) {
         textView.text = placeHolder;
         textView.textColor = holderColor;
+    }else{
+        matchedArray = @[];
+        [self getPhoneNumber:copyView.text];
+        if ([copyView.text isEqualToString:placeHolder]||!matchedArray.count) {
+            formLab.hidden = YES;
+            [self showSignContentWithSign:@"未匹配到相应会员，可选择智能填单"];
+            return;
+        }
+        if (_fillClickBlock) {
+            LxDBAnyVar(matchedArray[0]);
+            _fillClickBlock(matchedArray[0]);
+        }
+
     }
 }
 

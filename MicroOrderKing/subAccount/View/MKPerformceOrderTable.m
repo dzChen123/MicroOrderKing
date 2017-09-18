@@ -33,6 +33,7 @@
             cellid = historyCellid;
             break;
         default:
+            cellid = historyCellid;
             break;
     }
     MKOrderManageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellid forIndexPath:indexPath];
@@ -56,6 +57,7 @@
             cellid = historyCellid;
             break;
         default:
+            cellid = historyCellid;
             break;
     }
     CGFloat height =[tableView fd_heightForCellWithIdentifier:cellid cacheByIndexPath:indexPath configuration:^(BaseTableViewCell *cell) {

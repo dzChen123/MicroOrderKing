@@ -213,6 +213,13 @@
     addressStr = address;
 }
 
+- (void)setInfoPhoneNum:(NSString *)phoneNum {
+    
+    phoneField.text = phoneNum;
+    phoneField.enabled = NO;
+    phoneField.clearButtonMode = UITextFieldViewModeNever;
+}
+
 - (NSArray *)getReceiverInfo {
     return @[nameField.text,phoneField.text,addressStr];
 }

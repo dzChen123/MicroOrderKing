@@ -116,13 +116,21 @@
         }else if (SCREEN_WIDTH == 414 ){
             searcherBar.placeholder = @"搜索订单编号、收货人姓名、手机号                    ";
         }
-    }else{
+    }else if(_type == 1){
         if (SCREEN_WIDTH == 320) {
             searcherBar.placeholder = @"搜索                                            ";
         }else if (SCREEN_WIDTH == 375 ){
             searcherBar.placeholder = @"搜索                                                         ";
         }else if (SCREEN_WIDTH == 414 ){
             searcherBar.placeholder = @"搜索                                                                   ";
+        }
+    }else{
+        if (SCREEN_WIDTH == 320) {
+            searcherBar.placeholder = @"搜索账号、会员名、备注               ";
+        }else if (SCREEN_WIDTH == 375 ){
+            searcherBar.placeholder = @"搜索账号、会员名、备注                              ";
+        }else if (SCREEN_WIDTH == 414 ){
+            searcherBar.placeholder = @"搜索账号、会员名、备注                                          ";
         }
     }
     [searcherBar mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -15,7 +15,8 @@
              @"phoneNum" : @"mobile",
              @"name" : @"user_nickname",
              @"timeStr" : @"expire_time",
-             @"isTry" : @"is_try"
+             @"isTry" : @"is_try",
+             @"isHide" : @"is_hide"
              };
 }
 

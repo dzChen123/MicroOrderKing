@@ -88,8 +88,8 @@
                  value:FONT(16)
                  range:NSMakeRange(attr.length - totalCostStr.length, totalCostStr.length)];
     [attr addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor hexStringToColor:@"#CC8285"]
-                 range:NSMakeRange(attr.length - totalCostStr.length, totalCostStr.length)];
+                 value:[UIColor hexStringToColor:@"#ff7878"]
+                 range:NSMakeRange(attr.length - totalCostStr.length - 1, totalCostStr.length + 1)];
     totalPriceLab.attributedText = attr;
     
 }
@@ -105,13 +105,13 @@
                  range:NSMakeRange(0, attr.length - totalCostStr.length)];
     [attr addAttribute:NSForegroundColorAttributeName
                  value:[UIColor hexStringToColor:@"#7B7B7B"]
-                 range:NSMakeRange(0, attr.length - totalCostStr.length)];
+                 range:NSMakeRange(0, attr.length - totalCostStr.length - 1)];
     [attr addAttribute:NSFontAttributeName
                  value:FONT(16)
                  range:NSMakeRange(attr.length - totalCostStr.length, totalCostStr.length)];
     [attr addAttribute:NSForegroundColorAttributeName
-                 value:[UIColor hexStringToColor:@"#CC8285"]
-                 range:NSMakeRange(attr.length - totalCostStr.length, totalCostStr.length)];
+                 value:[UIColor hexStringToColor:@"#ff7878"]
+                 range:NSMakeRange(attr.length - totalCostStr.length - 1, totalCostStr.length + 1)];
     totalPriceLab.attributedText = attr;
     if ([parent isKindOfClass:[MKOrderWritingController class]]) {
         MKOrderWritingController *controller = (MKOrderWritingController *)parent;

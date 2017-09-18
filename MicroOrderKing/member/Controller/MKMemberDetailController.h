@@ -7,8 +7,9 @@
 //
 
 #import "BaseScrollViewController.h"
+#import "BaseViewController.h"
 
-@interface MKMemberDetailController : BaseScrollViewController
+@interface MKMemberDetailController : BaseViewController
 
 @property(strong,nonatomic) NSString *memberId;
 

@@ -11,10 +11,12 @@
 #import "MKPerformanceController.h"
 #import "MKTradesDetailController.h"
 #import "MKSearResultController.h"
+#import "MKScanViewController.h"
 
 #import "MKOrderManageCell.h"
 #import "MKGoodsInfoView.h"
 #import "MKConfirmView.h"
+#import "MKScanConfirmView.h"
 
 #import "MKOrderCellModel.h"
 
@@ -37,9 +39,11 @@
     UIView *lineView;
     UILabel *sumLab;
     UIButton *clickButn;
+    UIButton *printOrderButn;       // 这个才是打印订单
     
     UIView *maskView;
     MKConfirmView *confirmView;
+    MKScanConfirmView *scanConfirmView;
     MASConstraint *bottomConstraint;
     NSString *orderId;
     BOOL isSelected;
@@ -61,6 +65,7 @@
     lineView = [[UIView alloc] init];
     sumLab = [[UILabel alloc] init];
     clickButn = [[UIButton alloc] init];
+    printOrderButn = [[UIButton alloc] init];
     
     [self.contentView addSubview:grayView];
     [self.contentView addSubview:orderIDIcon];
@@ -74,6 +79,7 @@
     [butnView addSubview:printBtn];
     [butnView addSubview:editBtn];
     [butnView addSubview:confirmBtn];
+    [butnView addSubview:printOrderButn];
     [self.contentView addSubview:lineView];
     [self.contentView addSubview:sumLab];
     [self.contentView addSubview:clickButn];
@@ -92,7 +98,7 @@
         make.left.right.top.mas_equalTo(ws.contentView);
         make.height.mas_equalTo(15 * autoSizeScaleH);
     }];
-    
+
     
     [orderIDIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ws.contentView).offset(leftPadding);
@@ -100,14 +106,15 @@
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
     
-    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"]) {
+    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"] || [self.reuseIdentifier isEqualToString:@"orderDeliver"]) {
         orderIDIcon.hidden = YES;
         clickButn.hidden = NO;
-        [clickButn setImage:[UIImage imageNamed:@"moreAdresNodef"] forState:UIControlStateNormal];
+        //clickButn.backgroundColor = [UIColor yellowColor];
+        [clickButn setImage:[[UIImage imageNamed:@"moreAdresNodef"] imageByScalingToSize:CGSizeMake(15 * autoSizeScaleW, 15 * autoSizeScaleW)] forState:UIControlStateNormal];
         [clickButn addTarget:self action:@selector(clickButnClick) forControlEvents:UIControlEventTouchUpInside];
         [clickButn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(orderIDIcon);
             make.center.mas_equalTo(orderIDIcon);
+            make.width.height.mas_equalTo(30 * autoSizeScaleW);
         }];
     }else{
         orderIDIcon.hidden = NO;
@@ -130,7 +137,7 @@
         make.height.mas_equalTo(18 * autoSizeScaleH);
         make.right.mas_equalTo(ws).offset(rightPadding);
     }];
-    
+
     [goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(orderIDIcon);
         make.right.mas_equalTo(condition);
@@ -150,22 +157,26 @@
     }else{
         addressView.backgroundColor = [UIColor hexStringToColor:@"#FAFAFA"];
         [addressView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(goodsView);
+            make.left.mas_equalTo(ws.contentView).offset(leftPadding);
+            make.right.mas_equalTo(ws.contentView).offset(rightPadding);
             make.top.mas_equalTo(goodsView.mas_bottom).offset(10 * autoSizeScaleH);
-            make.bottom.mas_equalTo(addreIcon.mas_bottom).offset(10 * autoSizeScaleH);
+            make.bottom.mas_equalTo(addreLab.mas_bottom).offset(10 * autoSizeScaleH);
         }];
         
         [addreIcon mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(addressView).offset(leftPadding);
-            make.top.mas_equalTo(addressView).offset(10 * autoSizeScaleH);
+            make.top.mas_equalTo(addressView).offset(12 * autoSizeScaleH);
             make.width.height.mas_equalTo(15 * autoSizeScaleW);
         }];
         
         addreLab.font = FONT(14);
         addreLab.textColor = grayColor69;
+        addreLab.numberOfLines = 0;
         [addreLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(addreIcon.mas_right).offset(5 * autoSizeScaleW);
-            make.centerY.mas_equalTo(addreIcon);
+            make.right.lessThanOrEqualTo(addressView).offset(-5 * autoSizeScaleW);
+            make.top.mas_equalTo(addressView).offset(10 * autoSizeScaleH);
+            //make.bottom.mas_equalTo(ws.contentView);
         }];
         
         [butnView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -189,33 +200,50 @@
         if ([self.reuseIdentifier isEqualToString:@"orderDeliver"]) {
             confirmTittle = @"确认发货";
             
+            [self customButn:printOrderButn withTittle:@"打印订单"];
+            [printOrderButn addTarget:self action:@selector(goToScanSuccess) forControlEvents:UIControlEventTouchUpInside];
+            [printOrderButn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(butnView);
+                make.top.mas_equalTo(butnView).offset(10 * autoSizeScaleH);
+                make.size.mas_equalTo(CGSizeMake(70 * autoSizeScaleW, 25 * autoSizeScaleH));
+            }];
+            
+            [confirmBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.size.centerY.mas_equalTo(printOrderButn);
+                make.right.mas_equalTo(printBtn.mas_left).offset(-10 * autoSizeScaleW);
+            }];
+            
             [self customButn:editBtn withTittle:@"编辑订单"];
             [editBtn addTarget:self action:@selector(goToEdit) forControlEvents:UIControlEventTouchUpInside];
-            [editBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            [editBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.size.centerY.mas_equalTo(confirmBtn);
                 make.right.mas_equalTo(confirmBtn.mas_left).offset(-10 * autoSizeScaleW);
             }];
 
             //[printBtn removeFromSuperview];
-            [self customButn:printBtn withTittle:@"删除订单"];
-            [printBtn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
-            [printBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            [self customButn:printBtn withTittle:@"导出订单"];
+            [printBtn addTarget:self action:@selector(goToOutput) forControlEvents:UIControlEventTouchUpInside];
+            [printBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
                 make.size.centerY.mas_equalTo(editBtn);
-                make.right.mas_equalTo(editBtn.mas_left).offset(-10 * autoSizeScaleW);
+                make.right.mas_equalTo(printOrderButn.mas_left).offset(-10 * autoSizeScaleW);
             }];
+            
         } else {
             confirmTittle = @"交易完成";
+            [confirmBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(butnView);
+                make.top.mas_equalTo(butnView).offset(10 * autoSizeScaleH);
+                make.size.mas_equalTo(CGSizeMake(70 * autoSizeScaleW, 25 * autoSizeScaleH));
+            }];
+            
             [printBtn removeFromSuperview];
             [editBtn removeFromSuperview];
+            [printOrderButn removeFromSuperview];
+            
         }
         
         [self customButn:confirmBtn withTittle:confirmTittle];
         [confirmBtn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
-        [confirmBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(butnView);
-            make.top.mas_equalTo(butnView).offset(10 * autoSizeScaleH);
-            make.size.mas_equalTo(CGSizeMake(70 * autoSizeScaleW, 25 * autoSizeScaleH));
-        }];
     }
     
     [sumLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -252,7 +280,13 @@
             break;
     }
     [self loadGoodsViewsWithData:cellModel.goodsInfoArra];
-    addreLab.text = cellModel.address;
+    
+    if (![self.reuseIdentifier isEqualToString:@"orderHistory"]) {
+        addreLab.text = cellModel.address;
+        
+        //LxDBAnyVar(addreLab.numberOfLines);
+    }
+    
     NSString *resultStr = [NSString stringWithFormat:@"共%@件商品 合计(元):¥ %@",cellModel.totalAmount,cellModel.totalCost];
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:resultStr];
     [attr addAttribute:NSFontAttributeName
@@ -279,10 +313,61 @@
 
 - (void)clickButnClick {
     isSelected = !isSelected;
-    [clickButn setImage:[UIImage imageNamed:isSelected ? @"moreAdresDef" : @"moreAdresNodef"] forState:UIControlStateNormal];
+    [clickButn setImage:[[UIImage imageNamed:isSelected ? @"moreAdresDef" : @"moreAdresNodef"] imageByScalingToSize:CGSizeMake(15 * autoSizeScaleW, 15 * autoSizeScaleW)] forState:UIControlStateNormal];
     if (_clickButnClickBlock) {
         _clickButnClickBlock(isSelected,orderId);
     }
+}
+
+- (void)goToOutput {
+    
+    UIViewController *parent = [self parentController];
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = orderId;
+    controller.printType = 10;
+    [parent.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)goToScanSuccess {
+    
+    UIViewController *parent = [self parentController];
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [parent.view addSubview:maskView];
+    [parent.view bringSubviewToFront:maskView];
+    WS(ws)
+    WeakObj(parent)
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(parentWeak.view);
+        make.center.mas_equalTo(parentWeak.view);
+    }];
+    
+    scanConfirmView = [[MKScanConfirmView alloc] init];
+    [parent.view addSubview:scanConfirmView];
+    [parent.view bringSubviewToFront:scanConfirmView];
+    scanConfirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    scanConfirmView.confirmBlock =^(){
+        [ws scanConfirm];
+    };
+    scanConfirmView.alpha = 0;
+    scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [scanConfirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(parentWeak.view).offset(leftPadding);
+        make.right.mas_equalTo(parentWeak.view).offset(rightPadding);
+        make.centerY.mas_equalTo(parentWeak.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        scanConfirmView.alpha = 1;
+        scanConfirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+
 }
 
 - (void)goToEdit {
@@ -347,11 +432,14 @@
         maskView.alpha = 0;
         confirmView.alpha = 0;
         confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+        scanConfirmView.alpha = 0;
+        scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
     }completion:^(BOOL finished) {
         maskView.hidden = YES;
         confirmView.hidden = YES;
         [maskView removeFromSuperview];
         [confirmView removeFromSuperview];
+        [scanConfirmView removeFromSuperview];
     }];
 }
 
@@ -402,6 +490,24 @@
     } other:^(id json) {
         [controller.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
     }];
+}
+
+- (void)scanConfirm {
+    
+    BaseViewController *parent = (BaseViewController *)[self parentController];
+    
+    if (!scanConfirmView.type) {
+        [parent.hud showTipMessageAutoHide:@"请先选择打印类型"];
+        return;
+    }
+    
+    [self cancelConfirm];
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = orderId;
+    controller.printType = scanConfirmView.type;
+    [parent.navigationController pushViewController:controller animated:YES];
+    
 }
 
 - (void)loadGoodsViewsWithData:(NSMutableArray *)dataArra {

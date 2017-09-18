@@ -8,10 +8,12 @@
 
 #import "MKOrderWritingController.h"
 #import "MKOrderDetailController.h"
+#import "MKScanViewController.h"
 
 #import "MKOrderGoodsView.h"
 #import "MKGoodsInfoView.h"
 #import "MKConfirmView.h"
+#import "MKScanConfirmView.h"
 
 #import "MKOrderCellModel.h"
 
@@ -138,9 +140,11 @@
     UIButton *editButn;
     UIButton *confirmButn;
     UIButton *deleteButn;
+    UIButton *printButn;
     
     UIView *maskView;
     MKConfirmView *confirmView;
+    MKScanConfirmView *scanConfirmView;
     NSString *orderId;
     NSString *senderTittle;
 }
@@ -149,10 +153,12 @@
     editButn = [[UIButton alloc] init];
     confirmButn = [[UIButton alloc] init];
     deleteButn = [[UIButton alloc] init];
+    printButn = [[UIButton alloc] init];
     
     [self addSubview:editButn];
     [self addSubview:confirmButn];
     [self addSubview:deleteButn];
+    [self addSubview:printButn];
 }
 
 - (void)SettingViewAttributes {
@@ -160,6 +166,20 @@
     WS(ws)
     
     self.backgroundColor = customWhite;
+    
+    [printButn setTitle:@"打印订单" forState:UIControlStateNormal];
+    [printButn setTitleColor:grayColor69 forState:UIControlStateNormal];
+    [printButn addTarget:self action:@selector(goToScan) forControlEvents:UIControlEventTouchUpInside];
+    printButn.titleLabel.font = FONT(14);
+    printButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
+    printButn.layer.borderWidth = 1.0;
+    printButn.layer.masksToBounds = YES;
+    printButn.layer.cornerRadius = 5.0;
+    [printButn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws).offset(-10 * autoSizeScaleW);
+        make.centerY.mas_equalTo(ws);
+        make.size.mas_equalTo(CGSizeMake(75 * autoSizeScaleW, 30 * autoSizeScaleH));
+    }];
     
     [confirmButn setTitle:@"确认发货" forState:UIControlStateNormal];
     [confirmButn setTitleColor:grayColor69 forState:UIControlStateNormal];
@@ -170,9 +190,8 @@
     confirmButn.layer.masksToBounds = YES;
     confirmButn.layer.cornerRadius = 5.0;
     [confirmButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(ws).offset(rightPadding);
-        make.centerY.mas_equalTo(ws);
-        make.size.mas_equalTo(CGSizeMake(80 * autoSizeScaleW, 30 * autoSizeScaleH));
+        make.right.mas_equalTo(deleteButn.mas_left).offset(-10 * autoSizeScaleW);
+        make.size.centerY.mas_equalTo(printButn);
     }];
     
     [editButn setTitle:@"编辑订单" forState:UIControlStateNormal];
@@ -184,20 +203,20 @@
     editButn.layer.masksToBounds = YES;
     editButn.layer.cornerRadius = 5.0;
     [editButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(confirmButn.mas_left).offset(rightPadding);
+        make.right.mas_equalTo(confirmButn.mas_left).offset(-10 * autoSizeScaleW);
         make.size.centerY.mas_equalTo(confirmButn);
     }];
     
-    [deleteButn setTitle:@"删除订单" forState:UIControlStateNormal];
+    [deleteButn setTitle:@"导出订单" forState:UIControlStateNormal];
     [deleteButn setTitleColor:grayColor69 forState:UIControlStateNormal];
-    [deleteButn addTarget:self action:@selector(goToConfirm:) forControlEvents:UIControlEventTouchUpInside];
+    [deleteButn addTarget:self action:@selector(goToOutput) forControlEvents:UIControlEventTouchUpInside];
     deleteButn.titleLabel.font = FONT(14);
     deleteButn.layer.borderColor = [UIColor hexStringToColor:@"#F0F0F0"].CGColor;
     deleteButn.layer.borderWidth = 1.0;
     deleteButn.layer.masksToBounds = YES;
     deleteButn.layer.cornerRadius = 5.0;
     [deleteButn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(editButn.mas_left).offset(rightPadding);
+        make.right.mas_equalTo(printButn.mas_left).offset(-10 * autoSizeScaleW);
         make.size.centerY.mas_equalTo(confirmButn);
     }];
 }
@@ -206,6 +225,16 @@
     UIViewController *parent = [self parentController];
     MKOrderWritingController *controller = [[MKOrderWritingController alloc] initWithType:1];
     controller.orderId = orderId;
+    [parent.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)goToOutput {
+    
+    UIViewController *parent = [self parentController];
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = orderId;
+    controller.printType = 10;
     [parent.navigationController pushViewController:controller animated:YES];
 }
 
@@ -258,18 +287,79 @@
     }];
 }
 
+- (void)goToScan {
+
+    UIViewController *parent = [self parentController];
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [parent.view addSubview:maskView];
+    [parent.view bringSubviewToFront:maskView];
+    WS(ws)
+    WeakObj(parent)
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(parentWeak.view);
+        make.center.mas_equalTo(parentWeak.view);
+    }];
+    
+    scanConfirmView = [[MKScanConfirmView alloc] init];
+    [parent.view addSubview:scanConfirmView];
+    [parent.view bringSubviewToFront:scanConfirmView];
+    scanConfirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    scanConfirmView.confirmBlock =^(){
+        [ws scanConfirm];
+    };
+    scanConfirmView.alpha = 0;
+    scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [scanConfirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(parentWeak.view).offset(leftPadding);
+        make.right.mas_equalTo(parentWeak.view).offset(rightPadding);
+        make.centerY.mas_equalTo(parentWeak.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        scanConfirmView.alpha = 1;
+        scanConfirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
 - (void)cancelConfirm {
     
     [UIView animateWithDuration:.2 animations:^{
         maskView.alpha = 0;
         confirmView.alpha = 0;
         confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+        scanConfirmView.alpha = 0;
+        scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
     }completion:^(BOOL finished) {
         maskView.hidden = YES;
         confirmView.hidden = YES;
         [maskView removeFromSuperview];
         [confirmView removeFromSuperview];
+        [scanConfirmView removeFromSuperview];
     }];
+}
+
+- (void)scanConfirm {
+
+    BaseViewController *parent = (BaseViewController *)[self parentController];
+    
+    if (!scanConfirmView.type) {
+        [parent.hud showTipMessageAutoHide:@"请先选择打印类型"];
+        return;
+    }
+    
+    [self cancelConfirm];
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = orderId;
+    controller.printType = scanConfirmView.type;
+    [parent.navigationController pushViewController:controller animated:YES];
+    
 }
 
 - (void)confirm {

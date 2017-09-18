@@ -11,6 +11,7 @@
 @interface MKReceiverInfoView : BaseView<UITextViewDelegate,UITextFieldDelegate>
 
 - (void)setReceiverInfo:(NSString *)name Phone:(NSString *)phone Address:(NSString *)address;
+- (void)setInfoPhoneNum:(NSString *)phoneNum;
 - (NSArray *)getReceiverInfo;
 
 @end

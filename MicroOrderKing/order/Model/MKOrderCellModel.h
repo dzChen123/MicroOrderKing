@@ -49,9 +49,10 @@
 
 @interface MKOrderGoodsModel : NSObject //订单商品信息(单件)
 
-@property (strong,nonatomic) NSString *payNumber;
+@property (strong,nonatomic) NSString *payNumber;  //买的商品个数
 @property (strong,nonatomic) NSString *goodsId;
 @property (strong,nonatomic) NSString *orderId;
+@property (strong,nonatomic) NSString *price;
 @property (strong,nonatomic) MKGoodsInfoModel *goods;
 
 @end

@@ -123,23 +123,27 @@
 
 - (void)delete {
     MKAddreManageController *parent = (MKAddreManageController *)[self parentController];
-    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",addressId] params:plist success:^(id json) {
-        NSInteger rowNum = 0;
-        for (MKAddreManageModel *model in parent.addreManageTable.dataArray) {
-            if ([model.addreId isEqualToString:addressId]) {
-                rowNum = [parent.addreManageTable.dataArray indexOfObject:model];
-                [parent.addreManageTable.dataArray removeObject:model];
-                break;
+    if (parent.addreManageTable.dataArray.count > 1) {
+        NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+        [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",addressId] params:plist success:^(id json) {
+            NSInteger rowNum = 0;
+            for (MKAddreManageModel *model in parent.addreManageTable.dataArray) {
+                if ([model.addreId isEqualToString:addressId]) {
+                    rowNum = [parent.addreManageTable.dataArray indexOfObject:model];
+                    [parent.addreManageTable.dataArray removeObject:model];
+                    break;
+                }
             }
-        }
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
-        [parent.addreManageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    } fail:^(NSError *error) {
-        
-    } other:^(id json) {
-        [parent.hud showTipMessageAutoHide:@"删除失败"];
-    }];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
+            [parent.addreManageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        } fail:^(NSError *error) {
+            
+        } other:^(id json) {
+            [parent.hud showTipMessageAutoHide:@"删除失败"];
+        }];
+    }else {
+        [parent.hud showTipMessageAutoHide:@"必须有一个收货地址"];
+    }
 }
 
 @end

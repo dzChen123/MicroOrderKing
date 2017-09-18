@@ -149,12 +149,17 @@
         }];
     }else{
         [AFNetWorkingUsing httpPost:@"goods" params:plist success:^(id json) {
+            
             [self.hud showTipMessageAutoHide:@"添加成功"];
+            
             [self.navigationController popViewControllerAnimated:YES];
+            
         } fail:^(NSError *error) {
             
         } other:^(id json) {
+            
             [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+        
         }];
     }
 }

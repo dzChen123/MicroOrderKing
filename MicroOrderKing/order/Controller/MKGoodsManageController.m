@@ -145,7 +145,7 @@
     } other:^(id json) {
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
-        [self.hud showTipMessageAutoHide:@"没有更多数据"];
+        [self.hud showTipMessageAutoHide:@"已无新数据"];
     }];
 }
 

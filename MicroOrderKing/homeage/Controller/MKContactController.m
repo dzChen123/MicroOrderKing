@@ -51,8 +51,9 @@
 - (void)setData {
     
     MKContactModel *model = [[MKContactModel alloc] init];
-    model.weChatNum = @"kefuweixinhao";
-    model.phoneNum = @"0577-88888888";
+    model.weChatNum = @"wdw_kf";
+    model.phoneNum = @"13002698223";
+    model.qqNum = @"3290613410";
     [contactView setData:model];
 }
 

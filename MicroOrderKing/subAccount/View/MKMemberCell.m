@@ -13,18 +13,21 @@
 @implementation MKMemberCell
 {
     UIImageView *avatar;
+    UIImageView *iconView;
     UILabel *nameLab;
     UILabel *phoneLab;
     UIView *lineView;
 }
 
 - (void)createView {
-    avatar = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subactName"]];
+    avatar = [[UIImageView alloc] init];
+    iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subactName"]];
     nameLab = [[UILabel alloc] init];
     phoneLab = [[UILabel alloc] init];
     lineView = [[UIView alloc] init];
     
     [self.contentView addSubview:avatar];
+    [self.contentView addSubview:iconView];
     [self.contentView addSubview:nameLab];
     [self.contentView addSubview:phoneLab];
     [self.contentView addSubview:lineView];
@@ -38,6 +41,11 @@
         make.left.mas_equalTo(ws.contentView).offset(leftPadding);
         make.top.mas_equalTo(ws.contentView).offset(25 * autoSizeScaleH);
         make.bottom.mas_equalTo(ws.contentView).offset(-25 * autoSizeScaleH);
+        make.width.height.mas_equalTo(15 * autoSizeScaleW);
+    }];
+    
+    [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(avatar);
         make.width.height.mas_equalTo(15 * autoSizeScaleW);
     }];
     

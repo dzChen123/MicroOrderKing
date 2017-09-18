@@ -58,6 +58,9 @@
     copyBoard.fillClickBlock =^(NSString *phoneNum){
         [ws goToChoose:phoneNum];
     };
+    copyBoard.autoFillBlock =^(NSArray *array){
+        [ws autoFillInfoBlock:array];
+    };
     
     otherView.confirmButnBlock =^(){
         [ws confirmButnBlock];
@@ -83,6 +86,7 @@
     if (_orderId) {
         [self loadEditionData];
     }
+
     // Do any additional setup after loading the view.
 }
 
@@ -208,8 +212,18 @@
     }
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPost:@"order" params:plist success:^(id json) {
+        
         [self.hud showTipMessageAutoHide:@"订单录入成功"];
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        //[self.navigationController popViewControllerAnimated:YES];
+        
+        WS(ws)
+        
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            [ws.navigationController popViewControllerAnimated:YES];
+        });
+        
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -260,8 +274,16 @@
     }
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@",_orderId] params:plist success:^(id json) {
+        
         [self.hud showTipMessageAutoHide:@"订单编辑成功"];
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        WS(ws)
+        
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            [ws.navigationController popViewControllerAnimated:YES];
+        });
+
     } fail:^(NSError *error) {
         
     } other:^(id json) {
@@ -337,7 +359,7 @@
         } other:^(id json) {
             NSString *signStr = [json objectForKey:@"msg"];
             if ([signStr isEqualToString:@"获取收货信息失败"]) {
-                [copyBoard showSignContent];
+                [copyBoard showSignContentWithSign:@"未匹配到相应会员，可选择智能填单"];
             }
             [self.hud showTipMessageAutoHide:@"匹配失败"];
         }];
@@ -366,6 +388,15 @@
     addressId = itemModel.itemId;
     addressStr = itemModel.address;
     [receiverInfoView setReceiverInfo:model.name Phone:model.mobile Address:itemModel.address];
+    [copyBoard showSignContentWithSign:@"已完成智能填单，如有误差请自行调整"];
+}
+
+- (void)autoFillInfoBlock:(NSArray *)array {
+    if (array.count == 1) {
+        [receiverInfoView setInfoPhoneNum:array[0]];
+    }else{
+        [receiverInfoView setReceiverInfo:array[0] Phone:array[1] Address:array[2]];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -374,11 +405,17 @@
     if (_isOrdered) {
         [self tableViewReload:_infoTable];
     }
+    if (_phoneNum != nil && _phoneNum.length > 0) {
+        [copyBoard setText:_phoneNum];
+        [self goToChoose:_phoneNum];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     
     [super viewDidDisappear:animated];
+    
+    _phoneNum = @"";
     
     [[MKAddressManager sharedAddressManager] saveLocalInfo];
 }
@@ -435,7 +472,7 @@
         MKAddGoodsCellModel *goodsCellModel = [[MKAddGoodsCellModel alloc] init];
         [self getValueFromParent:goodsCellModel SuperModel:model.goods];
         goodsCellModel.buyCount = model.payNumber;
-        costModel.totalCost = [NSString stringWithFormat:@"%ld",[model.payNumber integerValue] * [goodsCellModel.price integerValue]];
+        costModel.totalCost = [NSString stringWithFormat:@"%ld",[model.payNumber integerValue] * [model.price integerValue]];
         costModel.goodsCellModel = goodsCellModel;
         [table.dataArray addObject:costModel];
     }

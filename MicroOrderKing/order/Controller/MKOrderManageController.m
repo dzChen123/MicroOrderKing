@@ -9,10 +9,12 @@
 #import "MKOrderManageController.h"
 #import "MKOrderDetailController.h"
 #import "MKSearchGoodsController.h"
+#import "MKScanViewController.h"
 
 #import "MKOrderManageTable.h"
 #import "MKOrderManageCell.h"
 #import "MKConfirmView.h"
+#import "MKScanConfirmView.h"
 
 #import "MKOrderCellModel.h"
 
@@ -25,24 +27,32 @@
 {
     UIView *maskView;
     MKConfirmView *confirmView;
+    MKScanConfirmView *scanConfirmView;
     
     NSMutableArray *pageArray;
     NSMutableArray *selectIdArray;
+    NSString *printString;      //批量打印的IDString
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     WS(ws)
+    
+    MKOrderManageTable *firstTable = (MKOrderManageTable *)self.tableViewArray[0];
+    [firstTable SetGreenBtn];
+    firstTable.printButnBlock =^(NSInteger tag){
+        [ws firstTableClick:tag];
+    };
+    
     MKOrderManageTable *secondTable = (MKOrderManageTable *)self.tableViewArray[1];
     [secondTable SetGreenBtn];
-    secondTable.greenButnBlock =^(){
+    secondTable.confirmButnBlock =^(){
         [ws goToConfirm];
     };
     self.cellSelcet =^(UITableView *tableView,NSIndexPath *indexPath){
         [ws goToOrderDetail:(BaseUITableView *)tableView indexPath:indexPath];
     };
-//    [((MKOrderManageTable *)self.tableViewArray[0]) SetGreenBtn];
     // Do any additional setup after loading the view.
 }
 
@@ -86,7 +96,7 @@
 - (void)tabScrollViewSetting {
     
     self.tableViewArray = [[NSMutableArray alloc] initWithObjects:
-                           [[BaseUITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderDeliver" class:[MKOrderManageCell class]],
+                           [[MKOrderManageTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderDeliver" class:[MKOrderManageCell class] type:0],
                            [[MKOrderManageTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderConfirmCenter" class:[MKOrderManageCell class] type:1],
                            [[BaseUITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"orderHistory" class:[MKOrderManageCell class]], nil];
     [self setTabDataSource:[[NSMutableArray alloc] initWithObjects:@"待发货订单",@"待确认订单",@"历史订单", nil]];
@@ -160,8 +170,99 @@
     } other:^(id json) {
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
-        [self.hud showTipMessageAutoHide:@"没有更多数据"];
+        [self.hud showTipMessageAutoHide:@"已无新数据"];
     }];
+}
+
+- (void)firstTableClick:(NSInteger)tag {
+    if (tag == 20) {
+        [self goToOutPut];
+    } else {
+        [self goToPrint];
+    }
+}
+
+- (void)goToOutPut {
+    
+    printString = @"";
+    
+    MKOrderManageTable *firstTable = (MKOrderManageTable *)self.tableViewArray[0];
+    for (MKOrderCellModel *model in firstTable.dataArray) {
+        if (model.isSelected) {
+            
+            if (!printString.length) {
+                printString = model.orderId;
+            }else{
+                printString = [NSString stringWithFormat:@"%@,%@",printString,model.orderId];
+            }
+        }
+    }
+    
+    if (!printString.length) {
+        [self.hud showTipMessageAutoHide:@"请您先勾选订单，再进行批量导出"];
+        return;
+    }
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = printString;
+    controller.printType = 10;
+    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)goToPrint {
+    
+    printString = @"";
+    
+    MKOrderManageTable *firstTable = (MKOrderManageTable *)self.tableViewArray[0];
+    for (MKOrderCellModel *model in firstTable.dataArray) {
+        if (model.isSelected) {
+            
+            if (!printString.length) {
+                printString = model.orderId;
+            }else{
+                printString = [NSString stringWithFormat:@"%@,%@",printString,model.orderId];
+            }
+        }
+    }
+    
+    if (!printString.length) {
+        [self.hud showTipMessageAutoHide:@"请您先勾选订单，再进行批量打印"];
+        return;
+    }
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [self addSubview:maskView];
+    [self.view bringSubviewToFront:maskView];
+    WS(ws)
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(ws.view);
+        make.center.mas_equalTo(ws.view);
+    }];
+    
+    scanConfirmView = [[MKScanConfirmView alloc] init];
+    [self addSubview:scanConfirmView];
+    scanConfirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    scanConfirmView.confirmBlock =^(){
+        [ws scanConfirm];
+    };
+    scanConfirmView.alpha = 0;
+    scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [scanConfirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.view).offset(leftPadding);
+        make.right.mas_equalTo(ws.view).offset(rightPadding);
+        make.centerY.mas_equalTo(ws.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        scanConfirmView.alpha = 1;
+        scanConfirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+    
 }
 
 - (void)goToConfirm{
@@ -179,11 +280,17 @@
             }
         }
     }
+    
+    if (!selectCount) {
+        [self.hud showTipMessageAutoHide:@"请您先勾选订单，再进行批量确认"];
+        return;
+    }
+    
     signStr = [signStr substringWithRange:NSMakeRange(0, signStr.length - 1)];
     if (selectCount > 3) {
         signStr = [signStr stringByAppendingString:@"..."];
     }
-    signStr = [signStr stringByAppendingString:[NSString stringWithFormat:@"这%ld笔订单,请确认用户已收货，且您已收到这%ld笔贷款",selectCount,selectCount]];
+    signStr = [signStr stringByAppendingString:[NSString stringWithFormat:@"这%ld笔订单,请确认用户已收货，且您已收到这%ld笔贷款",(long)selectCount,(long)selectCount]];
     maskView = [[UIView alloc] init];
     maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
     maskView.alpha = 0;
@@ -223,13 +330,33 @@
     [UIView animateWithDuration:.2 animations:^{
         maskView.alpha = 0;
         confirmView.alpha = 0;
+        scanConfirmView.alpha = 0;
         confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+        scanConfirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
     }completion:^(BOOL finished) {
         maskView.hidden = YES;
         confirmView.hidden = YES;
+        scanConfirmView.hidden = YES;
         [maskView removeFromSuperview];
         [confirmView removeFromSuperview];
+        [scanConfirmView removeFromSuperview];
     }];
+}
+
+- (void)scanConfirm {
+    
+    if (!scanConfirmView.type) {
+        [self.hud showTipMessageAutoHide:@"请先选择打印类型"];
+        return;
+    }
+    
+    [self cancelConfirm];
+    
+    MKScanViewController *controller = [[MKScanViewController alloc] initWithTitle:@"打码扫印"];
+    controller.printStr = printString;
+    controller.printType = scanConfirmView.type;
+    [self.navigationController pushViewController:controller animated:YES];
+    
 }
 
 - (void)confirm {

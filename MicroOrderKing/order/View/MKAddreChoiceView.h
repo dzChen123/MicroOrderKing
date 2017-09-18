@@ -22,7 +22,8 @@
 @interface MKAddreItemView : BaseView
 
 @property (assign,nonatomic) BOOL isSelected;
-@property (strong,nonatomic) void (^checkClickBlock)();
+@property (assign,nonatomic) NSInteger index;
+@property (strong,nonatomic) void (^checkClickBlock)(NSInteger index);
 
 - (void)setData:(id)model WithUserName:(NSString *)name Phone:(NSString *)phone;
 - (void)setSelected:(BOOL)selected;

@@ -18,5 +18,6 @@
 @property (assign,nonatomic) BOOL isOrdered;    //有没有添加过商品
 @property (strong,nonatomic) MKGoodsInfoTable *infoTable;
 @property (strong,nonatomic) NSString *orderId;
+@property (strong,nonatomic) NSString *phoneNum;
 
 @end

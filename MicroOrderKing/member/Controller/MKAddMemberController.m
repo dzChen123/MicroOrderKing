@@ -7,6 +7,7 @@
 //
 
 #import "MKAddMemberController.h"
+#import "MKMemberManageController.h"
 
 #import "MKTittleTextView.h"
 
@@ -178,8 +179,16 @@
         [self.hud showTipMessageAutoHide:signArr[1]];
         return;
     }
+    if (name.length > 5) {
+        [self.hud showTipMessageAutoHide:@"名字长度不能大于5"];
+        return;
+    }
     if (!addreArr.count) {
         [self.hud showTipMessageAutoHide:signArr[2]];
+        return;
+    }
+    if (remark.length > 11) {
+        [self.hud showTipMessageAutoHide:@"备注长度不能大于11"];
         return;
     }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];

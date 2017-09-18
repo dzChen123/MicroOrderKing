@@ -107,13 +107,25 @@
 }
 
 - (void)setData:(id)model{
+    
+    WS(ws)
     selectIndex = 0;
     dataModel = (MKAddreMatchModel *)model;
     MKAddreItemView *lastView;
+    [addreViewArra removeAllObjects];
+    for (UIView *subView in containView.subviews) {
+        if ([subView isKindOfClass:[MKAddreItemView class]]) {
+            [subView removeFromSuperview];
+        }
+    }
     for (int index = 0;index < dataModel.address.count;index ++) {
         MKAddreMatchItemModel *item = dataModel.address[index];
         MKAddreItemView *itemView = [[MKAddreItemView alloc] init];
-        [addreViewArra addObject:item];
+        [addreViewArra addObject:itemView];
+        itemView.index = (NSInteger)index;
+        itemView.checkClickBlock =^(NSInteger index){
+            [ws checkButnClickBlock:index];
+        };
         [itemView setData:item WithUserName:dataModel.name Phone:dataModel.mobile];
         [containView addSubview:itemView];
         if (!index) {
@@ -143,11 +155,12 @@
     
 }
 
-- (void)checkButnClickBlock:(UIButton *)sender {
-    selectIndex = [addreViewArra indexOfObject:sender.superview];
+- (void)checkButnClickBlock:(NSInteger)currentIndex {
+    selectIndex = currentIndex;
     for (int index = 0; index < addreViewArra.count; index ++) {
         MKAddreItemView *itemView = addreViewArra[index];
-        [itemView setSelected:index == selectIndex ? YES : NO];
+        BOOL isSelect = index == selectIndex;
+        [itemView setSelected:isSelect];
     }
 }
 
@@ -245,7 +258,7 @@
     _isSelected = !_isSelected;
     [checkButn setImage:[[UIImage imageNamed:_isSelected ? @"moreAdresDef" : @"moreAdresNodef"] imageByScalingToSize:CGSizeMake(20 * autoSizeScaleW, 20 * autoSizeScaleW)] forState:UIControlStateNormal];
     if (_checkClickBlock) {
-        _checkClickBlock();
+        _checkClickBlock(_index);
     }
 }
 

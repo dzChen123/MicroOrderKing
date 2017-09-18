@@ -16,6 +16,8 @@
 
 @implementation MKAddGoodsCell
 {
+    UIView *lineView;
+    
     NSInteger _maxCount;
     NSInteger _buyCount;
     NSString *goodsId;
@@ -29,18 +31,21 @@
     addButn = [[UIButton alloc] init];
     subtractButn = [[UIButton alloc] init];
     numLab = [[UILabel alloc] init];
+    lineView = [[UIView alloc] init];
     
     [self.contentView addSubview:goodsInfoView];
     [self.contentView addSubview:addButn];
     [self.contentView addSubview:subtractButn];
     [self.contentView addSubview:numLab];
+    [self.contentView addSubview:lineView];
 }
 
 - (void)setttingViewAtuoLayout {
     
     WS(ws)
     
-    self.backgroundColor = customWhite;
+    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = customWhite;
     
     goodsInfoView.backgroundColor = customWhite;
     [goodsInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,6 +76,12 @@
         make.size.centerY.mas_equalTo(addButn);
         make.right.mas_equalTo(numLab.mas_left).offset(-20 * autoSizeScaleW);
         bottomConstraint = make.bottom.mas_equalTo(ws.contentView).offset(-10 * autoSizeScaleH);
+    }];
+    
+    lineView.backgroundColor = VIEWBACKGRAY;
+    [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(ws.contentView);
+        make.height.mas_equalTo(1);
     }];
     
 }
