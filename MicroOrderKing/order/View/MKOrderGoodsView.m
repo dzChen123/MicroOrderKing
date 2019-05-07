@@ -384,6 +384,15 @@
         if (detailController) {
             [detailController loadData];
         }
+        if ([senderTittle isEqualToString:@"交易完成"] || [senderTittle isEqualToString:@"确认发货"]) {
+            
+            WeakObj(controller)
+            
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [controllerWeak.navigationController popViewControllerAnimated:YES];
+            });
+        }
         if ([senderTittle isEqualToString:@"删除订单"]) {
             [controller.navigationController popViewControllerAnimated:YES];
         }
@@ -396,6 +405,7 @@
 }
 
 - (void)setData:(id)model {
+    
     MKOrderDetailModel *dataModel = (MKOrderDetailModel *)model;
     
     orderId = dataModel.orderId;
@@ -403,7 +413,14 @@
     if ([dataModel.conditionType integerValue] == 1) {
         deleteButn.hidden = YES;
         editButn.hidden = YES;
+        printButn.hidden = YES;
+        WS(ws)
         [confirmButn setTitle:@"交易完成" forState:UIControlStateNormal];
+        [confirmButn mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(ws).offset(-10 * autoSizeScaleW);
+            make.centerY.mas_equalTo(ws);
+            make.size.mas_equalTo(CGSizeMake(75 * autoSizeScaleW, 30 * autoSizeScaleH));
+        }];
     }
 }
 

@@ -16,6 +16,9 @@
 #import "MKGoodsInfoTable.h"
 #import "MKOrderOtherView.h"
 #import "MKAddreChoiceView.h"
+#import "MKDeliverChoiceView.h"
+#import "MKTimeChoiceView.h"
+#import "MKConfirmView.h"
 
 #import "MKOrderCellModel.h"
 #import "MKAddreMatchModel.h"
@@ -31,13 +34,24 @@
     MKOrderOtherView *otherView;
     UIView *maskView;
     MKAddreChoiceView *addreChoiceView;
+    MKDeliverChoiceView *deliverChoiceView;
+    MKTimeChoiceView *timeChoiceView;
+    
+    MKConfirmView *confirmView;
+    UIView *maskView2;
     
     NSInteger _type;
     BOOL isMatched;
+    NSString *phoneStr;
     NSString *memberId;
     NSString *addressId;
     NSString *addressStr;
+    NSString *deliverTime;
+    NSInteger shippingMethod;
     MASConstraint *heightConstraint;
+    MASConstraint *deliverTopConstraint;
+    MASConstraint *timeTopConstraint;
+    NSMutableArray *deliverArray;
 }
 
 - (instancetype)initWithType:(NSInteger)type {
@@ -54,6 +68,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    deliverArray = [[NSMutableArray alloc] initWithObjects:@"同城配送",@"快递配送",@"商家自配送",@"用户自提", nil];
+    
     WS(ws)
     copyBoard.fillClickBlock =^(NSString *phoneNum){
         [ws goToChoose:phoneNum];
@@ -68,6 +84,20 @@
     otherView.deleteButnBlock =^(){
         [ws deleteButnBlock];
     };
+    otherView.deliverChoiceBlock = ^(){
+        [ws deliverChoose];
+    };
+    otherView.timeChoiceBlock =^(){
+        [ws timeChoose];
+    };
+    
+    
+    deliverChoiceView.deliverItemBlock = ^(NSString *deliver) {
+        [ws deliverConfirm:deliver];
+    };
+    timeChoiceView.timeConfirmBlock = ^(NSDate *date) {
+        [ws timeConfirm:date];
+    };
     
     _infoTable.mj_header = nil;
     _infoTable.mj_footer = nil;
@@ -75,6 +105,26 @@
         make.left.right.mas_equalTo(receiverInfoView);
         make.top.mas_equalTo(receiverInfoView.mas_bottom);
         heightConstraint = make.height.mas_equalTo(90 * autoSizeScaleH);
+    }];
+    
+    maskView.alpha = 0;
+    maskView.hidden = YES;
+    [self.view sendSubviewToBack:maskView];
+    [maskView addTapEventWith:self action:@selector(cancelChoose)];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(ws.view);
+        make.center.mas_equalTo(ws.view);
+    }];
+    
+    [deliverChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws.view);
+        deliverTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom);
+    }];
+    
+    [timeChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws.view);
+        timeTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom);
     }];
     
     _infoTable.cellDeleteBlock =^(){
@@ -92,18 +142,29 @@
 
 
 - (void)CreatView {
+    
     isMatched = NO;
+    shippingMethod = -1;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    deliverTime = [formatter stringFromDate:[NSDate date]];
+    
     copyBoard = [[MKCopyBoard alloc] init];
     receiverInfoView = [[MKReceiverInfoView alloc] init];
     _infoTable = [[MKGoodsInfoTable alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped cellIdentifier:@"goodsInfoCell" class:[MKGoodsInfoCell class]];
     otherView = [[MKOrderOtherView alloc] initWithType:_type];
     maskView = [[UIView alloc] init];
+    deliverChoiceView = [[MKDeliverChoiceView alloc] initWithChoice:0];
+    timeChoiceView = [[MKTimeChoiceView alloc] initWithDate:[NSDate date] isFilter:NO];
     
     [self addSubview:copyBoard];
     [self addSubview:receiverInfoView];
     [self addSubview:_infoTable];
     [self addSubview:otherView];
     [self.view addSubview:maskView];
+    [self.view addSubview:deliverChoiceView];
+    [self.view addSubview:timeChoiceView];
+    
 }
 
 - (void)updateViewConstraints {
@@ -132,16 +193,6 @@
         make.top.mas_equalTo(_infoTable.mas_bottom);
     }];
     
-    maskView.alpha = 0;
-    maskView.hidden = YES;
-    [self.view sendSubviewToBack:maskView];
-    [maskView addTapEventWith:self action:@selector(cancelChoose)];
-    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
-    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(ws.view);
-        make.center.mas_equalTo(ws.view);
-    }];
-    
     [self setBottomView:otherView withHeight:.1f];
     
     [super updateViewConstraints];
@@ -157,9 +208,71 @@
 }
 
 - (void)deleteButnBlock {
+    [self goToDeleteConfirm];
+}
+
+- (void)goToDeleteConfirm {
+    
+    maskView2 = [[UIView alloc] init];
+    maskView2.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView2.alpha = 0;
+    [self.view addSubview:maskView2];
+    [self.view bringSubviewToFront:maskView2];
+    
+    WS(ws)
+    
+    [maskView2 addTapEventWith:self action:@selector(cancelDeleteConfirm)];
+    [maskView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(ws.view);
+        make.center.mas_equalTo(ws.view);
+    }];
+    confirmView = [[MKConfirmView alloc] init];
+    [confirmView setSignStr:@[@"请确定您要删除该订单",@"删除"]];
+    confirmView.confirmBlock = ^{
+        [ws deleteConfirm];
+    };
+    
+    [self.view addSubview:confirmView];
+    confirmView.cancelBlock =^(){
+        [ws cancelDeleteConfirm];
+    };
+    confirmView.alpha = 0;
+    confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [confirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.view).offset(leftPadding);
+        make.right.mas_equalTo(ws.view).offset(rightPadding);
+        make.centerY.mas_equalTo(ws.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView2.alpha = 1;
+        confirmView.alpha = 1;
+        confirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)cancelDeleteConfirm {
+    //[self setEditing:NO];
+    [UIView animateWithDuration:.2 animations:^{
+        maskView2.alpha = 0;
+        confirmView.alpha = 0;
+        confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    }completion:^(BOOL finished) {
+        maskView2.hidden = YES;
+        confirmView.hidden = YES;
+        [maskView2 removeFromSuperview];
+        [confirmView removeFromSuperview];
+    }];
+}
+
+- (void)deleteConfirm {
+    
+    [self cancelDeleteConfirm];
+    
+    [self.hud showWait];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:@"3" forKey:@"post_status"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@/change",_orderId] params:plist success:^(id json) {
+        [self.hud hideAnimated:YES];
         [self.hud showTipMessageAutoHide:@"订单已删除"];
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
@@ -167,9 +280,11 @@
     } other:^(id json) {
         [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
     }];
+    
 }
 
 - (void)addOrder {
+    
     NSString *name,*phoneNum,*address,*remark;
     NSArray *infoArra = [receiverInfoView getReceiverInfo];
     NSArray *otherArra = [otherView getOrderOtherInfo];
@@ -194,6 +309,13 @@
         [self.hud showTipMessageAutoHide:@"请先选择一些商品"];
         return;
     }
+    if (shippingMethod < 0) {
+        [self.hud showTipMessageAutoHide:@"请先选择配送方式"];
+        return;
+    }
+    
+    [self.hud showWaitHudWithMessage:@"订单录入中..."];
+    
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:isMatched ? memberId : @"0" forKey:@"member_id"];
     [plist setObject:isPaid ? @"1" : @"0" forKey:@"pay_status"];
@@ -201,6 +323,8 @@
     [plist setObject:address forKey:@"address"];
     [plist setObject:name forKey:@"consignee"];
     [plist setObject:phoneNum forKey:@"mobile"];
+    [plist setObject:@(shippingMethod) forKey:@"shipping_method"];
+    [plist setObject:deliverTime forKey:@"delivery_time"];
     if (remark.length > 0) {
         [plist setObject:remark forKey:@"remark"];
     }
@@ -212,6 +336,8 @@
     }
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPost:@"order" params:plist success:^(id json) {
+        
+        [self.hud hideAnimated:YES];
         
         [self.hud showTipMessageAutoHide:@"订单录入成功"];
         
@@ -232,6 +358,7 @@
 }
 
 - (void)editOrder {
+    
     NSString *name,*phoneNum,*address,*remark;
     NSArray *infoArra = [receiverInfoView getReceiverInfo];
     NSArray *otherArra = [otherView getOrderOtherInfo];
@@ -240,6 +367,10 @@
     address = infoArra[2];
     remark = otherArra[0];
     BOOL isPaid = [otherArra[1] boolValue];
+    if (!phoneNum.length) {
+        [self.hud showTipMessageAutoHide:@"请输入手机号"];
+        return;
+    }
     if (!name.length) {
         [self.hud showTipMessageAutoHide:@"请输入收件人姓名"];
         return;
@@ -252,9 +383,12 @@
         [self.hud showTipMessageAutoHide:@"请先选择一些商品"];
         return;
     }
-    if (![addressStr isEqualToString:address]) {
+    if ([addressStr isEqualToString:address] == NO || [phoneStr isEqualToString:phoneNum] == NO) {
         [[MKAddressManager sharedAddressManager] needsUpdate:memberId];
     }
+    
+    [self.hud showWaitHudWithMessage:@"订单保存中..."];
+    
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:memberId forKey:@"member_id"];
     [plist setObject:isPaid ? @"1" : @"0" forKey:@"pay_status"];
@@ -263,6 +397,8 @@
     [plist setObject:addressId forKey:@"address_id"];
     [plist setObject:name forKey:@"consignee"];
     [plist setObject:phoneNum forKey:@"mobile"];
+    [plist setObject:@(shippingMethod) forKey:@"shipping_method"];
+    [plist setObject:deliverTime forKey:@"delivery_time"];
     if (remark.length > 0) {
         [plist setObject:remark forKey:@"remark"];
     }
@@ -275,6 +411,7 @@
     [plist setObject:(NSDictionary *)dict forKey:@"goods"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"order/%@",_orderId] params:plist success:^(id json) {
         
+        [self.hud hideAnimated:YES];
         [self.hud showTipMessageAutoHide:@"订单编辑成功"];
         
         WS(ws)
@@ -367,11 +504,83 @@
 
 }
 
+- (void)deliverChoose {
+    
+    WS(ws)
+    [deliverTopConstraint uninstall];
+    [deliverChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        deliverTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom).offset(-224 * autoSizeScaleH);
+    }];
+    
+    maskView.hidden = NO;
+    [self.view bringSubviewToFront:maskView];
+    [self.view bringSubviewToFront:deliverChoiceView];
+    
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        [self.view layoutIfNeeded];
+    }];
+    
+}
+
+- (void)deliverConfirm:(NSString *)deliver {
+    
+    [otherView setDeliverStr:deliver];
+    
+    shippingMethod = [deliverArray indexOfObject:deliver];
+    
+    [self cancelChoose];
+    
+}
+
+- (void)timeChoose {
+    
+    WS(ws)
+    [timeTopConstraint uninstall];
+    [timeChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        timeTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom).offset(-225 * autoSizeScaleH);
+    }];
+    
+    maskView.hidden = NO;
+    [self.view bringSubviewToFront:maskView];
+    [self.view bringSubviewToFront:timeChoiceView];
+    
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)timeConfirm:(NSDate *)date {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [formatter stringFromDate:date];
+    
+    deliverTime = dateStr;
+    [otherView setDateStr:dateStr];
+    
+    [self cancelChoose];
+}
+
 - (void)cancelChoose {
+    
+    WS(ws)
+    [deliverTopConstraint uninstall];
+    [deliverChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        deliverTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom);
+    }];
+    
+    [timeTopConstraint uninstall];
+    [timeChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        timeTopConstraint = make.top.mas_equalTo(ws.view.mas_bottom);
+    }];
+    
     [UIView animateWithDuration:.3 animations:^{
         maskView.alpha = 0;
         addreChoiceView.alpha = 0;
         addreChoiceView.transform = CGAffineTransformMakeScale(.0001,.0001);
+        [self.view layoutIfNeeded];
     }completion:^(BOOL finished) {
         maskView.hidden = YES;
         addreChoiceView.hidden = YES;
@@ -395,7 +604,11 @@
     if (array.count == 1) {
         [receiverInfoView setInfoPhoneNum:array[0]];
     }else{
-        [receiverInfoView setReceiverInfo:array[0] Phone:array[1] Address:array[2]];
+        if(array.count == 3) {
+            [receiverInfoView setReceiverInfo:array[0] Phone:array[1] Address:array[2]];
+        }else{
+            [self.hud showTipMessage:@"识别失败"];
+        }
     }
 }
 
@@ -427,9 +640,14 @@
         MKOrderDetailModel *model = [MKOrderDetailModel mj_objectWithKeyValues:[json objectForKey:@"data"]];
         memberId = model.memberId;
         addressId = model.addressId;
+        phoneStr = model.phoneNum;
         [receiverInfoView setReceiverInfo:model.name Phone:model.phoneNum Address:model.address];
         [self tableViewEditionReload:_infoTable WithData:model.goodsInfoArra];
         [otherView setOrderOtherInfo:model.remark IsPaid:![model.payStatus integerValue] ? NO : YES];
+        shippingMethod = [model.shippingMethod integerValue];
+        deliverTime  =model.deliveryTime;
+        [otherView setDeliverStr:deliverArray[shippingMethod]];
+        [otherView setDateStr:model.deliveryTime];
     } fail:^(NSError *error) {
         
     } other:^(id json) {

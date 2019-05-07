@@ -16,4 +16,6 @@
 
 @interface MKChangePasdView : BaseView
 
+- (instancetype)initWithTitle:(NSString *)titleStr AndImage:(NSString *)imageName;
+
 @end

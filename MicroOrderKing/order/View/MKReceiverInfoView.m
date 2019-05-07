@@ -195,6 +195,7 @@
     if(textView.text.length < 1) {
         textView.text = placeHolder;
         textView.textColor = holderColor;
+        addressStr = @"";
     }else{
         addressStr = textView.text;
     }
@@ -205,8 +206,8 @@
     nameField.text = name;
     
     phoneField.text = phone;
-    phoneField.enabled = NO;
-    phoneField.clearButtonMode = UITextFieldViewModeNever;
+    //phoneField.enabled = NO;
+    //phoneField.clearButtonMode = UITextFieldViewModeNever;
     
     addreView.text = address;
     addreView.textColor = wordThreeColor;
@@ -216,8 +217,8 @@
 - (void)setInfoPhoneNum:(NSString *)phoneNum {
     
     phoneField.text = phoneNum;
-    phoneField.enabled = NO;
-    phoneField.clearButtonMode = UITextFieldViewModeNever;
+    //phoneField.enabled = NO;
+    //phoneField.clearButtonMode = UITextFieldViewModeNever;
 }
 
 - (NSArray *)getReceiverInfo {

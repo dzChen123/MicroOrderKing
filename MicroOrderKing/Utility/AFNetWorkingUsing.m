@@ -66,6 +66,7 @@ NSString *const TRoperationInfoKey = @"operationInfoKey";
     }
     dict = (NSDictionary *)responseObject;
     NSLog(@"%@",dict);
+    //LxDBAnyVar(dict);
     
     NSInteger type = [[dict objectForKey:@"code"] integerValue];
     

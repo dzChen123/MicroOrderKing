@@ -64,6 +64,7 @@
     MKMemberBaseModel *cellModel = (MKMemberBaseModel *)model;
     nameLab.text = cellModel.name;
     if (cellModel.remark.length > 0) {
+        remarkLab.hidden = NO;
         remarkLab.text = [NSString stringWithFormat:@"   %@   ",cellModel.remark];
     }else{
         remarkLab.hidden = YES;

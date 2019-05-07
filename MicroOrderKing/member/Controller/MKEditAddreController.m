@@ -8,6 +8,7 @@
 
 #import "MKEditAddreController.h"
 
+#import "MKConfirmView.h"
 #import "MKAddressManager.h"
 
 #import "MKMemberBaseModel.h"
@@ -25,6 +26,9 @@
     UITextView *writeView;
     UIButton *deleteButn;
     UIButton *saveButn;
+    
+    MKConfirmView *confirmView;
+    UIView *maskView;
     
     NSInteger _type;
     NSString *address;
@@ -144,12 +148,14 @@
         [self.hud showTipMessageAutoHide:@"请输入地址"];
         return;
     }
+    [self.hud showWait];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:address forKey:@"address"];
     [plist setObject:_memberId forKey:@"member_id"];
     [AFNetWorkingUsing httpPost:@"address" params:plist success:^(id json) {
         [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
         [[MKAddressManager sharedAddressManager] saveLocalInfo];
+        [self.hud hideAnimated:YES];
         [self.hud showTipMessageAutoHide:@"地址添加成功"];
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
@@ -168,11 +174,13 @@
         [self.hud showTipMessageAutoHide:@"请先修改再提交"];
         return;
     }
+    [self.hud showWait];
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:address forKey:@"address"];
     [AFNetWorkingUsing httpPut:[NSString stringWithFormat:@"address/%@",_addreId] params:plist success:^(id json) {
         [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
         [[MKAddressManager sharedAddressManager] saveLocalInfo];
+        [self.hud hideAnimated:YES];
         [self.hud showTipMessageAutoHide:@"地址更新成功"];
         [self.navigationController popViewControllerAnimated:YES];
     } fail:^(NSError *error) {
@@ -183,16 +191,8 @@
 }
 
 - (void)deleteAddress {
-    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-    [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",_addreId] params:plist success:^(id json) {
-        [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
-        [[MKAddressManager sharedAddressManager] saveLocalInfo];
-        [self.navigationController popViewControllerAnimated:YES];
-    } fail:^(NSError *error) {
-        
-    } other:^(id json) {
-        [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
-    }];
+    
+    [self goToConfirm];
 }
 
 - (void)loadAddress {
@@ -223,6 +223,78 @@
     }else{
         address = textView.text;
     }
+}
+
+- (void)goToConfirm {
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [self.view addSubview:maskView];
+    [self.view bringSubviewToFront:maskView];
+    
+    WS(ws)
+    
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(ws.view);
+        make.center.mas_equalTo(ws.view);
+    }];
+    confirmView = [[MKConfirmView alloc] init];
+    [confirmView setSignStr:@[@"请确定您要删除该地址",@"删除"]];
+    confirmView.confirmBlock = ^{
+        [ws confirm];
+    };
+    
+    [self.view addSubview:confirmView];
+    confirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    confirmView.alpha = 0;
+    confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [confirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.view).offset(leftPadding);
+        make.right.mas_equalTo(ws.view).offset(rightPadding);
+        make.centerY.mas_equalTo(ws.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        confirmView.alpha = 1;
+        confirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)cancelConfirm {
+    //[self setEditing:NO];
+    [UIView animateWithDuration:.2 animations:^{
+        maskView.alpha = 0;
+        confirmView.alpha = 0;
+        confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    }completion:^(BOOL finished) {
+        maskView.hidden = YES;
+        confirmView.hidden = YES;
+        [maskView removeFromSuperview];
+        [confirmView removeFromSuperview];
+    }];
+}
+
+- (void)confirm {
+    
+    [self cancelConfirm];
+    
+    [self.hud showWait];
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",_addreId] params:plist success:^(id json) {
+        [[MKAddressManager sharedAddressManager] needsUpdate:_memberId];
+        [[MKAddressManager sharedAddressManager] saveLocalInfo];
+        [self.hud hideAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
+    }];
+    
 }
 
 

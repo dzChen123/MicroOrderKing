@@ -187,6 +187,10 @@
         [self.hud showTipMessageAutoHide:signArr[2]];
         return;
     }
+    if (addreArr.count > 20) {
+        [self.hud showTipMessageAutoHide:@"地址数量不能超过20"];
+        return;
+    }
     if (remark.length > 11) {
         [self.hud showTipMessageAutoHide:@"备注长度不能大于11"];
         return;
@@ -213,6 +217,11 @@
 }
 
 - (void)addClick {
+    
+    if (addreViewArray.count + 1 > 20) {
+        [self.hud showTipMessageAutoHide:@"地址数量不得超过20个"];
+        return;
+    }
     
     WS(ws)
     MKTextViewModel *model = [[MKTextViewModel alloc] init];

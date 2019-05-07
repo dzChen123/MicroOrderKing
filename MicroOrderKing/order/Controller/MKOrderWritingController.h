@@ -13,6 +13,7 @@
 @interface MKOrderWritingController : BaseScrollViewController
 
 - (instancetype)initWithType:(NSInteger)type;
+- (void)cellDeleteUpdate;
 
 @property (strong,nonatomic) NSMutableArray *tableViewData;
 @property (assign,nonatomic) BOOL isOrdered;    //有没有添加过商品

@@ -17,6 +17,7 @@
 #import "MKEditAddreController.h"
 #import "MKAddreManageController.h"
 #import "MKEditMemberController.h"
+#import "MKPersonCenterController.h"
 
 #import "MKSectionView.h"
 
@@ -113,7 +114,7 @@
             pushedController = [[MKOrderWritingController alloc] initWithType:0];
             break;
         case 12:
-            pushedController = [[MKOrderManageController alloc] initWithTitle:@"商品管理"];
+            pushedController = [[MKOrderManageController alloc] initWithTitle:@"订单管理"];
             ((MKOrderManageController *)pushedController).currentIndex = 0;
             break;
         case 13:
@@ -127,12 +128,22 @@
             break;
         case 16:
             pushedController = [[MKAccountManageController alloc] initWithTitle:@"分账号管理"];
+//            pushedController = [[MKPersonCenterController alloc] initWithTitle:@"个人中心"];
             break;
             
         default:
             break;
     }
     [parent.navigationController pushViewController:pushedController animated:YES];
+}
+
+- (void)goToPersonCenter {
+    
+    UIViewController *parent = [self parentController];
+    
+    MKPersonCenterController *controller = [[MKPersonCenterController alloc] initWithTitle:@"个人中心"];
+    controller.isOut = NO;
+    [parent.navigationController pushViewController:controller animated:YES];
 }
 
 @end

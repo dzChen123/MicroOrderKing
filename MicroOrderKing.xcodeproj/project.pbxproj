@@ -29,7 +29,24 @@
 		064DB2461F35F68700087865 /* MKEditAddreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2451F35F68700087865 /* MKEditAddreController.m */; };
 		064DB2491F35FC2100087865 /* MKAddreManageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB2481F35FC2100087865 /* MKAddreManageController.m */; };
 		064DB24C1F35FCA000087865 /* MKAddreMangeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */; };
+		065961951F71387B00DA8F21 /* MKVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 065961941F71387B00DA8F21 /* MKVersionModel.m */; };
+		065961981F75008400DA8F21 /* MKDeliverChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065961971F75008400DA8F21 /* MKDeliverChoiceView.m */; };
+		0659619B1F752F9100DA8F21 /* MKTimeChoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0659619A1F752F9100DA8F21 /* MKTimeChoiceView.m */; };
+		0659619E1F75918700DA8F21 /* MKFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0659619D1F75918700DA8F21 /* MKFilterView.m */; };
+		065961A91F761CA600DA8F21 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 065961A21F761CA600DA8F21 /* NSDate+Extension.m */; };
+		065961AA1F761CA600DA8F21 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 065961A41F761CA600DA8F21 /* UIView+Extension.m */; };
+		065961AB1F761CA600DA8F21 /* XHDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 065961A71F761CA600DA8F21 /* XHDatePickerView.m */; };
+		065961AC1F761CA600DA8F21 /* XHDatePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 065961A81F761CA600DA8F21 /* XHDatePickerView.xib */; };
 		065A9C9D1F5452A300D791A4 /* MKCheckFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 065A9C9C1F5452A300D791A4 /* MKCheckFormController.m */; };
+		069F56221F99F5EB001153CD /* MKAppInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069F56211F99F5EB001153CD /* MKAppInfoController.m */; };
+		069F56251F9A2BCB001153CD /* PgySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F56231F9A2BCB001153CD /* PgySDK.framework */; };
+		069F56261F9A2BCB001153CD /* PgyUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F56241F9A2BCB001153CD /* PgyUpdate.framework */; };
+		069F56271F9A2D69001153CD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F56141F98E278001153CD /* CoreTelephony.framework */; };
+		069F56281F9A2D73001153CD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F56161F98E283001153CD /* SystemConfiguration.framework */; };
+		069F56291F9A2D81001153CD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F56181F98E296001153CD /* AudioToolbox.framework */; };
+		069F562A1F9A2D95001153CD /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F561A1F98E2A1001153CD /* AVFoundation.framework */; };
+		069F562B1F9A2DA0001153CD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F561C1F98E2AD001153CD /* OpenGLES.framework */; };
+		069F562C1F9A2DA8001153CD /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 069F561E1F98E2BC001153CD /* CoreMotion.framework */; };
 		06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */; };
 		06A0D6B21F304CB800B7CE09 /* MKPersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B11F304CB800B7CE09 /* MKPersonInfoView.m */; };
 		06A0D6B61F305B1700B7CE09 /* MKPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06A0D6B51F305B1700B7CE09 /* MKPersonModel.m */; };
@@ -180,8 +197,33 @@
 		064DB2481F35FC2100087865 /* MKAddreManageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreManageController.m; path = member/Controller/MKAddreManageController.m; sourceTree = "<group>"; };
 		064DB24A1F35FCA000087865 /* MKAddreMangeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAddreMangeCell.h; path = member/View/MKAddreMangeCell.h; sourceTree = "<group>"; };
 		064DB24B1F35FCA000087865 /* MKAddreMangeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAddreMangeCell.m; path = member/View/MKAddreMangeCell.m; sourceTree = "<group>"; };
+		065961931F71387B00DA8F21 /* MKVersionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKVersionModel.h; sourceTree = "<group>"; };
+		065961941F71387B00DA8F21 /* MKVersionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKVersionModel.m; sourceTree = "<group>"; };
+		065961961F75008400DA8F21 /* MKDeliverChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKDeliverChoiceView.h; path = order/View/MKDeliverChoiceView.h; sourceTree = "<group>"; };
+		065961971F75008400DA8F21 /* MKDeliverChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKDeliverChoiceView.m; path = order/View/MKDeliverChoiceView.m; sourceTree = "<group>"; };
+		065961991F752F9100DA8F21 /* MKTimeChoiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKTimeChoiceView.h; path = order/View/MKTimeChoiceView.h; sourceTree = "<group>"; };
+		0659619A1F752F9100DA8F21 /* MKTimeChoiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKTimeChoiceView.m; path = order/View/MKTimeChoiceView.m; sourceTree = "<group>"; };
+		0659619C1F75918700DA8F21 /* MKFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKFilterView.h; path = order/View/MKFilterView.h; sourceTree = "<group>"; };
+		0659619D1F75918700DA8F21 /* MKFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKFilterView.m; path = order/View/MKFilterView.m; sourceTree = "<group>"; };
+		065961A11F761CA600DA8F21 /* NSDate+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extension.h"; sourceTree = "<group>"; };
+		065961A21F761CA600DA8F21 /* NSDate+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extension.m"; sourceTree = "<group>"; };
+		065961A31F761CA600DA8F21 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		065961A41F761CA600DA8F21 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		065961A61F761CA600DA8F21 /* XHDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHDatePickerView.h; sourceTree = "<group>"; };
+		065961A71F761CA600DA8F21 /* XHDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHDatePickerView.m; sourceTree = "<group>"; };
+		065961A81F761CA600DA8F21 /* XHDatePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XHDatePickerView.xib; sourceTree = "<group>"; };
 		065A9C9B1F5452A300D791A4 /* MKCheckFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKCheckFormController.h; path = order/Controller/MKCheckFormController.h; sourceTree = "<group>"; };
 		065A9C9C1F5452A300D791A4 /* MKCheckFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKCheckFormController.m; path = order/Controller/MKCheckFormController.m; sourceTree = "<group>"; };
+		069F56141F98E278001153CD /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		069F56161F98E283001153CD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		069F56181F98E296001153CD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		069F561A1F98E2A1001153CD /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		069F561C1F98E2AD001153CD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		069F561E1F98E2BC001153CD /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		069F56201F99F5EB001153CD /* MKAppInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKAppInfoController.h; path = homeage/Controller/MKAppInfoController.h; sourceTree = "<group>"; };
+		069F56211F99F5EB001153CD /* MKAppInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKAppInfoController.m; path = homeage/Controller/MKAppInfoController.m; sourceTree = "<group>"; };
+		069F56231F9A2BCB001153CD /* PgySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgySDK.framework; sourceTree = "<group>"; };
+		069F56241F9A2BCB001153CD /* PgyUpdate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PgyUpdate.framework; sourceTree = "<group>"; };
 		06A0D6AD1F304C2300B7CE09 /* MKPersonCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonCenterController.h; path = homeage/Controller/MKPersonCenterController.h; sourceTree = "<group>"; };
 		06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKPersonCenterController.m; path = homeage/Controller/MKPersonCenterController.m; sourceTree = "<group>"; };
 		06A0D6B01F304CB800B7CE09 /* MKPersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKPersonInfoView.h; path = homeage/View/MKPersonInfoView.h; sourceTree = "<group>"; };
@@ -366,6 +408,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069F562C1F9A2DA8001153CD /* CoreMotion.framework in Frameworks */,
+				069F562B1F9A2DA0001153CD /* OpenGLES.framework in Frameworks */,
+				069F562A1F9A2D95001153CD /* AVFoundation.framework in Frameworks */,
+				069F56291F9A2D81001153CD /* AudioToolbox.framework in Frameworks */,
+				069F56281F9A2D73001153CD /* SystemConfiguration.framework in Frameworks */,
+				069F56271F9A2D69001153CD /* CoreTelephony.framework in Frameworks */,
+				069F56261F9A2BCB001153CD /* PgyUpdate.framework in Frameworks */,
+				069F56251F9A2BCB001153CD /* PgySDK.framework in Frameworks */,
 				AFAEA7F24E0972E457594BA6 /* Pods_MicroOrderKing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -462,6 +512,45 @@
 				063CE56A1F2E303400A5A9F9 /* MKMemManageTable.m */,
 			);
 			name = "会员管理";
+			sourceTree = "<group>";
+		};
+		0659619F1F761CA600DA8F21 /* XHDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				065961A01F761CA600DA8F21 /* Tools */,
+				065961A51F761CA600DA8F21 /* XHDatePicker */,
+			);
+			path = XHDatePicker;
+			sourceTree = "<group>";
+		};
+		065961A01F761CA600DA8F21 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				065961A11F761CA600DA8F21 /* NSDate+Extension.h */,
+				065961A21F761CA600DA8F21 /* NSDate+Extension.m */,
+				065961A31F761CA600DA8F21 /* UIView+Extension.h */,
+				065961A41F761CA600DA8F21 /* UIView+Extension.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		065961A51F761CA600DA8F21 /* XHDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				065961A61F761CA600DA8F21 /* XHDatePickerView.h */,
+				065961A71F761CA600DA8F21 /* XHDatePickerView.m */,
+				065961A81F761CA600DA8F21 /* XHDatePickerView.xib */,
+			);
+			path = XHDatePicker;
+			sourceTree = "<group>";
+		};
+		069F560F1F98E202001153CD /* TestSDK */ = {
+			isa = PBXGroup;
+			children = (
+				069F56231F9A2BCB001153CD /* PgySDK.framework */,
+				069F56241F9A2BCB001153CD /* PgyUpdate.framework */,
+			);
+			name = TestSDK;
 			sourceTree = "<group>";
 		};
 		06A0D6B31F305AE700B7CE09 /* Model */ = {
@@ -574,6 +663,7 @@
 		06CCAFD51F275A79003091C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				069F560F1F98E202001153CD /* TestSDK */,
 				06CCAFE11F275A79003091C0 /* Assets.xcassets */,
 				06CCAFE61F275A79003091C0 /* Info.plist */,
 				06CCAFE31F275A79003091C0 /* LaunchScreen.storyboard */,
@@ -752,6 +842,8 @@
 		06CCB0691F2770CB003091C0 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				065961931F71387B00DA8F21 /* MKVersionModel.h */,
+				065961941F71387B00DA8F21 /* MKVersionModel.m */,
 				06CCAFD81F275A79003091C0 /* AppDelegate.h */,
 				06CCAFD91F275A79003091C0 /* AppDelegate.m */,
 			);
@@ -788,6 +880,8 @@
 				06A0D6AE1F304C2300B7CE09 /* MKPersonCenterController.m */,
 				06A0D6BA1F306FA800B7CE09 /* MKContactController.h */,
 				06A0D6BB1F306FA800B7CE09 /* MKContactController.m */,
+				069F56201F99F5EB001153CD /* MKAppInfoController.h */,
+				069F56211F99F5EB001153CD /* MKAppInfoController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -905,6 +999,7 @@
 		06CCB0B81F2B1243003091C0 /* 订单管理 */ = {
 			isa = PBXGroup;
 			children = (
+				0659619F1F761CA600DA8F21 /* XHDatePicker */,
 				06CCB0881F29A809003091C0 /* MKOrderManageCell.h */,
 				06CCB0891F29A809003091C0 /* MKOrderManageCell.m */,
 				06CCB0951F29DDC2003091C0 /* MKOrderManageTable.h */,
@@ -915,6 +1010,8 @@
 				06EB3C6A1F5D2E6F004A11F6 /* MKScanConfirmView.m */,
 				06EB3C6F1F5D5890004A11F6 /* TNWCameraScanView.h */,
 				06EB3C701F5D5890004A11F6 /* TNWCameraScanView.m */,
+				0659619C1F75918700DA8F21 /* MKFilterView.h */,
+				0659619D1F75918700DA8F21 /* MKFilterView.m */,
 			);
 			name = "订单管理";
 			sourceTree = "<group>";
@@ -945,6 +1042,10 @@
 				063CE53D1F2C4CC200A5A9F9 /* MKOrderOtherView.m */,
 				062EB0E41F35563F00945BE9 /* MKAddreChoiceView.h */,
 				062EB0E51F35563F00945BE9 /* MKAddreChoiceView.m */,
+				065961961F75008400DA8F21 /* MKDeliverChoiceView.h */,
+				065961971F75008400DA8F21 /* MKDeliverChoiceView.m */,
+				065961991F752F9100DA8F21 /* MKTimeChoiceView.h */,
+				0659619A1F752F9100DA8F21 /* MKTimeChoiceView.m */,
 			);
 			name = "录入订单";
 			sourceTree = "<group>";
@@ -972,6 +1073,12 @@
 		0C66F285EAFB8E1A80771F0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				069F561E1F98E2BC001153CD /* CoreMotion.framework */,
+				069F561C1F98E2AD001153CD /* OpenGLES.framework */,
+				069F561A1F98E2A1001153CD /* AVFoundation.framework */,
+				069F56181F98E296001153CD /* AudioToolbox.framework */,
+				069F56161F98E283001153CD /* SystemConfiguration.framework */,
+				069F56141F98E278001153CD /* CoreTelephony.framework */,
 				27FAB922808F4CF772E94D60 /* Pods_MicroOrderKing.framework */,
 			);
 			name = Frameworks;
@@ -1090,6 +1197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				06CCAFE51F275A79003091C0 /* LaunchScreen.storyboard in Resources */,
+				065961AC1F761CA600DA8F21 /* XHDatePickerView.xib in Resources */,
 				06CCAFE21F275A79003091C0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1117,9 +1225,44 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MicroOrderKing/Pods-MicroOrderKing-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BlocksKit/BlocksKit.framework",
+				"${BUILT_PRODUCTS_DIR}/HappyDNS/HappyDNS.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MDHTMLLabel/MDHTMLLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/MagicalRecord/MagicalRecord.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Qiniu/Qiniu.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeBack/SwipeBack.framework",
+				"${BUILT_PRODUCTS_DIR}/UITableView+FDTemplateLayoutCell/UITableView_FDTemplateLayoutCell.framework",
+				"${BUILT_PRODUCTS_DIR}/ZYCornerRadius/ZYCornerRadius.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BlocksKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HappyDNS.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDHTMLLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MagicalRecord.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Qiniu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeBack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITableView_FDTemplateLayoutCell.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZYCornerRadius.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1132,13 +1275,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MicroOrderKing-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		627316328B07085E1021F42B /* [CP] Copy Pods Resources */ = {
@@ -1167,6 +1313,7 @@
 				06A0D6C51F317F8300B7CE09 /* MKLoginModel.m in Sources */,
 				06CCB0C21F2B40C4003091C0 /* MKOrderWritingController.m in Sources */,
 				06CCB0591F276867003091C0 /* BaseView.m in Sources */,
+				0659619B1F752F9100DA8F21 /* MKTimeChoiceView.m in Sources */,
 				06EB3C6B1F5D2E6F004A11F6 /* MKScanConfirmView.m in Sources */,
 				06CCB05A1F276867003091C0 /* Container.m in Sources */,
 				06C82AA91F2F5348004E2F25 /* MKSearchTable.m in Sources */,
@@ -1206,8 +1353,11 @@
 				06CCB0511F276867003091C0 /* BaseScrollViewController.m in Sources */,
 				06C82A961F2EFF82004E2F25 /* MKOrderGoodsView.m in Sources */,
 				06CCB0971F29DDC2003091C0 /* MKOrderManageTable.m in Sources */,
+				065961AB1F761CA600DA8F21 /* XHDatePickerView.m in Sources */,
 				06CCB0A61F2AC9AD003091C0 /* MKAccountManageCell.m in Sources */,
 				06CCB0711F286F31003091C0 /* MKSignUpViewController.m in Sources */,
+				0659619E1F75918700DA8F21 /* MKFilterView.m in Sources */,
+				065961951F71387B00DA8F21 /* MKVersionModel.m in Sources */,
 				063CE5471F2CBAB700A5A9F9 /* MKOrderDetailController.m in Sources */,
 				06CCB0BF1F2B3164003091C0 /* MKGoodsBottomView.m in Sources */,
 				063CE5441F2C566400A5A9F9 /* MKTittleTextView.m in Sources */,
@@ -1232,6 +1382,7 @@
 				06CCB04C1F276867003091C0 /* UIImage+ZYFCategory.m in Sources */,
 				06CCB0C91F2B5A4C003091C0 /* MKReceiverInfoView.m in Sources */,
 				06CCB08A1F29A809003091C0 /* MKOrderManageCell.m in Sources */,
+				069F56221F99F5EB001153CD /* MKAppInfoController.m in Sources */,
 				06CCB04D1F276867003091C0 /* UIImageView+ZYFCategory.m in Sources */,
 				063CE5411F2C556800A5A9F9 /* MKAddAccountController.m in Sources */,
 				063CE5641F2E1C7E00A5A9F9 /* MKMemberManageController.m in Sources */,
@@ -1250,17 +1401,20 @@
 				06CCB0861F2983FC003091C0 /* MKOrderManageController.m in Sources */,
 				06CCB0901F29D25D003091C0 /* MKOrderCellModel.m in Sources */,
 				06CCB0571F276867003091C0 /* BaseTopView.m in Sources */,
+				065961AA1F761CA600DA8F21 /* UIView+Extension.m in Sources */,
 				06C42A3A1F3C017000B7048C /* MKAddressManager.m in Sources */,
 				06A0D6AF1F304C2300B7CE09 /* MKPersonCenterController.m in Sources */,
 				06CCAFD71F275A79003091C0 /* main.m in Sources */,
 				06CCB04A1F276867003091C0 /* NSString+ZYFCategory.m in Sources */,
 				06A0D6BF1F306FDC00B7CE09 /* MKContactView.m in Sources */,
+				065961981F75008400DA8F21 /* MKDeliverChoiceView.m in Sources */,
 				06CCB0541F276867003091C0 /* BaseTabButtonScrollView.m in Sources */,
 				063CE5771F2EC63B00A5A9F9 /* MKGoodsManageController.m in Sources */,
 				06CCB0481F276867003091C0 /* AFNetWorkingUsing.m in Sources */,
 				06CCB0491F276867003091C0 /* NSDate+ZYFCategory.m in Sources */,
 				06C82A931F2EDCA7004E2F25 /* MKOrderDetailView.m in Sources */,
 				06CCB0501F276867003091C0 /* BaseScrollTableViewController.m in Sources */,
+				065961A91F761CA600DA8F21 /* NSDate+Extension.m in Sources */,
 				06CCB05B1F276867003091C0 /* NSLog+Extension.m in Sources */,
 				063CE5711F2E3DD000A5A9F9 /* MKMemberCell.m in Sources */,
 				06CCB0A91F2ACEC4003091C0 /* MKAccountBaseModel.m in Sources */,
@@ -1419,6 +1573,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				DEVELOPMENT_TEAM = 732E2MFAKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MicroOrderKing",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;
@@ -1440,6 +1598,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hangzhou dotne Technology co.,ltd (732E2MFAKM)";
 				DEVELOPMENT_TEAM = 732E2MFAKM;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MicroOrderKing",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MicroOrderKing/MicroOrderKing.pch";
 				INFOPLIST_FILE = MicroOrderKing/Info.plist;

@@ -6,6 +6,9 @@
 //  Copyright © 2017年 陈徳柱. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVMediaFormat.h>
+
 #import "MKScanViewController.h"
 #import "MKScanSuccessController.h"
 
@@ -140,6 +143,16 @@
 
 - (void)startScan
 {
+    //要判断用户是否允许app访问相机
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"请您设置允许app访问您的相机->设置->隐私->相机" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
+    
+    
     // 1.判断输入能否添加到会话中
     if (![self.session canAddInput:self.input]) return;
     [self.session addInput:self.input];

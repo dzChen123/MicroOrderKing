@@ -183,32 +183,17 @@
     }
     phoneLab.text = dataModel.phoneNum;
     
-
-    switch ([dataModel.conditionType integerValue]) {
-        case 0:
-        {
+    if ([dataModel.conditionType integerValue] == 2) {
+        conditionLab.text = @" 已完成 ";
+        conditionLab.backgroundColor = [UIColor hexStringToColor:@"#37BF76"];
+    } else {
+        if (![dataModel.payStatus integerValue]) {
             conditionLab.text = @" 未付款 ";
             conditionLab.backgroundColor = [UIColor hexStringToColor:@"#FB737C"];
-        }
-            break;
-        case 1:
-        {
+        } else {
             conditionLab.text = @" 已付款 ";
             conditionLab.backgroundColor = [UIColor hexStringToColor:@"#77AEFF"];
         }
-            break;
-        case 2:
-        {
-            conditionLab.text = @" 已完成 ";
-            conditionLab.backgroundColor = [UIColor hexStringToColor:@"#37BF76"];
-        }
-            break;
-        default:
-            break;
-    }
-    if ([dataModel.conditionType integerValue] < [dataModel.payStatus integerValue]) {
-        conditionLab.text = @" 已付款 ";
-        conditionLab.backgroundColor = [UIColor hexStringToColor:@"#77AEFF"];
     }
 }
 

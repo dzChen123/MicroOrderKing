@@ -12,4 +12,6 @@
 @interface IQKeyboardManagerHelper : NSObject
 +(void)setKeyBoard;
 
+
+
 @end

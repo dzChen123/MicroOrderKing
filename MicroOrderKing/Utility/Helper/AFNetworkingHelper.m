@@ -48,7 +48,10 @@ DEFINE_SINGLETON_IMPLEMENTATION(AFNetworkingHelper)
     return manager;
 }
 
-- (void)startMonitoring { [self startMonitoringNet]; }
+- (void)startMonitoring {
+    [self startMonitoringNet];
+    
+}
 
 - (void)startMonitoringNet {
     [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;

@@ -10,6 +10,7 @@
 #import "MKEditAddreController.h"
 
 #import "MKAddreMangeCell.h"
+#import "MKConfirmView.h"
 
 #import "MKAddreManageModel.h"
 
@@ -20,6 +21,9 @@
     UIView *lineView;
     UIButton *editButn;
     UIButton *deleteButn;
+    
+    MKConfirmView *confirmView;
+    UIView *maskView;
     
     UIView *view;
     
@@ -124,26 +128,93 @@
 - (void)delete {
     MKAddreManageController *parent = (MKAddreManageController *)[self parentController];
     if (parent.addreManageTable.dataArray.count > 1) {
-        NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
-        [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",addressId] params:plist success:^(id json) {
-            NSInteger rowNum = 0;
-            for (MKAddreManageModel *model in parent.addreManageTable.dataArray) {
-                if ([model.addreId isEqualToString:addressId]) {
-                    rowNum = [parent.addreManageTable.dataArray indexOfObject:model];
-                    [parent.addreManageTable.dataArray removeObject:model];
-                    break;
-                }
-            }
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
-            [parent.addreManageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        } fail:^(NSError *error) {
-            
-        } other:^(id json) {
-            [parent.hud showTipMessageAutoHide:@"删除失败"];
-        }];
+
+        [self goToConfirm];
+        
     }else {
         [parent.hud showTipMessageAutoHide:@"必须有一个收货地址"];
     }
+}
+
+- (void)goToConfirm {
+    UIViewController *parent = [self parentController];
+    
+    maskView = [[UIView alloc] init];
+    maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.5];
+    maskView.alpha = 0;
+    [parent.view addSubview:maskView];
+    [parent.view bringSubviewToFront:maskView];
+    
+    WS(ws)
+    WeakObj(parent)
+    
+    [maskView addTapEventWith:self action:@selector(cancelConfirm)];
+    [maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.mas_equalTo(parentWeak.view);
+        make.center.mas_equalTo(parentWeak.view);
+    }];
+    confirmView = [[MKConfirmView alloc] init];
+    [confirmView setSignStr:@[@"请确定您要删除该地址",@"删除"]];
+    confirmView.confirmBlock = ^{
+        [ws confirm];
+    };
+    
+    [parent.view addSubview:confirmView];
+    confirmView.cancelBlock =^(){
+        [ws cancelConfirm];
+    };
+    confirmView.alpha = 0;
+    confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    [confirmView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(parentWeak.view).offset(leftPadding);
+        make.right.mas_equalTo(parentWeak.view).offset(rightPadding);
+        make.centerY.mas_equalTo(parentWeak.view);
+    }];
+    [UIView animateWithDuration:.3 animations:^{
+        maskView.alpha = 1;
+        confirmView.alpha = 1;
+        confirmView.transform = CGAffineTransformMakeScale(1, 1);
+    }];
+}
+
+- (void)cancelConfirm {
+    [self setEditing:NO];
+    [UIView animateWithDuration:.2 animations:^{
+        maskView.alpha = 0;
+        confirmView.alpha = 0;
+        confirmView.transform = CGAffineTransformMakeScale(.0001, .0001);
+    }completion:^(BOOL finished) {
+        maskView.hidden = YES;
+        confirmView.hidden = YES;
+        [maskView removeFromSuperview];
+        [confirmView removeFromSuperview];
+    }];
+}
+
+- (void)confirm {
+    
+    [self cancelConfirm];
+    
+    MKAddreManageController *parent = (MKAddreManageController *)[self parentController];
+    
+    NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
+    [AFNetWorkingUsing httpDelete:[NSString stringWithFormat:@"address/%@",addressId] params:plist success:^(id json) {
+        NSInteger rowNum = 0;
+        for (MKAddreManageModel *model in parent.addreManageTable.dataArray) {
+            if ([model.addreId isEqualToString:addressId]) {
+                rowNum = [parent.addreManageTable.dataArray indexOfObject:model];
+                [parent.addreManageTable.dataArray removeObject:model];
+                break;
+            }
+        }
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:rowNum inSection:0];
+        [parent.addreManageTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } fail:^(NSError *error) {
+        
+    } other:^(id json) {
+        [parent.hud showTipMessageAutoHide:@"删除失败"];
+    }];
+    
 }
 
 @end

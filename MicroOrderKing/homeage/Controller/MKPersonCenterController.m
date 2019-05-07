@@ -9,6 +9,7 @@
 #import "MKPersonCenterController.h"
 #import "MKChangePasdController.h"
 #import "MKLoginViewController.h"
+#import "MKAppInfoController.h"
 #import "BaseNavigationController.h"
 
 #import "MKPersonInfoView.h"
@@ -23,7 +24,11 @@
 @implementation MKPersonCenterController
 {
     MKPersonInfoView *personInfoView;
+    
+    UIView *contentView;            //做出密码修改  和  关于微单王 的圆角
     MKChangePasdView *changeView;
+    MKChangePasdView *aboutInfoView;
+    
     UIButton *signOutButn;
     UIView *maskView;
     MKSignOutView *signOutView;
@@ -62,13 +67,17 @@
 
 - (void)CreatView {
     personInfoView = [[MKPersonInfoView alloc] init];
-    changeView = [[MKChangePasdView alloc] init];
+    contentView = [[UIView alloc] init];
+    changeView = [[MKChangePasdView alloc] initWithTitle:@"密码修改" AndImage:@"personPasd"];
+    aboutInfoView = [[MKChangePasdView alloc] initWithTitle:@"关于微单王" AndImage:@"personCenterInfo"];
     signOutButn = [[UIButton alloc] init];
     maskView = [[UIView alloc] init];
     signOutView = [[MKSignOutView alloc] init];
     
     [self addSubview:personInfoView];
-    [self addSubview:changeView];
+    [self addSubview:contentView];
+    [contentView addSubview:changeView];
+    [contentView addSubview:aboutInfoView];
     [self addSubview:signOutButn];
     [self addSubview:maskView];
     [self addSubview:signOutView];
@@ -84,11 +93,25 @@
         make.top.mas_equalTo(ws.topView.mas_bottom).offset(15 * autoSizeScaleH);
     }];
     
-    [changeView addTapEventWith:self action:@selector(gotoChangePasd)];
-    [changeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    contentView.cornerRadius = 5.0;
+    contentView.layer.masksToBounds = YES;
+    contentView.clipsToBounds = YES;
+    [contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(personInfoView);
         make.top.mas_equalTo(personInfoView.mas_bottom).offset(15 * autoSizeScaleH);
+        make.bottom.mas_equalTo(aboutInfoView);
+    }];
+    
+    [changeView addTapEventWith:self action:@selector(gotoChangePasd)];
+    [changeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.top.mas_equalTo(contentView);
         make.height.mas_equalTo(45 * autoSizeScaleH);
+    }];
+    
+    [aboutInfoView addTapEventWith:self action:@selector(goToAppInfoController)];
+    [aboutInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.size.left.mas_equalTo(changeView);
+        make.top.mas_equalTo(changeView.mas_bottom).offset(1);
     }];
     
     signOutButn.layer.masksToBounds = YES;
@@ -100,7 +123,7 @@
     signOutButn.titleLabel.font = FONT(16);
     [signOutButn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(changeView);
-        make.top.mas_equalTo(changeView.mas_bottom).offset(15 * autoSizeScaleH);
+        make.top.mas_equalTo(contentView.mas_bottom).offset(15 * autoSizeScaleH);
         make.height.mas_equalTo(45 * autoSizeScaleH);
     }];
     
@@ -165,6 +188,11 @@
     [self.navigationController pushViewController:controller animated:YES];
 }
 
+
+- (void)goToAppInfoController {
+    MKAppInfoController *controller = [[MKAppInfoController alloc] initWithTitle:@"关于微单王"];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 - (void)loadData {     
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];

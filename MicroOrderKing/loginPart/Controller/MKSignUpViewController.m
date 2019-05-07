@@ -236,6 +236,7 @@
 }
 
 - (void)signUpOrChangePasd {
+    
     if (!phoneField.text.length) {
         [self.hud showTipMessageAutoHide:@"请先填写手机号"];
         return;
@@ -257,6 +258,10 @@
     }
     if (![pasdField.text isEqualToString:confirmField.text]) {
         [self.hud showTipMessageAutoHide:@"两次填写的密码不一致，请重新填写"];
+        return;
+    }
+    if (pasdField.text.length < 6 || pasdField.text.length > 12) {
+        [self.hud showTipMessageAutoHide:@"密码长度限制为6-12位，请修改您的密码"];
         return;
     }
     NSString *waitStr = _type == 0 ? @"注册中,请耐心等待..." : @"密码重置中,请耐心等待...";

@@ -20,6 +20,7 @@
 {
     NSMutableArray *textViewArray;
     UIButton *saveButn;
+    NSArray *matchedArray;
     
     NSInteger _type;
     BOOL isEdit;
@@ -40,7 +41,7 @@
 - (void)setTopView {
     [super setTopView];
     if(![self.topTitle isEqualToString:@"分账号编辑"] && ![self.topTitle isEqualToString:@"会员编辑"]){
-        self.topTitle = _type == 0 ? @"新增分账号" : @"新增会员";
+        self.topTitle = _type == 0 ? @"新增子账户" : @"新增会员";
         isEdit = NO;
     }else{
         isEdit = YES;
@@ -142,7 +143,7 @@
                 [itemView SetText:model.name];
                 break;
             default:
-                [itemView SetText:@"密码什么的不需要填写哦"];
+                //[itemView SetText:];
                 break;
         }
     }
@@ -185,6 +186,11 @@
     }
     if (!phoneNum.length) {
         [self.hud showTipMessageAutoHide:signArra[0]];
+        return;
+    }
+    [self getPhoneNumber:phoneNum];
+    if (!matchedArray.count || phoneNum.length != 11) {
+        [self.hud showTipMessageAutoHide:@"请输入合法手机号"];
         return;
     }
     if (!name.length) {
@@ -261,23 +267,45 @@
         [self.hud showTipMessageAutoHide:signArra[0]];
         return;
     }
+    [self getPhoneNumber:phoneNum];
+    if (!matchedArray.count || phoneNum.length != 11) {
+        [self.hud showTipMessageAutoHide:@"请输入合法手机号"];
+        return;
+    }
     if (!name.length) {
         [self.hud showTipMessageAutoHide:signArra[1]];
         return;
     }
-    if (_type) {
-        if (!repeat.length) {
-            [self.hud showTipMessageAutoHide:signArra[3]];
-            return;
-        }
+    if (!pasd.length) {
+        [self.hud showTipMessageAutoHide:@"请填写新密码"];
+        return;
     }
+    if (!repeat.length) {
+        [self.hud showTipMessageAutoHide:@"请填写确认密码"];
+        return;
+    }
+    if (![pasd isEqualToString:repeat]) {
+        [self.hud showTipMessageAutoHide:@"填写的密码不一致!"];
+        return;
+    }
+    if (pasd.length < 6 || pasd.length > 12) {
+        [self.hud showTipMessageAutoHide:@"密码长度限制为6-12"];
+        return;
+    }
+//    if (_type) {
+//        if (!repeat.length) {
+//            [self.hud showTipMessageAutoHide:signArra[3]];
+//            return;
+//        }
+//    }
     NSMutableDictionary *plist = [[NSMutableDictionary alloc] init];
     [plist setObject:phoneNum forKey:@"mobile"];
     [plist setObject:name forKey:@"user_nickname"];
-    if (_type) {
-        [plist setObject:pasd forKey:@"password"];
-        [plist setObject:repeat forKey:@"repassword"];
-    }
+    [plist setObject:pasd forKey:@"password"];
+    [plist setObject:repeat forKey:@"repassword"];
+//    if (_type) {
+//
+//    }
     [self.hud showWaitHudWithMessage:@"请稍后"];
     [AFNetWorkingUsing httpPut:requestStr params:plist success:^(id json) {
         [self.hud hideAnimated:YES];
@@ -290,6 +318,71 @@
         [self.hud showTipMessageAutoHide:[json objectForKey:@"msg"]];
     }];
     
+}
+
+- (void)getPhoneNumber:(NSString *)checkString {
+    /**
+     * 手机号码
+     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     * 联通：130,131,132,152,155,156,185,186
+     * 电信：133,1349,153,180,189
+     */
+    //NSString * MOBILE = @"1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}";
+    /**
+     * 中国移动：China Mobile
+     * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
+     */
+    //NSString * CM = @"1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}";
+    /**
+     * 中国联通：China Unicom
+     * 130,131,132,152,155,156,185,186
+     */
+    //NSString * CU = @"1(3[0-2]|5[256]|8[56])\\d{8}";
+    /**
+     * 中国电信：China Telecom
+     * 133,1349,153,180,189
+     */
+    //NSString * CT = @"1((33|53|8[09])[0-9]|349)\\d{7}";
+    
+//    [self getPhoneNum:checkString regexStr:MOBILE];
+//    [self getPhoneNum:checkString regexStr:CM];
+//    [self getPhoneNum:checkString regexStr:CU];
+//    [self getPhoneNum:checkString regexStr:CT];
+    
+    NSString *finalCheckStr = @"1[3|4|5|8][0-9]\\d{8}";
+    [self getPhoneNum:checkString regexStr:finalCheckStr];
+    
+}
+
+- (void)getPhoneNum:(NSString *)phoneNum regexStr:(NSString *)regexStr {
+    NSArray *arra = [self matchString:phoneNum toRegexString:regexStr];
+    if (arra.count > 0) {
+        matchedArray = arra;
+    }
+}
+
+- (NSArray *)matchString:(NSString *)string toRegexString:(NSString *)regexStr {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionCaseInsensitive error:nil];
+    
+    NSArray * matches = [regex matchesInString:string options:0 range:NSMakeRange(0, [string length])];
+    
+    //match: 所有匹配到的字符,根据() 包含级
+    
+    NSMutableArray *array = [NSMutableArray array];
+    
+    for (NSTextCheckingResult *match in matches) {
+        
+        for (int i = 0; i < [match numberOfRanges]; i++) {
+            //以正则中的(),划分成不同的匹配部分
+            NSString *component = [string substringWithRange:[match rangeAtIndex:i]];
+            
+            [array addObject:component];
+            
+        }
+        
+    }
+    
+    return array;
 }
 
 - (void)didReceiveMemoryWarning {

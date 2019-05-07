@@ -26,6 +26,7 @@
     UIButton *clearButn;
     UIButton *fillButn;
     UILabel *formLab;
+    UILabel *signLab;   //提示如何进行智能匹配
     
     NSString *placeHolder;
     MASConstraint *topConstraint;
@@ -45,6 +46,7 @@
     clearButn = [[UIButton alloc] init];
     fillButn = [[UIButton alloc] init];
     formLab = [[UILabel alloc] init];
+    signLab = [[UILabel alloc] init];
     
     [self addSubview:copyIcon];
     [self addSubview:copyTittle];
@@ -57,6 +59,7 @@
     [signView addSubview:formLab];
     [self addSubview:clearButn];
     [self addSubview:fillButn];
+    [self addSubview:signLab];
 }
 
 - (void)SettingViewAttributes {
@@ -80,6 +83,16 @@
         make.centerY.mas_equalTo(copyIcon);
     }];
     
+    signLab.text = @"输入手机号，点击完成或空白处可进行智能匹配";
+    signLab.font = FONT(12);
+    signLab.textColor = wordSixColor;
+    signLab.hidden = YES;
+    signLab.alpha = 0;
+    [signLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(copyIcon.mas_bottom).offset(5 * autoSizeScaleH);
+        make.left.mas_equalTo(copyIcon);
+    }];
+    
     grayView.backgroundColor = [UIColor hexStringToColor:@"#FAFAFA"];
     grayView.borderWidth = 1.0;
     grayView.borderColor = [UIColor hexStringToColor:@"#F6F6F6"];
@@ -90,7 +103,7 @@
         make.height.mas_equalTo(100 * autoSizeScaleH);
     }];
     
-    placeHolder = @"粘贴整段地址，只能匹配填入姓名、电话和地址";
+    placeHolder = @"粘贴整段地址，智能匹配填入姓名、电话和地址";
     copyView.font = FONT(14);
     copyView.delegate = self;
     copyView.textColor = holderColor;
@@ -285,27 +298,31 @@
      * 联通：130,131,132,152,155,156,185,186
      * 电信：133,1349,153,180,189
      */
-    NSString * MOBILE = @"1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}";
+    //NSString * MOBILE = @"1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}";
     /**
      * 中国移动：China Mobile
      * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188
      */
-    NSString * CM = @"1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}";
+    //NSString * CM = @"1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}";
     /**
      * 中国联通：China Unicom
      * 130,131,132,152,155,156,185,186
      */
-    NSString * CU = @"1(3[0-2]|5[256]|8[56])\\d{8}";
+    //NSString * CU = @"1(3[0-2]|5[256]|8[56])\\d{8}";
     /**
      * 中国电信：China Telecom
      * 133,1349,153,180,189
      */
-    NSString * CT = @"1((33|53|8[09])[0-9]|349)\\d{7}";
+    //NSString * CT = @"1((33|53|8[09])[0-9]|349)\\d{7}";
     
-    [self getPhoneNum:checkString regexStr:MOBILE];
-    [self getPhoneNum:checkString regexStr:CM];
-    [self getPhoneNum:checkString regexStr:CU];
-    [self getPhoneNum:checkString regexStr:CT];
+//    [self getPhoneNum:checkString regexStr:MOBILE];
+//    [self getPhoneNum:checkString regexStr:CM];
+//    [self getPhoneNum:checkString regexStr:CU];
+//    [self getPhoneNum:checkString regexStr:CT];
+    
+    NSString *finalCheckStr = @"1[3|4|5|8][0-9]\\d{8}";
+    [self getPhoneNum:checkString regexStr:finalCheckStr];
+    
 
 }
 
@@ -361,8 +378,10 @@
             return;
         }
         if (_fillClickBlock) {
-            LxDBAnyVar(matchedArray[0]);
-            _fillClickBlock(matchedArray[0]);
+            if (matchedArray.count > 0) {
+                LxDBAnyVar(matchedArray[0]);
+                _fillClickBlock(matchedArray[0]);
+            }
         }
 
     }

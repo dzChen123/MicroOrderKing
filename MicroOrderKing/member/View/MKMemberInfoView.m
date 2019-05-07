@@ -159,6 +159,7 @@
     UIButton *hideButn;
     
     BOOL isHidden;
+    MASConstraint *selfBottomConstraint;
     MASConstraint *bottomConstraint;
     NSMutableArray *itemViewArra;
     MKMemAddreItemView *lastView,*firstView;
@@ -206,10 +207,16 @@
         return;
     }
     hideButn.hidden = NO;
+    if (selfBottomConstraint) {
+        [selfBottomConstraint uninstall];
+    }
     [ws mas_makeConstraints:^(MASConstraintMaker *make) {
-        bottomConstraint = count == 1 ? make.bottom.mas_equalTo(containView) : make.bottom.mas_equalTo(hideButn);
+        selfBottomConstraint = count == 1 ? make.bottom.mas_equalTo(containView) : make.bottom.mas_equalTo(hideButn);
     }];
     NSInteger index = 0;
+    
+    [itemViewArra removeAllObjects];
+    
     for (MKMemAddreModel *model in dataArr) {
         MKMemAddreItemView *itemView = [[MKMemAddreItemView alloc] init];
         [itemView setAddre:model.address];
@@ -232,7 +239,14 @@
         index ++;
         lastView = itemView;
     }
-    if (count == 1) { [hideButn removeFromSuperview]; }
+    if (count == 1) {
+        hideButn.hidden = YES;
+        hideButn.alpha = 0;
+        //[hideButn removeFromSuperview];
+    }else{
+        hideButn.hidden = NO;
+        hideButn.alpha = 1;
+    }
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
         bottomConstraint = make.bottom.mas_equalTo(firstView);
     }];
@@ -257,6 +271,8 @@
             for (int i = 0; i < itemViewArra.count; i ++) {
                 if (i) { ((MKMemAddreItemView *)itemViewArra[i]).hidden = YES; }
             }
+            ((MKMemAddreItemView *)itemViewArra[0]).hidden = NO;
+            ((MKMemAddreItemView *)itemViewArra[0]).alpha = 1;
         }];
     }else{          //显示
         for (MKMemAddreItemView *itemView in itemViewArra) {

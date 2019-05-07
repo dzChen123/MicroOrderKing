@@ -148,6 +148,7 @@
         NSString *urlStr;
 
         urlStr = [goodsModel.imgUrl stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        urlStr = [urlStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 //        NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
 //        NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
 //        
@@ -157,6 +158,7 @@
         
         //LxDBAnyVar(urlStr);
         
+        //NSURL *url = [[NSURL alloc] initWithString:@"http://ouaqk5p3u.bkt.clouddn.com/2017-09-14-09:46:50-nkqqftslocamz.png?imageView2/1/w/100/h/100"];
         NSURL *url = [[NSURL alloc] initWithString:urlStr];
         [goodsPic sd_setImageWithURL:url];
         

@@ -19,7 +19,9 @@
              @"orderSn" : @"order_sn",
              @"conditionType" : @"post_status",
              @"payStatus" : @"pay_status",
-             @"totalAmount" : @"total"
+             @"totalAmount" : @"total",
+             @"deliveryTime" : @"delivery_time",
+             @"deliverMethod" : @"shipping_method"
              };
 }
 
@@ -49,6 +51,7 @@
              @"imgUrl" : @"sm_logo",
              @"goodsName" : @"name",
              @"goodsId" : @"id",
+             @"isSale" : @"is_sale"
              };
 }
 
@@ -103,7 +106,8 @@
                                     @"phoneNum" : @"mobile",
                                     @"name" : @"consignee",
                                     @"addressId" : @"address_id",
-                                    @"memberId" : @"member_id"
+                                    @"memberId" : @"member_id",
+                                    @"shippingMethod" : @"shipping_method"
                                     }];
     return (NSDictionary *)dic;
 }

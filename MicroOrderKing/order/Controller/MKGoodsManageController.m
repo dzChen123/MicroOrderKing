@@ -114,6 +114,7 @@
         for (int count = 0; count < modelArr.count; count ++) {
             [tableView.dataArray addObject:modelArr[count]];
         }
+        [self GoodsSorting:tableView.dataArray];
         [tableView reloadData];
         [tableView.mj_header endRefreshing];
     } fail:^(NSError *error) {
@@ -138,6 +139,7 @@
         for (int count = 0; count < modelArr.count; count ++) {
             [tableView.dataArray addObject:modelArr[count]];
         }
+        [self GoodsSorting:tableView.dataArray];
         [tableView reloadData];
         [tableView.mj_footer endRefreshing];
     } fail:^(NSError *error) {
@@ -147,6 +149,36 @@
         [tableView.mj_footer endRefreshing];
         [self.hud showTipMessageAutoHide:@"已无新数据"];
     }];
+}
+
+//---获得的商品列表是混乱的  要进行ID从大到小排序且下架商品放在最后---
+
+- (void)GoodsSorting:(NSMutableArray *)array {
+//    for (int i = 0 ;i < array.count ;i ++ ) {
+//        NSLog(@"before:%@",((MKGoodsInfoModel *)array[i]).goodsId);
+//    }
+    for (int i = 0; i < array.count; i ++) {
+        for (int j = 0; j < array.count - 1; j ++) {
+            MKGoodsInfoModel *model1 = array[j];
+            MKGoodsInfoModel *model2 = array[j + 1];
+            if ([model2.goodsId integerValue] > [model1.goodsId integerValue]) {
+                [array exchangeObjectAtIndex:j withObjectAtIndex:j + 1];
+            }
+        }
+    }
+    //将下架的商品移动到列表的最下面
+    NSMutableArray *indexArray = [[NSMutableArray alloc] init];
+    for (int i = 0; i < array.count; i ++) {
+        MKGoodsInfoModel *model = array[i];
+        if (![model.isSale integerValue]) {
+            [indexArray addObject:model];
+        }
+    }
+    for (int i = 0; i < indexArray.count; i ++) {
+        MKGoodsInfoModel *model = indexArray[i];
+        [array removeObject:model];
+        [array addObject:model];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

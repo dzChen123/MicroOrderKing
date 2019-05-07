@@ -30,6 +30,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     isSearched = NO;
@@ -48,6 +49,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [super viewWillAppear:animated];
     
     [memberTable.mj_header beginRefreshing];

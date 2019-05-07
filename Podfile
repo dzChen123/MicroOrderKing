@@ -14,7 +14,6 @@ pod 'Qiniu', "~> 7.0"
 pod 'IQKeyboardManager'
 pod 'MBProgressHUD'
 pod 'SwipeBack', '~> 1.1'
-pod 'JxbDebugTool'
 pod 'UITableView+FDTemplateLayoutCell'
 pod 'MDHTMLLabel'
 pod 'ZYCornerRadius'

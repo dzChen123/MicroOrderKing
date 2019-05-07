@@ -177,6 +177,7 @@
     stockField.font = FONT(14);
     stockField.placeholder = @"请输入库存数量（例：1000）";
     stockField.delegate = self;
+    stockField.tag = 200;
     stockField.textColor = [UIColor hexStringToColor:@"#3D3D3D"];
     [stockField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.size.left.mas_equalTo(unitField);
@@ -216,7 +217,14 @@
     if(textView.text.length < 1) {
         textView.text = placeHolder;
         textView.textColor = holderColor;
-    }else{
+    }
+    else if (textView.text.length > 15) {
+        textView.text = placeHolder;
+        textView.textColor = holderColor;
+        BaseViewController *controller = (BaseViewController *)[self parentController];
+        [controller.hud showTipMessageAutoHide:@"商品名称长度不得大于15"];
+    }
+    else{
         name = textView.text;
     }
 }
@@ -226,12 +234,29 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    BaseViewController *controller = (BaseViewController *)[self parentController];
     if (textField.tag == 100) {
         NSString *priceStr = textField.text;
         if ([self isPureInt:priceStr] == NO && [self isPureFloat:priceStr] == NO ) {
             textField.text = @"";
-            BaseViewController *controller = (BaseViewController *)[self parentController];
             [controller.hud showTipMessageAutoHide:@"请输入合法数字"];
+        }
+        NSArray *array = [priceStr componentsSeparatedByString:@"."];
+        NSString *intPart = !array.count ? priceStr : array[0];
+        if ([intPart integerValue] > 99999999) {
+            textField.text = @"";
+            [controller.hud showTipMessageAutoHide:@"目前允许单价不得大于100000000元"];
+        }
+    }
+    else if (textField.tag == 200) {
+        NSString *priceStr = textField.text;
+        if (![self isPureInt:priceStr]) {
+            textField.text = @"";
+            [controller.hud showTipMessageAutoHide:@"库存只能输入整数"];
+        }
+        if ([priceStr integerValue] > 999999) {
+            textField.text = @"";
+            [controller.hud showTipMessageAutoHide:@"目前库存数量不得大于999999"];
         }
     }
 }

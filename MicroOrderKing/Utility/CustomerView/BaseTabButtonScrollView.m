@@ -20,7 +20,7 @@
 
 @implementation BaseTabButtonScrollView
 {
-
+    MASConstraint *topConstraint;
 }
 
 
@@ -76,6 +76,9 @@
     UIView *lastView=ws;
     for (int i =0 ;i<array.count;i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        //btn.backgroundColor = [UIColor yellowColor];
+        
         [_containView addSubview:btn];
         [btn setTitle:array[i] forState:UIControlStateNormal];
         btn.titleLabel.font = FONT(14);
@@ -94,7 +97,7 @@
             }
             make.height.mas_equalTo(_containView).offset(-5);
             make.width.mas_equalTo(SCREEN_WIDTH/_showButtonCount);
-            make.top.mas_equalTo(lastView);
+            topConstraint = make.top.mas_equalTo(lastView);
         }];
         [_buttonArray addObject:btn];
         lastView=btn;
@@ -180,6 +183,8 @@
 - (void)SetSlideViewBackgroundColor:(UIColor *)backColor{
     _slideView.backgroundColor = backColor;
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

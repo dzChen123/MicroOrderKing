@@ -21,6 +21,8 @@
 @property (strong,nonatomic) NSMutableArray *goodsInfoArra;
 @property (strong,nonatomic) NSString *createTime;
 @property (strong,nonatomic) NSString *orderSn;
+@property (strong,nonatomic) NSString *deliveryTime;
+@property (strong,nonatomic) NSString *deliverMethod;
 
 @end
 
@@ -38,6 +40,7 @@
 @property (strong,nonatomic) NSString *goodsId;
 @property (strong,nonatomic) NSString *unit;
 @property (strong,nonatomic) NSString *number;  //库存
+@property (strong,nonatomic) NSString *isSale;  //商品的状态  上架中还是已下架
 
 @end
 
@@ -83,6 +86,8 @@
 @property(strong,nonatomic) NSString *remark;
 @property (strong,nonatomic) NSString *addressId;
 @property (strong,nonatomic) NSString *memberId;
+//@property (strong,nonatomic) NSString *deliveryTime;
+@property (strong,nonatomic) NSString *shippingMethod;
 
 @end
 

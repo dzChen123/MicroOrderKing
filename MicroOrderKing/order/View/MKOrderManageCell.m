@@ -40,6 +40,10 @@
     UILabel *sumLab;
     UIButton *clickButn;
     UIButton *printOrderButn;       // 这个才是打印订单
+    UIImageView *carIcon;
+    UILabel *methodLab;
+    UILabel *dateLab;
+    UIView *grayView2;
     
     UIView *maskView;
     MKConfirmView *confirmView;
@@ -66,6 +70,10 @@
     sumLab = [[UILabel alloc] init];
     clickButn = [[UIButton alloc] init];
     printOrderButn = [[UIButton alloc] init];
+    carIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"deliverMethod"]];
+    methodLab = [[UILabel alloc] init];
+    dateLab = [[UILabel alloc] init];
+    grayView2 = [[UIView alloc] init];
     
     [self.contentView addSubview:grayView];
     [self.contentView addSubview:orderIDIcon];
@@ -75,6 +83,10 @@
     [self.contentView addSubview:addressView];
     [addressView addSubview:addreIcon];
     [addressView addSubview:addreLab];
+    [self.contentView addSubview:grayView2];
+    [grayView2 addSubview:carIcon];
+    [grayView2 addSubview:methodLab];
+    [grayView2 addSubview:dateLab];
     [self.contentView addSubview:butnView];
     [butnView addSubview:printBtn];
     [butnView addSubview:editBtn];
@@ -142,6 +154,34 @@
         make.left.mas_equalTo(orderIDIcon);
         make.right.mas_equalTo(condition);
         make.top.mas_equalTo(orderIDIcon.mas_bottom).offset(15 * autoSizeScaleH);
+        //make.height.mas_equalTo(100);
+    }];
+    
+    [carIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(grayView2).offset(leftPadding);
+        make.top.mas_equalTo(grayView2).offset(10 * autoSizeScaleH);
+        make.size.mas_equalTo(CGSizeMake(14 * autoSizeScaleW, 13 * autoSizeScaleW));
+    }];
+    
+    methodLab.font = FONT(14);
+    methodLab.textColor = grayColor69;
+    [methodLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(carIcon.mas_right).offset(8 * autoSizeScaleW);
+        make.centerY.mas_equalTo(carIcon);
+    }];
+    
+    dateLab.font = FONT(14);
+    dateLab.textColor = grayColor69;
+    [dateLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(grayView2).offset(-15 * autoSizeScaleW);
+        make.centerY.mas_equalTo(grayView2);
+    }];
+    
+    grayView2.backgroundColor = [UIColor hexStringToColor:@"#FAFAFA"];
+    [grayView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws.contentView).offset(leftPadding);
+        make.right.mas_equalTo(ws.contentView).offset(rightPadding);
+        make.bottom.mas_equalTo(carIcon).offset(10 * autoSizeScaleH);
     }];
     
     if([self.reuseIdentifier isEqualToString:@"orderHistory"]){
@@ -150,8 +190,12 @@
         [butnView removeFromSuperview];
         [lineView removeFromSuperview];
         
+        [grayView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(goodsView.mas_bottom).offset(10 * autoSizeScaleH);
+        }];
+        
         [sumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(goodsView.mas_bottom).offset(15 * autoSizeScaleH);
+            make.top.mas_equalTo(grayView2.mas_bottom).offset(15 * autoSizeScaleH);
         }];
         
     }else{
@@ -179,9 +223,13 @@
             //make.bottom.mas_equalTo(ws.contentView);
         }];
         
+        [grayView2 mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(addressView.mas_bottom).offset(10 * autoSizeScaleH);
+        }];
+        
         [butnView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(addressView);
-            make.top.mas_equalTo(addressView.mas_bottom);
+            make.top.mas_equalTo(grayView2.mas_bottom);
             make.bottom.mas_equalTo(confirmBtn).offset(10 * autoSizeScaleH);
         }];
         
@@ -257,28 +305,37 @@
     MKOrderCellModel *cellModel = (MKOrderCellModel *)model;
     orderID.text = cellModel.orderSn;
     orderId = cellModel.orderId;
-    switch ([cellModel.conditionType integerValue]) {
-        case 0:
-        {
+    if ([cellModel.conditionType integerValue] == 2) {
+        condition.text = @" 已完成 ";
+        condition.backgroundColor = [UIColor hexStringToColor:@"#37BF76"];
+    } else {
+        if (![cellModel.payStatus integerValue]) {
             condition.text = @" 未付款 ";
             condition.backgroundColor = [UIColor hexStringToColor:@"#FB737C"];
-        }
-            break;
-        case 1:
-        {
+        }else{
             condition.text = @" 已付款 ";
             condition.backgroundColor = [UIColor hexStringToColor:@"#77AEFF"];
         }
+    }
+
+    NSString *method;
+    switch ([cellModel.deliverMethod integerValue]) {
+        case 0:
+            method = @"同城配送";
+            break;
+        case 1:
+            method = @"快递配送";
             break;
         case 2:
-        {
-            condition.text = @" 已完成 ";
-            condition.backgroundColor = [UIColor hexStringToColor:@"#37BF76"];
-        }
+            method = @"商家自配送";
             break;
         default:
+            method = @"用户自提";
             break;
     }
+    methodLab.text = method;
+    NSArray *array = [cellModel.createTime componentsSeparatedByString:@"-"];
+    dateLab.text = [NSString stringWithFormat:@"%@年%@月%@日发货",array[0],array[1],array[2]];
     [self loadGoodsViewsWithData:cellModel.goodsInfoArra];
     
     if (![self.reuseIdentifier isEqualToString:@"orderHistory"]) {
@@ -304,8 +361,8 @@
     
     sumLab.attributedText = attr;
     
-    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"]) {
-        [clickButn setImage:[UIImage imageNamed:cellModel.isSelected ? @"moreAdresDef" : @"moreAdresNodef"] forState:UIControlStateNormal];
+    if ([self.reuseIdentifier isEqualToString:@"orderConfirmCenter"] || [self.reuseIdentifier isEqualToString:@"orderDeliver"]) {
+        [clickButn setImage:[[UIImage imageNamed:cellModel.isSelected ? @"moreAdresDef" : @"moreAdresNodef"] imageByScalingToSize:CGSizeMake(15 * autoSizeScaleW, 15 * autoSizeScaleW)] forState:UIControlStateNormal];
         isSelected = cellModel.isSelected;
     }
     
@@ -520,6 +577,7 @@
             [subView removeFromSuperview];
         }
     }
+    //LxDBAnyVar(dataArra);
     for (int index = 0; index < dataArra.count; index ++) {
         MKOrderGoodsModel *model = dataArra[index];
         MKGoodsInfoView *infoView = [[MKGoodsInfoView alloc] initWithType:1];
@@ -532,11 +590,17 @@
                 make.top.mas_equalTo(lastView.mas_bottom).offset(10 * autoSizeScaleH);
             }
             make.left.right.mas_equalTo(goodsView);
+            make.height.mas_equalTo(100 * autoSizeScaleH);
         }];
         lastView = infoView;
     }
+    
     [goodsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        bottomConstraint = make.bottom.mas_equalTo(lastView);
+        if (dataArra.count > 0) {
+            bottomConstraint = make.bottom.mas_equalTo(lastView);
+        }else{
+            bottomConstraint = make.height.mas_equalTo(50 * autoSizeScaleH);
+        }
     }];
     
 }

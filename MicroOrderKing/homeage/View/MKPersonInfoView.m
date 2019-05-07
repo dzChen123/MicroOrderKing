@@ -217,10 +217,24 @@
     UIImageView *iconView;
     UILabel *tittleLab;
     UIImageView *arrow;
+    
+    NSString *iconName;
+    NSString *title;
+}
+
+- (instancetype)initWithTitle:(NSString *)titleStr AndImage:(NSString *)imageName {
+    
+    iconName = imageName;
+    title = titleStr;
+    
+    self = [super init];
+    
+    return self;
+    
 }
 
 - (void)CreatView {
-    iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"personPasd"]];
+    iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:iconName]];
     arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subactArrow"]];
     tittleLab = [[UILabel alloc] init];
 
@@ -234,8 +248,8 @@
     WS(ws)
     
     self.backgroundColor = customWhite;
-    self.layer.cornerRadius = 5.0;
-    self.layer.masksToBounds = YES;
+//    self.layer.cornerRadius = 5.0;
+//    self.layer.masksToBounds = YES;
     
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ws).offset(leftPadding);
@@ -243,7 +257,7 @@
         make.width.height.mas_equalTo(15 * autoSizeScaleH);
     }];
     
-    tittleLab.text = @"密码修改";
+    tittleLab.text = title;
     tittleLab.font = FONT(14);
     tittleLab.textColor = [UIColor hexStringToColor:@"#494949"];
     [tittleLab mas_makeConstraints:^(MASConstraintMaker *make) {

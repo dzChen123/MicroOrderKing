@@ -137,9 +137,22 @@
         }
         _buyCount ++;
     }else{
-        if (_buyCount - 1 < 0) {
-            [parent.hud showTipMessageAutoHide:@"已经是0件了，不用再点了～"];
-            return;
+//        if (_buyCount - 1 < 0) {
+//            [parent.hud showTipMessageAutoHide:@"已经是0件了，不用再点了～"];
+//            return;
+//        }
+        if (_buyCount - 1 == 0) {
+            if ([parent isKindOfClass:[MKOrderWritingController class]]) {
+                MKOrderWritingController *controller = (MKOrderWritingController *)parent;
+                for (MKCountCostCellModel *model in controller.infoTable.dataArray) {
+                    if ([model.goodsCellModel.goodsId isEqualToString:goodsId]) {
+                        [controller.infoTable.dataArray removeObject:model];
+                        break;
+                    }
+                }
+                [controller.infoTable reloadData];
+                [controller cellDeleteUpdate];
+            }
         }
         _buyCount --;
     }

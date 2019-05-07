@@ -48,6 +48,12 @@
 }
 
 - (void)goToAddAddre{
+    
+    if (_addreManageTable.dataArray.count + 1 > 20) {
+        [self.hud showTipMessageAutoHide:@"地址数量不能超过20"];
+        return;
+    }
+    
     MKEditAddreController *controller = [[MKEditAddreController alloc] initWithType:0];
     controller.memberId = _memberId;
     [self.navigationController pushViewController:controller animated:YES];

@@ -20,6 +20,8 @@
     UISwitch *switchButn;
     UIButton *confirmButn;
     UIButton *deleteButn;
+    MKOrderOptionView *timeChoiceView;
+    MKOrderOptionView *deliverChoiceView;
     
     NSInteger _type;
     NSString *placeHolder;
@@ -42,11 +44,16 @@
     confirmButn = [[UIButton alloc] init];
     deleteButn = [[UIButton alloc] init];
     
+    timeChoiceView = [[MKOrderOptionView alloc] initWithTitle:@"发货时间选择" AndContent:[self getCurrentDate]];
+    deliverChoiceView = [[MKOrderOptionView alloc] initWithTitle:@"配送方式选择" AndContent:@"请选择配送方式"];
+    
     [self addSubview:remarkTittle];
     [self addSubview:whiteView];
     [self addSubview:whiteView2];
     [self addSubview:confirmButn];
     [self addSubview:deleteButn];
+    [self addSubview:timeChoiceView];
+    [self addSubview:deliverChoiceView];
     [whiteView addSubview:remarkView];
     [whiteView2 addSubview:paidTittle];
     [whiteView2 addSubview:switchButn];
@@ -106,6 +113,18 @@
         make.size.mas_equalTo(CGSizeMake(50 * autoSizeScaleW, 30 * autoSizeScaleH));
     }];
     
+    [timeChoiceView addTapEventWith:self action:@selector(timeChoiceClick)];
+    [timeChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws);
+        make.top.mas_equalTo(whiteView2.mas_bottom).offset(15 * autoSizeScaleH);
+    }];
+    
+    [deliverChoiceView addTapEventWith:self action:@selector(deliverClick)];
+    [deliverChoiceView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(ws);
+        make.top.mas_equalTo(timeChoiceView.mas_bottom).offset(1);
+    }];
+    
     confirmButn.backgroundColor = themeGreen;
     [confirmButn setTitle: _type == 0 ? @"录入订单" : @"保存" forState: UIControlStateNormal];
     [confirmButn addTarget:self action:@selector(confirmButnClick) forControlEvents:UIControlEventTouchUpInside];
@@ -118,7 +137,7 @@
             make.width.mas_equalTo(ws).multipliedBy(.5);
             make.right.mas_equalTo(ws);
         }
-        make.top.mas_equalTo(whiteView2.mas_bottom).offset(15 * autoSizeScaleH);
+        make.top.mas_equalTo(deliverChoiceView.mas_bottom).offset(15 * autoSizeScaleH);
         make.height.mas_equalTo(45 * autoSizeScaleH);
     }];
     
@@ -184,14 +203,105 @@
     }
 }
 
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)deliverClick {
+    if (_deliverChoiceBlock) {
+        _deliverChoiceBlock();
+    }
 }
-*/
+
+- (void)timeChoiceClick {
+    if (_timeChoiceBlock) {
+        _timeChoiceBlock();
+    }
+}
+
+- (NSString *)getCurrentDate {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM月dd号"];
+    return [formatter stringFromDate:[NSDate date]];
+}
+
+- (void)setDeliverStr:(NSString *)deliver { deliverChoiceView.title = deliver; }
+
+- (void)setDateStr:(NSString *)date { timeChoiceView.title = date; }
 
 @end
+
+@implementation MKOrderOptionView
+{
+    UILabel *titleLab;
+    UILabel *contentLab;
+    UIImageView *narrowView;
+    UIPickerView *_pickerView;
+    
+    NSString *_title;
+    NSString *_content;
+}
+
+- (instancetype)initWithTitle:(NSString *)title AndContent:(NSString *)content {
+
+    _title = title;
+    _content = content;
+    
+    self = [super init];
+    
+    return self;
+}
+
+- (void)CreatView {
+    
+    titleLab = [[UILabel alloc] init];
+    contentLab = [[UILabel alloc] init];
+    narrowView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"subactArrow"]];
+    
+    [self addSubview:titleLab];
+    [self addSubview:contentLab];
+    [self addSubview:narrowView];
+}
+
+- (void)SettingViewAttributes {
+    
+    WS(ws)
+
+    self.backgroundColor = customWhite;
+    
+    titleLab.text  =_title;
+    titleLab.textColor = wordSixColor;
+    titleLab.font = FONT(14);
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(ws).offset(leftPadding);
+        make.centerY.mas_equalTo(ws);
+    }];
+    
+    [narrowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(ws).offset(rightPadding);
+        make.centerY.mas_equalTo(ws);
+        make.width.height.mas_equalTo(15 * autoSizeScaleW);
+    }];
+    
+    contentLab.text = _content;
+    contentLab.textColor = wordThreeColor;
+    contentLab.font = FONT(14);
+    [contentLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(narrowView.mas_left).offset(rightPadding);
+        make.centerY.mas_equalTo(ws);
+    }];
+    
+    [ws mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(45 * autoSizeScaleH);
+    }];
+    
+}
+
+- (void)setTitle:(NSString *)title {
+    
+    contentLab.text = title;
+    _title = title;
+}
+
+
+
+@end
+
+
